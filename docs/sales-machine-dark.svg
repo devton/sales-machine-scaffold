@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" width="1600" height="560" role="img" aria-label="Sales machine: an agent runs six stages, from Feed to Feed back, and growth loops bring the next customers back to the start">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4b5160"/></marker><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8b7cf6"/></marker></defs>
+<rect width="1600" height="560" rx="20" fill="#0f1115"/>
+<rect x="60" y="40" width="1480" height="96" rx="14" fill="#241f3d"/>
+<text x="88" y="80" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="88" dy="0.0">Agent operator</tspan></text>
+<text x="88" y="110" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="88" dy="0.0">runs the machine from system/sales-machine.hcl</tspan></text>
+<rect x="1335" y="70" width="177" height="36" rx="18" fill="#0f1115"/>
+<text x="1423.3" y="93" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="500" fill="#e8eaed" text-anchor="middle"><tspan x="1423.3" dy="0.0">hand-offs to people</tspan></text>
+<rect x="1205" y="70" width="117" height="36" rx="18" fill="#0f1115"/>
+<text x="1263.9999999999998" y="93" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="500" fill="#e8eaed" text-anchor="middle"><tspan x="1263.9999999999998" dy="0.0">review gates</tspan></text>
+<rect x="1102" y="70" width="91" height="36" rx="18" fill="#0f1115"/>
+<text x="1147.6999999999998" y="93" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="500" fill="#e8eaed" text-anchor="middle"><tspan x="1147.6999999999998" dy="0.0">workflows</tspan></text>
+<rect x="1007" y="70" width="83" height="36" rx="18" fill="#0f1115"/>
+<text x="1048.6" y="93" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="500" fill="#e8eaed" text-anchor="middle"><tspan x="1048.6" dy="0.0">routines</tspan></text>
+<line x1="172" y1="136" x2="172" y2="200" stroke="#8b7cf6" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.6"/>
+<rect x="60" y="200" width="225" height="190" rx="14" fill="#1a1d24"/>
+<text x="82.0" y="236" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#8b7cf6" text-anchor="start"><tspan x="82.0" dy="0.0">01</tspan></text>
+<text x="82.0" y="266" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="82.0" dy="0.0">Feed</tspan></text>
+<text x="82.0" y="304" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="82.0" dy="0.0">articles, pages,</tspan><tspan x="82.0" dy="19.5">release notes</tspan></text>
+<line x1="288" y1="295.0" x2="308" y2="295.0" stroke="#4b5160" stroke-width="2" marker-end="url(#a)"/>
+<line x1="424" y1="136" x2="424" y2="200" stroke="#8b7cf6" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.6"/>
+<rect x="311" y="200" width="225" height="190" rx="14" fill="#1a1d24"/>
+<text x="333.0" y="236" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#8b7cf6" text-anchor="start"><tspan x="333.0" dy="0.0">02</tspan></text>
+<text x="333.0" y="266" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="333.0" dy="0.0">Attract</tspan></text>
+<text x="333.0" y="304" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="333.0" dy="0.0">access request:</tspan><tspan x="333.0" dy="19.5">goal, providers</tspan></text>
+<line x1="539" y1="295.0" x2="559" y2="295.0" stroke="#4b5160" stroke-width="2" marker-end="url(#a)"/>
+<line x1="674" y1="136" x2="674" y2="200" stroke="#8b7cf6" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.6"/>
+<rect x="562" y="200" width="225" height="190" rx="14" fill="#1a1d24"/>
+<text x="584.0" y="236" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#8b7cf6" text-anchor="start"><tspan x="584.0" dy="0.0">03</tspan></text>
+<text x="584.0" y="266" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="584.0" dy="0.0">Activate</tspan></text>
+<text x="584.0" y="304" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="584.0" dy="0.0">sandbox account,</tspan><tspan x="584.0" dy="19.5">goal picks the path</tspan></text>
+<line x1="790" y1="295.0" x2="810" y2="295.0" stroke="#4b5160" stroke-width="2" marker-end="url(#a)"/>
+<line x1="926" y1="136" x2="926" y2="200" stroke="#8b7cf6" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.6"/>
+<rect x="813" y="200" width="225" height="190" rx="14" fill="#1a1d24"/>
+<text x="835.0" y="236" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#8b7cf6" text-anchor="start"><tspan x="835.0" dy="0.0">04</tspan></text>
+<text x="835.0" y="266" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="835.0" dy="0.0">Qualify</tspan></text>
+<rect x="827" y="282" width="197" height="46" rx="10" fill="#22262f"/>
+<text x="841.0" y="302" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#e8eaed" text-anchor="start"><tspan x="841.0" dy="0.0">On their own</tspan></text>
+<text x="841.0" y="320" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="841.0" dy="0.0">usage signal</tspan></text>
+<rect x="827" y="336" width="197" height="46" rx="10" fill="#22262f"/>
+<text x="841.0" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#e8eaed" text-anchor="start"><tspan x="841.0" dy="0.0">With the team</tspan></text>
+<text x="841.0" y="374" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="841.0" dy="0.0">milestone signal</tspan></text>
+<line x1="1041" y1="295.0" x2="1061" y2="295.0" stroke="#4b5160" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1176" y1="136" x2="1176" y2="200" stroke="#8b7cf6" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.6"/>
+<rect x="1064" y="200" width="225" height="190" rx="14" fill="#1a1d24"/>
+<text x="1086.0" y="236" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#8b7cf6" text-anchor="start"><tspan x="1086.0" dy="0.0">05</tspan></text>
+<text x="1086.0" y="266" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="1086.0" dy="0.0">Convert</tspan></text>
+<text x="1086.0" y="304" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="1086.0" dy="0.0">lead to the team,</tspan><tspan x="1086.0" dy="19.5">first real purchase</tspan></text>
+<line x1="1292" y1="295.0" x2="1312" y2="295.0" stroke="#4b5160" stroke-width="2" marker-end="url(#a)"/>
+<line x1="1428" y1="136" x2="1428" y2="200" stroke="#8b7cf6" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.6"/>
+<rect x="1315" y="200" width="225" height="190" rx="14" fill="#1a1d24"/>
+<text x="1337.0" y="236" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#8b7cf6" text-anchor="start"><tspan x="1337.0" dy="0.0">06</tspan></text>
+<text x="1337.0" y="266" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#e8eaed" text-anchor="start"><tspan x="1337.0" dy="0.0">Feed back</tspan></text>
+<text x="1337.0" y="304" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="400" fill="#9aa0a6" text-anchor="start"><tspan x="1337.0" dy="0.0">growth loops</tspan></text>
+<path d="M1428,390 V460 H172 V394" fill="none" stroke="#8b7cf6" stroke-width="2.5" marker-end="url(#b)"/>
+<rect x="470" y="438" width="660" height="44" rx="22" fill="#0f1115"/>
+<text x="800.0" y="466" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" font-weight="600" fill="#e8eaed" text-anchor="middle"><tspan x="800.0" dy="0.0">Growth loops: integrations  ·  invites  ·  content</tspan></text>
+<text x="800.0" y="512" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" font-weight="400" fill="#9aa0a6" text-anchor="middle"><tspan x="800.0" dy="0.0">each group of customers brings the next one</tspan></text>
+</svg>

@@ -2,6 +2,15 @@
 
 An agent skill that builds a product-led sales machine for any product, with zero dependencies.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/sales-machine-dark.svg">
+  <img alt="The sales machine: an agent operator runs six stages (Feed, Attract, Activate, Qualify with two lanes, Convert, Feed back), and growth loops through integrations, invites and content bring the next customers back to the start" src="docs/sales-machine-light.svg">
+</picture>
+
+An agent runs the machine from its spec. People enter through content (01), ask for access (02),
+try the product without risk (03) and reach a buying signal on their own or with the team (04).
+The team closes (05), and each group of customers brings the next one through the growth loops (06).
+
 It reads only local files you point it to (code, docs, release notes, notes) and writes plain files
 under `sales-machine/`. It needs no network, connector, package or build step.
 
