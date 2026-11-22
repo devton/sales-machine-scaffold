@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-report
+description: "one self-contained HTML file that shows the whole sales machine and its audit, readable offline by anyone."
+---
+
 # report
 
 `id: sales-machine-scaffold.workflow.report`

@@ -1,6 +1,6 @@
 ---
 name: sales-machine-scaffold
-description: Build a product-led sales machine for any product with zero dependencies (local files only): explore the product, position it, design the 6-stage machine and growth loops, draft articles, landing specs and the sales manual, and close with an HCL spec of the finished machine as an agent-operated system plus one self-contained HTML audit report.
+description: "Build a product-led sales machine for any product with zero dependencies (local files only): explore the product, position it, design the 6-stage machine and growth loops, draft articles, landing specs and the sales manual, and close with an HCL spec of the finished machine as an agent-operated system plus one self-contained HTML audit report."
 ---
 
 # Sales Machine Scaffold

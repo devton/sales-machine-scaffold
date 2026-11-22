@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-machine
+description: "a 6-stage sales machine where the product carries people to value and the team enters on a buying signal."
+---
+
 # machine
 
 `id: sales-machine-scaffold.workflow.machine`

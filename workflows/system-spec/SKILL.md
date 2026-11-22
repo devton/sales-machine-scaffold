@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-system-spec
+description: "describe the finished sales machine as an intelligent system that an agent operates day to day, in one HCL spec."
+---
+
 # system-spec
 
 `id: sales-machine-scaffold.workflow.system-spec`

@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-loops
+description: "turn the funnel into compounding loops, where the output of one cohort brings the next."
+---
+
 # loops
 
 `id: sales-machine-scaffold.workflow.loops`

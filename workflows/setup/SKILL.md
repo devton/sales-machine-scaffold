@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-setup
+description: "create `sales-machine/config.json` and the workspace with only confirmed values."
+---
+
 # setup
 
 `id: sales-machine-scaffold.workflow.setup`

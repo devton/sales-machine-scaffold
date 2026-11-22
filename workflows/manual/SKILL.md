@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-manual
+description: "a non-technical brand + sales manual and a training ebook the team learns and sells from."
+---
+
 # manual
 
 `id: sales-machine-scaffold.workflow.manual`

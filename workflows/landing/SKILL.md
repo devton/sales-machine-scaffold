@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-landing
+description: "landing page specs that speak to the flagship customer first, then each persona and each integration."
+---
+
 # landing
 
 `id: sales-machine-scaffold.workflow.landing`

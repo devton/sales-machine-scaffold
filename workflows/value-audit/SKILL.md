@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-value-audit
+description: "pass/fail check of a piece of copy against the rules and the Elements of Value, with exact fixes."
+---
+
 # value-audit
 
 `id: sales-machine-scaffold.workflow.value-audit`

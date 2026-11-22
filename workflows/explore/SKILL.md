@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-explore
+description: "a product map of what the product really does, what is live, and which value each feature delivers."
+---
+
 # explore
 
 `id: sales-machine-scaffold.workflow.explore`

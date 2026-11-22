@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-article-ideas
+description: "a batch of READY articles, each moving one persona one stage down the machine and feeding one loop."
+---
+
 # article-ideas
 
 `id: sales-machine-scaffold.workflow.article-ideas`

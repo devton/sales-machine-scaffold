@@ -1,3 +1,8 @@
+---
+name: sales-machine-scaffold-position
+description: "one positioning everyone writes from: who we talk to first, the promise, personas, principles and say/never-say."
+---
+
 # position
 
 `id: sales-machine-scaffold.workflow.position`
