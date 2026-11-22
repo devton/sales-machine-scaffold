@@ -103,23 +103,68 @@ The skill checks the spec itself, with no tool: balanced braces, only the block 
 every reference declared, and no forbidden blocks, `${}`, URLs or secrets. If you have an HCL
 parser at hand you can also parse the file with it, but none is required.
 
-## Commands
+## Setup
 
-Invoke as `/sales-machine-scaffold <cmd>`:
+`/sales-machine-scaffold setup` is always the first run. It creates the config and the empty
+workspace, and every other command reads from them.
 
-| cmd | What it does |
+1. **Reads** the local files you point it to (README, docs index, existing marketing copy) and
+   prefills what it can.
+2. **Asks you once**, in a single message, only for what it could not read: the access model and
+   the main call to action, the flagship customer, the personas, words to never use, regulated
+   topics and anything internal-only.
+3. **Writes** `sales-machine/config.json` and the workspace folders.
+
+It never invents a value. Anything still unknown is written `"[to confirm]"` and listed in the
+report until someone fills it in. It stores no secrets, only placeholders.
+
+### What goes in `config.json`
+
+See [`config.example.json`](config.example.json) for the full shape.
+
+| Field | What it holds |
 |---|---|
-| `setup` | creates `sales-machine/config.json` with the product-specific values |
-| `explore` | maps features, live vs rolling out, value delivered, fact ledger |
-| `position` | flagship customer, promise, personas, say / never-say |
-| `machine` | 6 stages, two lanes, buying signals, engine, metrics |
-| `loops` | integrations, invites and content growth loops |
-| `article-ideas` | a batch of ready articles with value, loop and FAQ |
-| `landing` | home, persona and integration page specs |
-| `manual` | brand + sales manual and training ebook |
-| `value-audit` | checks copy against the rules and the B2B Elements of Value |
-| `system-spec` | the HCL spec of the finished machine |
-| `report` | the final self-contained HTML report |
+| `product` | name, one-line promise, category |
+| `language` | language of public content, of team material, and any secondary languages |
+| `sources` | local folders and files: code, docs, release notes, feature flags, notes |
+| `access` | `invite-only`, `open` or `waitlist`; the primary and secondary CTA; CTAs that are forbidden |
+| `flagship` | the customer the home page talks to first, and what they lose today |
+| `lanes` | the self-serve and assisted paths, each with its buying signal |
+| `personas` | who buys, what job they want done, which lane they take |
+| `integrations` | the providers the product connects to, and whether each is live |
+| `loops` | which growth loops the machine runs |
+| `neverSay` / `sayInstead` | forbidden claims and words, and the words to use instead |
+| `internalOnly` | things that never appear in public material (revenue levers, internal numbers) |
+| `regulatedTopics` | sensitive topics and the only true statement allowed about each |
+| `batch` | how many articles per run, and how many from the sales lane |
+
+### Workspace it creates
+
+```
+sales-machine/
+  config.json
+  product-map.md   positioning.md   machine.md   loops.md
+  articles/        landing/         manual/      audit/
+  system/          report/          history/
+```
+
+## Commands and what each one produces
+
+Invoke as `/sales-machine-scaffold <cmd>`. The default order is the order of this table.
+
+| cmd | What it does | Produces |
+|---|---|---|
+| `setup` | collects the product-specific values | `config.json`, workspace folders |
+| `explore` | maps every feature from the code and docs: name as the UI shows it, job, persona, live / rolling out / internal, value delivered | `product-map.md` with the fact ledger (`F-001 \| claim \| source \| status`) and the content gaps |
+| `position` | defines the flagship customer, the promise, the persona matrix, headline facts and the say / never-say table | `positioning.md` |
+| `machine` | designs the 6 stages (Feed, Attract, Activate, Qualify, Convert, Feed back), the two lanes, buying signals, the engine and the metrics | `machine.md` |
+| `loops` | designs the integrations, invites and content loops, each with steps, owner, metric and missing instrumentation | `loops.md` |
+| `article-ideas` | drafts ready articles from the coverage gaps, each with persona, stage, loop, value elements, CTA, media plan and FAQ | `articles/<date>/*.md`, `articles/index.json` |
+| `landing` | writes page specs where every line is backed by a ledger fact | `landing/home.md`, `landing/persona-*.md`, `landing/integration-*.md` |
+| `manual` | writes the brand + sales manual and the training ebook, with no technical detail | `manual/manual.md`, `manual/ebook.md` |
+| `value-audit` | checks any text against the rules and the value elements, quoting each problem and giving the fix | `audit/findings.json` |
+| `system-spec` | describes the finished machine as an agent-operated system | `system/sales-machine.hcl`, `system/README.md`, `system/operator.md` |
+| `report` | puts everything together for review, with diagrams, coverage and the audit | `report/sales-machine-report.html` |
 
 ## Layout
 
@@ -140,8 +185,66 @@ split from it for agents that load one contract at a time.
 Copy this folder into your agent's skills directory (for example `.claude/skills/sales-machine-scaffold/`),
 then run `/sales-machine-scaffold setup` in the project that holds your product's files.
 
-## Sources of the method
+## Frameworks it uses
 
-- Bain & Company, "The B2B Elements of Value" (Harvard Business Review, 2018).
-- Reforge, "Growth Loops are the New Funnels".
-- Product-led growth practice: the product carries people to value, the team enters on a buying signal.
+The skill does not invent a sales method. It puts together a few well-known frameworks and turns
+each into a rule or a field that the workflows check.
+
+### Product-led growth (PLG)
+
+From Wes Bush, *Product-Led Growth* (2019), and common PLG practice.
+
+- **The product carries people to value.** Stages 03 and 04 are a guided path inside the product,
+  with a sandbox or sample account, so people try it without real risk before they talk to anyone.
+- **Hybrid motion: two lanes.** Self-serve users go on their own; assisted users get the team.
+  The split is internal: pages never show "lanes".
+- **Buying signal (product-qualified lead).** The team steps in when usage reaches a signal
+  defined in the config, not when a form is filled in.
+- **Understand, communicate, deliver value.** Every article states the reader's outcome as
+  functional, emotional or social, and asks for one next step.
+
+Used in: `machine`, `article-ideas`, `landing`.
+
+### B2B Elements of Value
+
+From Bain & Company, "The B2B Elements of Value" (Harvard Business Review, 2018): 40 reasons
+businesses buy, in 5 levels (table stakes, functional, ease of doing business, individual,
+inspirational).
+
+- Selling copy names and shows 2 to 4 elements, with at least one from level 3 or 4. Deals are
+  won on ease of doing business and on what changes for the person who decides, not on price.
+- Each stage of the machine has the elements it must deliver.
+- Coverage of elements per persona and stage drives which articles come next.
+- "Acceptable price" and "Regulatory compliance" are never used as selling points.
+
+Used in: `explore`, `position`, `article-ideas`, `landing`, `value-audit`. Full list in
+[`reference/elements-of-value.md`](reference/elements-of-value.md).
+
+### Growth loops
+
+From Reforge, "Growth Loops are the New Funnels". A funnel ends at the customer; a loop uses the
+output of one group of customers to bring the next, so growth compounds.
+
+- Three loops: **integrations** (customers name their providers, each integration page brings that
+  provider's other customers), **invites** (active accounts bring colleagues and partners) and
+  **content** (real uses become templates and articles).
+- Each loop has 4 steps that close, an owner and one metric: new access requests per monthly
+  activated cohort.
+- Every article and page gives the reader a reason to feed a loop.
+
+Used in: `machine` (stage 06), `loops`, `article-ideas`.
+
+### Jobs to be done
+
+Copy talks about the job the reader is trying to get done and the outcome they want. The product
+appears as the way to do it, never as a list of feature names.
+
+Used in: `position` (persona matrix), `article-ideas`, `landing`, `manual`.
+
+### Fact ledger
+
+Every product claim traces to a local source with a status: live, rolling out or internal.
+Anything unconfirmed is written `[to confirm]`. This is what keeps the output honest across
+articles, pages and the manual.
+
+Used in: every workflow, checked by `value-audit`.
