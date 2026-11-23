@@ -1,0 +1,863 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sales machine report · workflow-blueprint</title><style>
+:root{--bg:#fbfaf7;--fg:#1d2330;--mut:#5b6474;--line:#d9dde4;--card:#fff;--acc:#1f4fd1;--red:#c8372d;--ok:#1d7a46;--warn:#9a6a00;--gapbg:#fdeceb}
+@media (prefers-color-scheme:dark){:root{--bg:#12151b;--fg:#e6e9ef;--mut:#9aa3b2;--line:#2c323d;--card:#1a1e26;--acc:#7aa2ff;--red:#ff7a6e;--ok:#5fd394;--warn:#f0c15a;--gapbg:#3a1f1d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:24px 16px 80px}h1{font-size:1.9rem;margin:.2em 0}h2{margin-top:2.4em;padding-top:.6em;border-top:2px solid var(--line)}
+h3,h4,h5{margin:1.4em 0 .4em}a{color:var(--acc)}code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em}
+pre{background:var(--card);border:1px solid var(--line);padding:12px;overflow:auto;border-radius:6px;max-height:520px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.92rem}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--card)}
+td.gap{background:var(--gapbg);color:var(--red);font-weight:600}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.78rem;font-weight:600;border:1px solid currentColor}.chip.live{color:var(--ok)}.chip.fail{color:var(--red)}.chip.conf{color:var(--warn)}.chip.int{color:var(--mut)}
+.meta,.small{color:var(--mut);font-size:.85rem}details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}summary{cursor:pointer}
+.kpis{display:flex;flex-wrap:wrap;gap:12px}.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 16px;min-width:140px}.kpi b{display:block;font-size:1.6rem}
+.slot{border:2px dashed var(--line);padding:14px;color:var(--mut);border-radius:6px;margin:10px 0}blockquote{border-left:4px solid var(--red);margin:1em 0;padding:.2em 1em;font-size:1.1rem}
+nav.toc{font-size:.9rem;display:flex;flex-wrap:wrap;gap:4px 12px}nav.toc a{white-space:nowrap}code{overflow-wrap:anywhere}
+svg{width:100%;height:auto;margin:10px 0}svg text{fill:var(--fg);font:13px system-ui,sans-serif}svg .small{fill:var(--mut);font-size:12px}
+.node{fill:var(--card);stroke:var(--acc);stroke-width:1.5}.node.lane{stroke-dasharray:4 3}.edge{stroke:var(--mut);stroke-width:1.5;fill:none}.edge.back{stroke:var(--red)}.fillink{fill:var(--mut)}
+.ring{fill:none;stroke:var(--acc);stroke-width:2}.dot{fill:var(--red)}svg .num{fill:#fff;font-weight:700;font-size:12px}svg .loopname{font-weight:700;font-size:15px}
+@media print{body{background:#fff;color:#000}details{break-inside:avoid}details>*{display:block}pre{max-height:none}nav.toc{display:none}}
+</style></head><body><main>
+<p class="meta">sales-machine-scaffold · report · 2026-11-23 · example run on workflow-blueprint.com</p>
+<h1>Sales machine: workflow-blueprint</h1>
+<p>Teach your agent how to learn your project. <span class="meta">(meta-skill for coding agents, access: open)</span></p>
+<nav class="toc"><a href="#summary">Summary</a><a href="#map">Product map</a><a href="#pos">Positioning</a><a href="#machine">Machine</a><a href="#loops">Loops</a><a href="#coverage">Coverage</a><a href="#content">Content</a><a href="#manual">Manual</a><a href="#system">System</a><a href="#audit">Audit</a><a href="#handoff">Hand-off</a></nav>
+
+<h2 id="summary">1. Summary</h2>
+<div class="kpis"><div class="kpi"><b>13</b>PASS</div><div class="kpi"><b>2</b>FAIL</div><div class="kpi"><b>34</b>ledger facts</div><div class="kpi"><b>3</b>articles</div><div class="kpi"><b>7</b>page specs</div><div class="kpi"><b>28</b>to confirm</div></div>
+<p>Both FAILs are the <em>current live site</em> (Home and Docs), not files written by this run.</p>
+<h3>Top 5 actions</h3><ol><li>Fix the two FAIL pages: docs count and html-manual, plus the unconfirmed &quot;Works with Claude, Codex, Cursor&quot; line on Home.</li><li>Publish a real example repository (the shop) so stage 03 has a risk-free try and the site&#x27;s example becomes proof.</li><li>Add the &quot;Which workflow do you need?&quot; issue template: it is the entry of the strongest loop (integrations).</li><li>Decide what stage 05 means (adoption only, or a paid offer) and whether to add a LICENSE.</li><li>Ship the three articles and the Trivy, Linear and AI Hero integration pages.</li></ol>
+
+<h2 id="map">2. Product map</h2>
+<h4>Features</h4>
+<div class="tw"><table><thead><tr><th>#</th><th>Feature (as the product names it)</th><th>Job it does</th><th>Persona</th><th>Status</th><th>Evidence</th></tr></thead><tbody><tr><td>1</td><td>Blueprint scaffold ("blueprint this project.")</td><td>Writes the project's own skill folder: orchestrator, routing matrix, role contracts, one contract per workflow</td><td>agent-developer, tech-lead</td><td>live</td><td><code>product/SKILL.md</code> Procedure 1-3</td></tr><tr><td>2</td><td>Root doc wiring</td><td>Adds "Start here" links to <code>AGENTS.md</code> or <code>CLAUDE.md</code>; the root doc stays short</td><td>agent-developer</td><td>live</td><td><code>product/SKILL.md</code> Procedure 4</td></tr><tr><td>3</td><td>Router-only command routing</td><td><code>/&lt;skillName&gt; &lt;cmd&gt;</code> loads only <code>workflows/&lt;cmd&gt;/SKILL.md</code></td><td>all</td><td>live</td><td><code>product/SKILL.md</code> Invariants</td></tr><tr><td>4</td><td>Workflow contract format</td><td>Goal, Scope, Triggers, Inputs, Invariants, Procedure, Outputs, Review gate, References</td><td>all</td><td>live</td><td><code>product/SKILL.md</code> Invariants, <code>product/README.md</code> (The contract format)</td></tr><tr><td>5</td><td>Consistency verification</td><td>Checks links, ids and that <code>template.json</code> matches the workflows folder</td><td>tech-lead</td><td>live</td><td><code>product/SKILL.md</code> Procedure 6</td></tr><tr><td>6</td><td><code>template.json</code> manifest</td><td>Machine-readable command list for tools that expose commands</td><td>tech-lead</td><td>live</td><td><code>product/README.md</code> (Skill manifest)</td></tr><tr><td>7</td><td><code>radioactive</code></td><td>11-phase lifecycle; phase 10 writes what the run learned back into the contracts</td><td>agent-developer, tech-lead</td><td>live</td><td><code>product/workflows/radioactive/SKILL.md</code></td></tr><tr><td>8</td><td><code>embed-aihero-radioactive</code></td><td>14-phase lifecycle with wayfinder, grilling, domain-modeling, research, prototype, to-spec</td><td>tech-lead</td><td>live (merged 2026-08-21)</td><td><code>product/workflows/embed-aihero-radioactive/SKILL.md</code>, <code>product/catalog.md</code></td></tr><tr><td>9</td><td><code>plan-to-blueprint</code></td><td>Turns a technical plan into project skills and a manifest</td><td>tech-lead</td><td>live</td><td><code>product/README.md</code>, <code>product/catalog.md</code></td></tr><tr><td>10</td><td>document -&gt; review -&gt; changelog chain</td><td>Docs from diff evidence, pass/fail review, changelog, retry up to 3</td><td>agent-developer</td><td>live</td><td><code>product/README.md</code> (Chained flow example)</td></tr><tr><td>11</td><td>Linear workflows</td><td><code>linear</code>, <code>mcp-linear-planner</code>, <code>mcp-linear-sync</code> create and sync Linear work via MCP</td><td>tech-lead</td><td>live</td><td><code>product/catalog.md</code></td></tr><tr><td>12</td><td>Infra workflows</td><td><code>network-engineering</code>, <code>infra-operations</code>, <code>iac</code>, <code>os-platform</code>, rsyslog centralization</td><td>platform-engineer</td><td>live</td><td><code>product/catalog.md</code></td></tr><tr><td>13</td><td>Security workflows</td><td>18 contracts: Trivy, Kubernetes, AWS IAM, S3, GitHub Actions, Nessus, SSVC, image hardening, registry</td><td>platform-engineer</td><td>live</td><td><code>product/catalog.md</code></td></tr><tr><td>14</td><td>Code quality</td><td><code>thermo-nuclear-code-quality-review</code>, <code>thermo-fix</code>, <code>review</code></td><td>agent-developer</td><td>live</td><td><code>product/catalog.md</code></td></tr><tr><td>15</td><td>Creative</td><td><code>ui-ux-pro-max</code>, <code>remotion-video-motion</code></td><td>agent-developer</td><td>live</td><td><code>product/catalog.md</code></td></tr><tr><td>16</td><td><code>c4-architecture</code></td><td>C4 diagrams in Mermaid</td><td>tech-lead</td><td>live</td><td><code>product/README.md</code></td></tr><tr><td>17</td><td><code>html-manual</code></td><td>(removed)</td><td>none</td><td>internal: removed 2026-09-29, still listed on the live docs page</td><td><code>product/history.md</code>, <code>site/live-notes.md</code></td></tr></tbody></table></div>
+<h3>Fact ledger</h3><div class="tw"><table><thead><tr><th>id</th><th>claim</th><th>source</th><th>status</th></tr></thead><tbody>
+<tr><td>F-001</td><td>Install with <code>npx skills add devton/agentic-workflow-blueprint</code></td><td><code>product/README.md</code> Quick run</td><td><span class="chip live">live</span></td></tr><tr><td>F-002</td><td>Start with the prompt <code>blueprint this project.</code></td><td><code>product/README.md</code> Quick run</td><td><span class="chip live">live</span></td></tr><tr><td>F-003</td><td>First deliverable is <code>skills/&lt;projectSlug&gt;/SKILL.md</code></td><td><code>product/README.md</code> Quick run</td><td><span class="chip live">live</span></td></tr><tr><td>F-004</td><td>The agent asks for projectSlug, baseBranch, techStack, workflowsWanted and constraints</td><td><code>product/README.md</code> Getting started</td><td><span class="chip live">live</span></td></tr><tr><td>F-005</td><td>It generates an orchestrator, <code>template.json</code>, routing matrix, role contracts, one contract per workflow and runbooks</td><td><code>product/SKILL.md</code> Outputs</td><td><span class="chip live">live</span></td></tr><tr><td>F-006</td><td>It links the new skills from <code>AGENTS.md</code> or <code>CLAUDE.md</code>; the root doc stays minimal and only links out</td><td><code>product/SKILL.md</code> Procedure 4, Review gate</td><td><span class="chip live">live</span></td></tr><tr><td>F-007</td><td>Router-only: <code>/&lt;skillName&gt; &lt;cmd&gt;</code> loads only that workflow's contract</td><td><code>product/SKILL.md</code> Invariants</td><td><span class="chip live">live</span></td></tr><tr><td>F-008</td><td>Every contract has Goal, Scope, Triggers, Inputs, Invariants, Procedure, Outputs, Review gate, References</td><td><code>product/SKILL.md</code> Invariants</td><td><span class="chip live">live</span></td></tr><tr><td>F-009</td><td>The scaffold verifies links, ids and manifest sync before it is done</td><td><code>product/SKILL.md</code> Procedure 6</td><td><span class="chip live">live</span></td></tr><tr><td>F-010</td><td>Several commands can be chained in one message</td><td><code>product/README.md</code> Command routing</td><td><span class="chip live">live</span></td></tr><tr><td>F-011</td><td>document -&gt; review -&gt; changelog retries up to 3 times on a failed review</td><td><code>product/README.md</code> Chained flow example</td><td><span class="chip live">live</span></td></tr><tr><td>F-012</td><td><code>plan-to-blueprint</code> turns a technical plan into project skills and a manifest</td><td><code>product/README.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-013</td><td><code>radioactive</code> runs 11 phases in order, with no skipping</td><td><code>product/workflows/radioactive/SKILL.md</code> Invariant 1</td><td><span class="chip live">live</span></td></tr><tr><td>F-014</td><td>radioactive waits for the user after discovery questions (phase 2) and for plan approval (phase 4)</td><td><code>product/workflows/radioactive/SKILL.md</code> Invariants 3-4</td><td><span class="chip live">live</span></td></tr><tr><td>F-015</td><td>The fix loop runs up to 3 times and must resolve blocker and high findings</td><td><code>product/workflows/radioactive/SKILL.md</code> Invariant 6, Inputs</td><td><span class="chip live">live</span></td></tr><tr><td>F-016</td><td>Phase 10 writes new patterns and constraints back into the workflow contracts</td><td><code>product/workflows/radioactive/SKILL.md</code> Phase 10</td><td><span class="chip live">live</span></td></tr><tr><td>F-017</td><td>Phase 11 writes customer-facing release notes</td><td><code>product/workflows/radioactive/SKILL.md</code> Phase 11</td><td><span class="chip live">live</span></td></tr><tr><td>F-018</td><td>Infra changes in radioactive need rollback, change window and post-change health checks</td><td><code>product/workflows/radioactive/SKILL.md</code> Invariant 8</td><td><span class="chip live">live</span></td></tr><tr><td>F-019</td><td><code>embed-aihero-radioactive</code> runs 14 phases with six Matt Pocock / AI Hero skills; phase 1 runs the project skill first</td><td><code>product/workflows/embed-aihero-radioactive/SKILL.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-020</td><td>The repo ships 46 workflow contracts</td><td><code>product/catalog.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-021</td><td>The repo ships 7 operator runbooks</td><td><code>product/catalog.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-022</td><td>18 security workflows and 5 infrastructure workflows are included as templates</td><td><code>product/catalog.md</code>, <code>site/live-notes.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-023</td><td>Linear work is created and synced via MCP (<code>linear</code>, <code>mcp-linear-planner</code>, <code>mcp-linear-sync</code>)</td><td><code>product/catalog.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-024</td><td>A Remotion video workflow is included</td><td><code>product/catalog.md</code></td><td><span class="chip live">live</span></td></tr><tr><td>F-025</td><td>The blueprint is stack-agnostic by design</td><td><code>product/README.md</code> How to use</td><td><span class="chip live">live</span></td></tr><tr><td>F-026</td><td>Workflows are markdown, adjusted in plain conversation</td><td><code>product/README.md</code> How it works</td><td><span class="chip live">live</span></td></tr><tr><td>F-027</td><td>Workflows persist beyond a single session</td><td><code>product/README.md</code> Why turn plans into skills</td><td><span class="chip live">live</span></td></tr><tr><td>F-028</td><td>"Works with Claude, Codex, Cursor or the next one"</td><td><code>site/home.txt</code></td><td><span class="chip conf">[to confirm]</span></td></tr><tr><td>F-029</td><td>The run 1 to run 10 numbers on the site are illustrative, not a benchmark</td><td><code>site/home.txt</code></td><td><span class="chip live">live (disclaimer)</span></td></tr><tr><td>F-030</td><td><code>html-manual</code> was removed from the repo on 2026-09-29</td><td><code>product/history.md</code></td><td><span class="chip int">internal</span></td></tr><tr><td>F-031</td><td>An outside contributor expanded the infra and security catalog (2026-08-08)</td><td><code>product/history.md</code>, <code>product/catalog.md</code></td><td><span class="chip live">live (anonymized)</span></td></tr><tr><td>F-032</td><td>The repository has no LICENSE file</td><td><code>product/catalog.md</code></td><td><span class="chip int">internal</span></td></tr><tr><td>F-033</td><td>Templates are meant to be copied, renamed and adapted</td><td><code>product/README.md</code> Included workflow examples</td><td><span class="chip live">live</span></td></tr><tr><td>F-034</td><td>The scaffold adds only the workflows the user requested</td><td><code>product/SKILL.md</code> Invariants (Minimal surface)</td><td><span class="chip live">live</span></td></tr></tbody></table></div>
+<h4>Gaps</h4>
+<p><strong>Content candidates (features without a page or doc):</strong></p>
+<ul><li>G-01 No sample project. Activation has no risk-free "try it" path; the "shop" example exists only as site illustration. Candidate: a public example repo with a generated <code>skills/shop/</code>.</li><li>G-02 The docs page promises "Write a contract by hand (15 min)"; no such guide exists in the repo.</li><li>G-03 No page per integration (Linear, Trivy, Kubernetes, GitHub Actions) although the contracts exist.</li><li>G-04 <code>plan-to-blueprint</code> has a runbook but no site page that sells it to tech leads.</li></ul>
+<p><strong>Claims in current copy the ledger does not support:</strong></p>
+<ul><li>C-01 "Works with Claude, Codex, Cursor or the next one" (<code>site/home.txt</code>): no test or doc. F-028.</li><li>C-02 "Workflows (41)" and a card for <code>html-manual</code> (<code>site/live-notes.md</code>): repo has 46 and removed <code>html-manual</code> (F-020, F-030).</li><li>C-03 "Orchestrator ... under ~100 lines" (<code>site/docs.txt</code>): no such limit in <code>product/SKILL.md</code>.</li><li>C-04 "Cost: zero, it is a phase" (<code>site/home.txt</code>): phase 10 costs a run step; say "no extra setup" instead.</li><li>C-05 Install counts, stars or adoption: no data in the sources. Signals cannot be measured yet.</li></ul>
+
+<h2 id="pos">3. Positioning</h2><h4>1. Flagship customer</h4>
+<p><strong>Who:</strong> a developer who works with a coding agent every day on a repository with several modules.</p>
+<p><strong>What they lose today:</strong> every session starts from zero. They paste the same rules into every prompt, or they keep one long <code>AGENTS.md</code> that the agent reads for every task, where the rule that matters gets buried (<code>site/home.txt</code>, levels 1 and 2).</p>
+<p><strong>What changes:</strong> the agent writes and keeps its own notebook in the repo, one short contract per part of the codebase, opens only the right page for each task, and adds what review taught it after every job (F-005, F-007, F-016).</p>
+<p>The home page talks to this person first. Tech leads and platform engineers come after.</p>
+<h4>2. Promise</h4>
+<blockquote>We teach your agent to keep a notebook of your project, so you stop explaining the same rules every session.</blockquote>
+<p>Tagline options:</p>
+<div class="tw"><table><thead><tr><th>#</th><th>Option</th><th>Note</th></tr></thead><tbody><tr><td>A</td><td>Teach your agent how to learn your project.</td><td>Current site line. Says the outcome; category is in the eyebrow ("A meta-skill for coding agents").</td></tr><tr><td>B</td><td>A notebook your coding agent writes, reads and corrects.</td><td>Most concrete: says what it is and what it does.</td></tr><tr><td>C</td><td>Your agent's rules, in your repo, one page per module.</td><td>Strong on Transparency and Organization; weaker on learning.</td></tr><tr><td>D</td><td>Stop re-explaining your project to your agent.</td><td>Pain-first; good for ads and article titles, too negative for the hero.</td></tr></tbody></table></div>
+<p><strong>Recommendation: keep A as the hero and use B as the sub-line.</strong> A carries Vision and is already live; B fixes the one weakness of A (it does not say what the product is) without new claims.</p>
+<h4>3. Persona matrix</h4>
+<div class="tw"><table><thead><tr><th>Persona</th><th>Job to be done</th><th>Lane</th><th>First value moment</th><th>Elements of value</th><th>Proof</th></tr></thead><tbody><tr><td><strong>Developer with a coding agent</strong> (flagship)</td><td>Stop re-explaining the project; get the same result on task ten as on task one</td><td>self-serve</td><td>The second task routes to one contract without being asked for context</td><td>Time savings (3), Reduced effort (3), Reduced anxiety (4), Growth &amp; development (4)</td><td>F-002, F-007, F-016</td></tr><tr><td><strong>Tech lead of a team using agents</strong></td><td>Make every teammate's agent follow the same rules, reviewed like code</td><td>assisted</td><td>The first pull request where a lesson (a new invariant) is reviewed by a human</td><td>Transparency (3), Risk reduction (3), Organization (3), Reputational assurance (4)</td><td>F-008, F-012, F-014, F-016</td></tr><tr><td><strong>Platform and security engineer</strong></td><td>Run infra and security changes through the same checked steps, with rollback and evidence</td><td>self-serve</td><td>A copied Trivy or Kubernetes contract runs its gate on their repo</td><td>Risk reduction (3), Integration (3), Expertise (3), Reduced anxiety (4)</td><td>F-018, F-022, F-033</td></tr></tbody></table></div>
+<p><strong>Overlap check:</strong> the flagship and the tech lead share "same result every time". They stay separate because the job differs: one person's own time vs. a team's shared rules, and the tech lead's proof is the pull request review, not the routing. No merge.</p>
+<h4>4. Headline facts</h4>
+<div class="tw"><table><thead><tr><th>Label (~20 chars)</th><th>What it means for who decides</th><th>Fact</th></tr></thead><tbody><tr><td>One page per task</td><td>The agent reads only the contract it needs, not the whole manual</td><td>F-007</td></tr><tr><td>One setup prompt</td><td>Type <code>blueprint this project.</code> and answer five questions</td><td>F-002, F-004</td></tr><tr><td>Learns from review</td><td>What review caught becomes a rule in the contract</td><td>F-016</td></tr><tr><td>Lessons you can read</td><td>Plain markdown in your repo, reviewed in a pull request</td><td>F-026, F-016</td></tr><tr><td>No "done" without a gate</td><td>Every contract ends in pass/fail checks</td><td>F-008</td></tr></tbody></table></div>
+<h4>5. Principles</h4>
+<ol><li><strong>Sell the ease of a second run, not the first.</strong> The value shows on task two and later; show the notebook changing (the site's redline marks).</li><li><strong>Show before it runs.</strong> Show the real files: a contract with its Invariants and Review gate, the routing matrix, the phase 10 diff.</li><li><strong>Job over feature.</strong> "Stop re-explaining your project" before "router-only command routing".</li><li><strong>Plain words.</strong> Short sentences. "Notebook", "page", "lesson" in copy; "contract", "routing matrix", "review gate" in docs. No hype, no numbers we cannot show.</li><li><strong>Access model.</strong> Open: anyone can install. Every CTA is <strong>Install the blueprint</strong> (<code>npx skills add devton/agentic-workflow-blueprint</code>). Never a sign-up, account or trial.</li><li><strong>Lanes are internal.</strong> Pages never say "self-serve" or "assisted"; the maintainer uses them to decide whom to help.</li></ol>
+<h4>6. Say / never-say</h4>
+<div class="tw"><table><thead><tr><th>Never say</th><th>Say instead</th><th>Why</th></tr></thead><tbody><tr><td>prices, plans, "free", "trial"</td><td>nothing; the CTA is the install command</td><td><code>config.neverSay</code></td></tr><tr><td>"open source", any license claim</td><td>"public repository on GitHub"</td><td>no LICENSE file (F-032) [to confirm]</td></tr><tr><td>"saves 70% tokens", any number</td><td>"reads only the page it needs"</td><td>no benchmark; site numbers are illustrative (F-029)</td></tr><tr><td>"trains / fine-tunes your agent"</td><td>"writes lessons into your repo"</td><td>it changes markdown, not weights</td></tr><tr><td>"works with any agent"</td><td>"plain markdown in your repository" until F-028 is confirmed</td><td>F-028 [to confirm]</td></tr><tr><td>customer or contributor names</td><td>"a contributor", "a team"</td><td>hard rule 4</td></tr><tr><td>the owner's full name</td><td>"@devton"</td><td>owner's rule</td></tr><tr><td><code>html-manual</code></td><td>(leave out)</td><td>removed (F-030)</td></tr><tr><td>"AI", "documentation"</td><td>"your agent", "the agent's notebook"</td><td><code>config.sayInstead</code></td></tr><tr><td>"Sign up free", "Request a demo", "Join the waitlist"</td><td>"Install the blueprint"</td><td><code>config.access.forbiddenCtas</code></td></tr></tbody></table></div>
+<p><strong>Regulated topic.</strong> Security workflows are described only as "authorized checks on systems you own or are allowed to test". They are never sold as compliance and never as "no audit needed".</p>
+
+<h2 id="machine">4. Machine</h2><svg viewBox="0 0 860 230" role="img" aria-label="Six stages, split at 04 into two lanes, with an arrow from 06 back to 01"><rect x="20" y="70" width="115" height="44" rx="8" class="node"/><text x="77.5" y="97" text-anchor="middle">01 Feed</text><rect x="150" y="70" width="115" height="44" rx="8" class="node"/><text x="207.5" y="97" text-anchor="middle">02 Attract</text><rect x="280" y="70" width="115" height="44" rx="8" class="node"/><text x="337.5" y="97" text-anchor="middle">03 Activate</text><rect x="405" y="20" width="180" height="44" rx="8" class="node lane"/><text x="495.0" y="47" text-anchor="middle">04a On their own</text><rect x="405" y="120" width="180" height="44" rx="8" class="node lane"/><text x="495.0" y="147" text-anchor="middle">04b With the maintainer</text><rect x="615" y="70" width="115" height="44" rx="8" class="node"/><text x="672.5" y="97" text-anchor="middle">05 Convert</text><rect x="740" y="70" width="115" height="44" rx="8" class="node"/><text x="797.5" y="97" text-anchor="middle">06 Feed back</text><line x1="135" y1="92" x2="148" y2="92" class="edge"/><polygon points="148,92 140.3,96.6 140.3,87.4" class="fillink"/><line x1="265" y1="92" x2="278" y2="92" class="edge"/><polygon points="278,92 270.3,96.6 270.3,87.4" class="fillink"/><line x1="395" y1="92" x2="403" y2="42" class="edge"/><polygon points="403,42 406.4,50.3 397.2,48.9" class="fillink"/><line x1="395" y1="92" x2="403" y2="142" class="edge"/><polygon points="403,142 397.2,135.1 406.4,133.7" class="fillink"/><line x1="585" y1="42" x2="613" y2="92" class="edge"/><polygon points="613,92 605.2,87.5 613.3,83.0" class="fillink"/><line x1="585" y1="142" x2="613" y2="92" class="edge"/><polygon points="613,92 613.3,101.0 605.2,96.5" class="fillink"/><line x1="730" y1="92" x2="738" y2="92" class="edge"/><polygon points="738,92 730.3,96.6 730.3,87.4" class="fillink"/><path d="M797 114 C797 215, 77 215, 77 118" class="edge back"/><polygon points="77,116 81.6,123.7 72.4,123.7" class="fillink"/><text x="427" y="208" text-anchor="middle" class="small">growth loops feed the next cohort back into 01</text></svg><p><strong>How this product changes the template.</strong> Access is <code>open</code>: there is no access request, no invite and no purchase in the sources. So stage 02 is the install, the "buying signal" is a repository that keeps its notebook alive, and stage 05 is <strong>adoption</strong> (a team commits the notebook and asks the maintainer for more). Whether there is any commercial offer behind stage 05 is the owner's call: <code>[to confirm]</code>. Every event below is either observable today on public GitHub, or marked <strong>proposed</strong> with the instrumentation it needs (see <code>loops.md</code>).</p>
+<h4>Stages</h4>
+<h5>01 Feed</h5>
+<ul><li><strong>Entry:</strong> <code>content_published</code> (article, workflow page, release note on the site).</li><li><strong>Exit:</strong> <code>site_visit</code> that came from that content.</li><li><strong>Each persona finds its case:</strong> flagship -&gt; "your AGENTS.md is too long"; tech lead -&gt; "lessons reviewed in a pull request"; platform engineer -&gt; one page per integration (Trivy, Kubernetes).</li><li><strong>Value:</strong> Vision, Time savings, Reduced anxiety.</li><li><strong>Metric:</strong> visits per published piece. <code>[to confirm: the site has no analytics in the sources]</code>.</li><li><strong>Owner:</strong> content.</li></ul>
+<h5>02 Attract</h5>
+<ul><li><strong>Entry:</strong> <code>site_visit</code>.</li><li><strong>Exit:</strong> <code>blueprint_installed</code> (the user runs <code>npx skills add devton/agentic-workflow-blueprint</code>).</li><li><strong>What we capture:</strong> today nothing. <strong>Proposed:</strong> a "Which workflow do you need?" issue template on GitHub that asks for goal, stack and the tools they use (feeds the integrations loop), linked next to the install command.</li><li><strong>Value:</strong> Time savings, Reduced effort, Vision.</li><li><strong>Metric:</strong> installs per 100 visits. <code>[to confirm: does the skills CLI publish install counts?]</code></li><li><strong>Owner:</strong> content.</li></ul>
+<h5>03 Activate</h5>
+<ul><li><strong>Entry:</strong> <code>blueprint_installed</code>.</li><li><strong>Exit:</strong> <code>scaffold_generated</code>: <code>skills/&lt;projectSlug&gt;/SKILL.md</code> exists in the user's repo (F-003).</li><li><strong>Risk-free try:</strong> <strong>proposed</strong> public example repo (<code>shop</code>, the one the site already uses) with the scaffold already generated and two lessons in its history, so people see run 1 and run 3 before touching their own repo (gap G-01).</li><li><strong>The goal picks the path:</strong> the <code>workflowsWanted</code> answer (F-004) decides which contracts exist.</li><li><strong>Value:</strong> Reduced effort, Simplification, Decreased hassles, Reduced anxiety.</li><li><strong>Metric:</strong> scaffolds per 100 installs.</li><li><strong>Owner:</strong> product.</li></ul>
+<h5>04 Qualify</h5>
+<p>Two lanes, split here. Internal only; pages never show them.</p>
+<p><strong>Self-serve ("On their own")</strong>, flagship and platform engineer:</p>
+<ol><li>Scaffold generated (<code>scaffold_generated</code>).</li><li>First routed task: <code>/&lt;skillName&gt; &lt;cmd&gt;</code> loads one contract (F-007).</li><li>First lesson: radioactive phase 10 adds an invariant or trigger (F-016) -&gt; <code>lesson_committed</code>.</li><li>Second lesson on a later task.</li><li><strong>Signal <code>notebook_alive</code>:</strong> <code>[to confirm]</code> proposed rule: a repository commits <code>skills/&lt;project&gt;/</code> and changes a contract in a second, later commit within 30 days.</li></ol>
+<p><strong>Assisted ("With the maintainer")</strong>, tech lead:</p>
+<ol><li>Scaffold generated in a team repository.</li><li><code>plan-to-blueprint</code> run on a real plan (F-012).</li><li>A teammate's pull request includes a contract change (the lesson is reviewed by a person).</li><li>The team asks for a workflow for their stack (issue) or sends one (pull request).</li><li><strong>Signal <code>team_request</code>:</strong> an issue or pull request on the product repo that asks for, or adds, a workflow. This is observable today.</li></ol>
+<p>Regulated steps: the security workflows only appear in the platform engineer's path, stated as "authorized checks on systems you own or are allowed to test".</p>
+<ul><li><strong>Value (self-serve):</strong> Time savings, Configurability, Integration, Growth &amp; development.</li><li><strong>Value (assisted):</strong> Integration, Expertise, Responsiveness, Transparency.</li><li><strong>Metric:</strong> signal rate per lane per 100 scaffolds; days from scaffold to signal.</li><li><strong>Owner:</strong> product (self-serve), maintainer (assisted).</li></ul>
+<h5>05 Convert</h5>
+<ul><li><strong>Entry:</strong> <code>notebook_alive</code> or <code>team_request</code>.</li><li><strong>Exit:</strong> <code>adopted</code>: for self-serve, the repository still has lessons added 60 days later; for assisted, the maintainer answers and the team's workflow is merged or published as a template.</li><li><strong>The maintainer talks to someone already using it:</strong> the team's issue already names its stack and its tools.</li><li><strong>What "customer" means:</strong> <code>[to confirm with owner]</code>: adoption only, or a paid offer (setup help, private workflows). Nothing in the sources mentions money, so no copy may.</li><li><strong>Value:</strong> Risk reduction, Reputational assurance, Transparency, Commitment.</li><li><strong>Metric:</strong> adoptions per 100 signals.</li><li><strong>Owner:</strong> maintainer.</li></ul>
+<h5>06 Feed back</h5>
+<p>Growth loops (see <code>loops.md</code>): integrations, invites (the notebook travels with the repo), content (real lessons become examples). Each one ends at stage 01.</p>
+<h4>Engine (spec only)</h4>
+<p>A <strong>weekly sweep</strong> by the operator agent, using only public data the owner can see:</p>
+<ol><li>Read the product repo's new issues, pull requests, stars and forks since the last sweep.</li><li><strong>Proposed:</strong> search public repositories for generated notebooks (<code>skills/*/template.json</code> with <code>"routing": "router-only"</code> next to a root doc that links <code>skills/&lt;project&gt;/SKILL.md</code>); record first-seen date and each later contract change as milestones with their real dates.</li><li>For each repo or team that hit a signal, write a short note for the maintainer: what they built, which workflows, which tools.</li><li>Compute conversion and time between stages; record what could not be measured.</li></ol>
+<p>The engine never contacts anyone. It writes notes; the maintainer decides.</p>
+<h4>Metrics</h4>
+<div class="tw"><table><thead><tr><th>Metric</th><th>Formula</th><th>Unit</th></tr></thead><tbody><tr><td>visit_to_install</td><td>installs / site visits</td><td>per 100 visits <code>[to confirm data]</code></td></tr><tr><td>install_to_scaffold</td><td>scaffolds seen / installs</td><td>per 100 installs</td></tr><tr><td>scaffold_to_signal</td><td>repos with a signal / scaffolds</td><td>per 100 scaffolds, per lane</td></tr><tr><td>signal_to_adoption</td><td>adoptions / signals</td><td>per 100 signals</td></tr><tr><td>days_between_stages</td><td>median days stage N -&gt; N+1</td><td>days</td></tr><tr><td>loop_strength</td><td>new stage-02 entries per monthly cohort of adopters, per loop</td><td>ratio</td></tr><tr><td>value_coverage</td><td>articles + specs per persona x stage x element</td><td>count</td></tr></tbody></table></div>
+<h4>Diagram (nodes + edges, drawn by <code>report</code>)</h4>
+<ul><li>Nodes: 01 Feed, 02 Attract, 03 Activate, 04a Qualify (On their own), 04b Qualify (With the maintainer), 05 Convert, 06 Feed back.</li><li>Edges: 01-&gt;02, 02-&gt;03, 03-&gt;04a, 03-&gt;04b, 04a-&gt;05, 04b-&gt;05, 05-&gt;06, 06-&gt;01.</li></ul>
+
+<h2 id="loops">5. Loops</h2><svg viewBox="0 0 900 260" role="img" aria-label="The three growth loops, four steps each"><circle cx="150" cy="130" r="90" class="ring"/><text x="150" y="135" text-anchor="middle" class="loopname">integrations</text><circle cx="150" cy="40" r="13" class="dot"/><text x="150" y="44" text-anchor="middle" class="num">1</text><circle cx="245" cy="130" r="13" class="dot"/><text x="245" y="134" text-anchor="middle" class="num">2</text><circle cx="150" cy="220" r="13" class="dot"/><text x="150" y="224" text-anchor="middle" class="num">3</text><circle cx="55" cy="130" r="13" class="dot"/><text x="55" y="134" text-anchor="middle" class="num">4</text><circle cx="450" cy="130" r="90" class="ring"/><text x="450" y="135" text-anchor="middle" class="loopname">invites</text><circle cx="450" cy="40" r="13" class="dot"/><text x="450" y="44" text-anchor="middle" class="num">1</text><circle cx="545" cy="130" r="13" class="dot"/><text x="545" y="134" text-anchor="middle" class="num">2</text><circle cx="450" cy="220" r="13" class="dot"/><text x="450" y="224" text-anchor="middle" class="num">3</text><circle cx="355" cy="130" r="13" class="dot"/><text x="355" y="134" text-anchor="middle" class="num">4</text><circle cx="750" cy="130" r="90" class="ring"/><text x="750" y="135" text-anchor="middle" class="loopname">content</text><circle cx="750" cy="40" r="13" class="dot"/><text x="750" y="44" text-anchor="middle" class="num">1</text><circle cx="845" cy="130" r="13" class="dot"/><text x="845" y="134" text-anchor="middle" class="num">2</text><circle cx="750" cy="220" r="13" class="dot"/><text x="750" y="224" text-anchor="middle" class="num">3</text><circle cx="655" cy="130" r="13" class="dot"/><text x="655" y="134" text-anchor="middle" class="num">4</text></svg><ul><li><strong>integrations</strong>: a developer names the tools they use → a contract for that tool is added → the tool&#x27;s page attracts its other users → they install and name their tools → back to 1</li><li><strong>invites</strong>: an adopter commits skills/&lt;project&gt;/ → teammates who clone the repo get the notebook → a teammate installs the blueprint in another repository → that repository commits its own notebook → back to 1</li><li><strong>content</strong>: real runs produce lessons → anonymized lessons become examples and articles → articles bring new installs → new adopters produce new lessons → back to 1</li></ul><p>The product already grew one loop by accident: an outside contributor added the infra and security catalog (F-031). These loops make that repeatable. Prefer <strong>integrations</strong> and <strong>invites</strong>; content is the slowest of the three here.</p>
+<h4>1. Integrations loop (strongest)</h4>
+<ol><li>A developer names the tools their project uses (issue template "Which workflow do you need?").</li><li>A contract for that tool is added to <code>workflows/</code> (by the maintainer or a contributor).</li><li>A page <code>/workflows/&lt;name&gt;/</code> and an integration page attract other users of that tool (people searching "Trivy gate for coding agents", "Linear MCP agent workflow").</li><li>They install, scaffold, and name their own tools -&gt; back to 1.</li></ol>
+<ul><li><strong>Owner:</strong> product (maintainer).</li><li><strong>Priority of tools:</strong> by how many issues and adopters name them. Today the catalog already covers Linear, Trivy, Kubernetes, GitHub Actions, Remotion and AI Hero skills (F-019, F-022, F-023, F-024), so the first job is pages, not new contracts (gap G-03).</li><li><strong>Rule:</strong> integration content names the tool, never the team that uses it.</li></ul>
+<h4>2. Invites loop (notebook travels with the repo)</h4>
+<ol><li>An adopter commits <code>skills/&lt;project&gt;/</code> to their repository (F-005).</li><li>Every teammate who clones the repo, and every agent they use, gets the notebook and the "Start here" link in <code>AGENTS.md</code> (F-006).</li><li>A teammate sees it work and installs the blueprint for another repository they own.</li><li>That repository commits its own notebook -&gt; back to 1.</li></ol>
+<ul><li><strong>Owner:</strong> content (the hook) + product (the link).</li><li><strong>Hook:</strong> <strong>proposed</strong> one line that the scaffold adds under "Start here" in the root doc: "Generated with workflow-blueprint" with the repo link. This needs a change in the product's <code>SKILL.md</code> Procedure 4 and the owner's ok.</li></ul>
+<h4>3. Content loop</h4>
+<ol><li>Real runs produce lessons (phase 10 diffs) (F-016).</li><li>Anonymized, they become example contracts and "what the agent learned" articles.</li><li>Articles bring new installs (stage 01 -&gt; 02).</li><li>New adopters produce new lessons -&gt; back to 1.</li></ol>
+<ul><li><strong>Owner:</strong> content.</li><li><strong>Source of lessons:</strong> only from adopters who agree, or from the maintainer's own repos.</li></ul>
+<h4>Metric</h4>
+<p><strong>New stage-02 entries (installs) per monthly cohort of adopters, per loop.</strong> A loop is working when each cohort brings more installs than the one before.</p>
+<h4>Instrumentation gaps</h4>
+<div class="tw"><table><thead><tr><th>Needed</th><th>Loop</th><th>Today</th><th>Owner role</th></tr></thead><tbody><tr><td>Install counts from the skills CLI</td><td>all</td><td>not in sources <code>[to confirm]</code></td><td>product</td></tr><tr><td>Referrer on installs (which page or repo)</td><td>all</td><td>none</td><td>product</td></tr><tr><td>Site analytics (visits per page)</td><td>content, integrations</td><td>none in sources <code>[to confirm]</code></td><td>content</td></tr><tr><td>"Which workflow do you need?" issue template (goal, stack, tools)</td><td>integrations</td><td>none</td><td>product</td></tr><tr><td>"Generated with workflow-blueprint" line in generated root docs</td><td>invites</td><td>none</td><td>product</td></tr><tr><td>Public search for generated notebooks (engine step 2)</td><td>invites, signals</td><td>none</td><td>agent (operator)</td></tr><tr><td>Consent to reuse a lesson as an example</td><td>content</td><td>none</td><td>content</td></tr></tbody></table></div>
+<h4>Rule for all content</h4>
+<p>Every piece gives the reader a reason to feed a loop: name the tool you want a workflow for, commit the notebook so your team gets it, or start from an example contract. Not only "install".</p>
+
+<h2 id="coverage">6. Coverage</h2>
+<h3>Persona x stage (articles + page specs)</h3><div class="tw"><table><thead><tr><th>persona</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th></tr></thead><tbody><tr><td>agent-developer</td><td class="">2</td><td class="">2</td><td class="gap">gap</td><td class="gap">gap</td><td class="gap">gap</td><td class="gap">gap</td></tr><tr><td>tech-lead</td><td class="">2</td><td class="">1</td><td class="gap">gap</td><td class="">2</td><td class="gap">gap</td><td class="gap">gap</td></tr><tr><td>platform-engineer</td><td class="">1</td><td class="">2</td><td class="gap">gap</td><td class="gap">gap</td><td class="gap">gap</td><td class="gap">gap</td></tr></tbody></table></div>
+<h3>Value element x persona</h3><div class="tw"><table><thead><tr><th>element</th><th>agent-developer</th><th>tech-lead</th><th>platform-engineer</th></tr></thead><tbody><tr><td>Time savings</td><td class="">3</td><td class="gap">gap</td><td class="gap">gap</td></tr><tr><td>Reduced effort</td><td class="">1</td><td class="gap">gap</td><td class="gap">gap</td></tr><tr><td>Organization</td><td class="">3</td><td class="">1</td><td class="gap">gap</td></tr><tr><td>Transparency</td><td class="">1</td><td class="">2</td><td class="gap">gap</td></tr><tr><td>Risk reduction</td><td class="gap">gap</td><td class="">4</td><td class="">3</td></tr><tr><td>Integration</td><td class="">1</td><td class="">1</td><td class="">2</td></tr><tr><td>Expertise</td><td class="gap">gap</td><td class="">1</td><td class="">2</td></tr><tr><td>Reduced anxiety</td><td class="">1</td><td class="gap">gap</td><td class="">2</td></tr><tr><td>Growth &amp; development</td><td class="">1</td><td class="gap">gap</td><td class="gap">gap</td></tr><tr><td>Reputational assurance</td><td class="gap">gap</td><td class="">2</td><td class="gap">gap</td></tr><tr><td>Vision</td><td class="">1</td><td class="gap">gap</td><td class="gap">gap</td></tr></tbody></table></div>
+<p class="small">Gaps first in the next batch: stages 03, 05 and 06 have nothing for any persona, and 04 only for the tech lead; that matches the missing example repository and the open question on conversion.</p>
+
+<h2 id="content">7. Content</h2><details><summary><span class="chip live">PASS</span> <strong>Your AGENTS.md is too long. Give your agent a notebook instead.</strong><br><span class="meta">article · lane B · agent-developer · stage 01 · loop content · Time savings, Organization, Reduced anxiety</span></summary><h3>Your AGENTS.md is too long. Give your agent a notebook instead.</h3>
+<p>You started with a short <code>AGENTS.md</code>. A few rules, the test command, the folder layout. Then the agent rounded a refund with floats, so you added a line about cents. Then it called the payment API directly, so you added a line about the service layer. Six months later the file is hundreds of lines long, and the agent reads all of it for every task, including the one-line typo fix.</p>
+<p>The rule that would have saved you today is in there. It is just buried.</p>
+<h4>The problem is not the rules. It is that there is one file.</h4>
+<p>A single root file has two jobs that pull against each other. It has to hold everything the agent might need, and it has to be short enough that the agent pays attention to the part that matters. It cannot do both.</p>
+<p>So most of us end up doing one of two things: paste context into each prompt (and you become the memory), or keep growing the file (and the file becomes the memory, with every task paying for all of it).</p>
+<p>There is a third way: let the agent keep a notebook, with one short page per part of your project and a table of contents at the front.</p>
+<h4>What the notebook looks like</h4>
+<p>workflow-blueprint is a meta-skill: a skill that teaches your agent to write other skills for your repository. You install it once and ask for the notebook:</p>
+<pre><code>npx skills add devton/agentic-workflow-blueprint</code></pre>
+<pre><code>blueprint this project.</code></pre>
+<p>The agent asks you five things: a short name for the project, the base branch, the stack, which workflows you want, and your hard rules. Then it writes <code>skills/&lt;project&gt;/</code>:</p>
+<div class="slot">MEDIA M1 (screenshot slot)</div>
+<ul><li><code>SKILL.md</code>, the orchestrator: how to classify a task and pick one workflow.</li><li><code>reference/routing-matrix.md</code>, the table of contents: which kind of task goes to which page.</li><li><code>workflows/&lt;name&gt;/SKILL.md</code>, one contract per workflow you asked for.</li><li><code>template.json</code>, the same command list for tools that read JSON.</li></ul>
+<p>Your <code>AGENTS.md</code> keeps a short "Start here" link to the new skill. It stops being the place where every rule lives.</p>
+<h4>One page per task: where the <strong>time savings</strong> come from</h4>
+<p>From then on, when you type <code>/&lt;project&gt; &lt;command&gt;</code>, the agent loads only that workflow's contract. A bug fix in checkout does not load your infrastructure notes. That is the whole trick: the notebook is <strong>organized</strong> so that each task reads one page, not the whole book.</p>
+<p>Each page has the same sections: Goal, Scope, Triggers, Inputs, Invariants, Procedure, Outputs, Review gate and References. Invariants are the rules that must never break, like "amounts are integers in cents". The Review gate is a pass/fail checklist at the end. If the gate fails, the work is not done.</p>
+<div class="slot">MEDIA M2 (screenshot slot)</div>
+<h4>The notebook corrects itself</h4>
+<p>A notebook you have to maintain by hand would just move the problem. So the bundled <code>radioactive</code> workflow ends every job with a phase that does it for you. Phase 10 reviews what the run discovered and writes new patterns and constraints back into the contracts it used.</p>
+<p>That is the moment the site shows in red: a review caught float rounding on refunds, and the next version of the payments contract has a new invariant. The next time anyone asks for payment work, that rule is on the page the agent opens. You did not have to remember to add it.</p>
+<p>This is where the <strong>reduced anxiety</strong> comes from. You are no longer the only thing standing between a rule you learned last month and the agent forgetting it today.</p>
+<h4>It lives in your repo, so you can read it</h4>
+<p>Lessons are plain markdown, next to your code. You can read them, edit them in conversation, or delete one that is wrong. They change in commits like everything else, and they persist beyond a single chat session.</p>
+<div class="slot">MEDIA M3 (screenshot slot)</div>
+<h4>Try it on one repository</h4>
+<p>Pick the repository where you re-explain things most often. Install the blueprint, type <code>blueprint this project.</code>, and answer the five questions. Then do your next real task through the routed command and look at what changed in <code>skills/</code> afterwards.</p>
+<p><strong>Install the blueprint:</strong> <code>npx skills add devton/agentic-workflow-blueprint</code></p>
+<p><strong>Start from a lesson:</strong> when your agent writes its first rule from a review, keep that commit. It is the best example you will have of what the notebook is for, and the start of your own library of contracts.</p>
+<h4>Media plan</h4>
+<ul><li><strong>M1:</strong> terminal capture of <code>blueprint this project.</code> and the five questions, then the file tree of the generated <code>skills/&lt;project&gt;/</code> (from a real run on a public repo).</li><li><strong>M2:</strong> one real contract open in an editor, Invariants and Review gate visible.</li><li><strong>M3:</strong> the diff of a phase 10 commit that adds one invariant.</li></ul>
+<h4>FAQ</h4>
+<h5>Does it replace my AGENTS.md?</h5>
+<p>No. Your root doc stays, but short: it links to <code>skills/&lt;project&gt;/SKILL.md</code> and the agent follows the link. The detail moves into the contracts.</p>
+<h5>Which workflows should I ask for first?</h5>
+<p>Start with what you do every week. The repo ships 46 contract templates (document, review, radioactive, plan-to-blueprint, infra and security ones) meant to be copied and adapted.</p>
+<h5>What if the agent writes a bad rule?</h5>
+<p>It is a line of markdown in your repository. Read it in the diff, edit it, or delete it.</p>
+<h5>Do I have to use radioactive?</h5>
+<p>No. Routing and contracts work on their own. radioactive adds the phase that writes lessons back.</p>
+<h5>How do I test it without touching my main branch?</h5>
+<p>Run it on a branch. Everything it writes is files you can review before you merge.</p></details><details><summary><span class="chip live">PASS</span> <strong>Review what your team&#x27;s agents learned, in the same pull request as the code</strong><br><span class="meta">article · lane B · tech-lead · stage 04 · loop invites · Transparency, Risk reduction, Reputational assurance</span></summary><h3>Review what your team's agents learned, in the same pull request as the code</h3>
+<p>Five people on your team use coding agents. Each one has a slightly different prompt, a slightly different set of pasted rules, and a slightly different idea of how the payment module works. You find out in review, one pull request at a time.</p>
+<p>The fix is not a longer style guide. It is putting the agents' rules where the team already agrees on things: in the repository, changed through pull requests.</p>
+<h4>Rules your team can see</h4>
+<p>workflow-blueprint writes a folder of contracts into your repository, <code>skills/&lt;project&gt;/</code>, one per kind of work. Each contract has the same sections: Goal, Scope, Triggers, Inputs, Invariants, Procedure, Outputs, Review gate and References.</p>
+<p>That sameness is the point for a lead. When a contract says "All calls go through PaymentService" under Invariants, every agent that opens the payments contract reads that line. It is not in anyone's private prompt. It is in a file the whole team can read, which is what <strong>transparency</strong> means here: you can see exactly what the agents are told.</p>
+<div class="slot">MEDIA M1 (screenshot slot)</div>
+<h4>Lessons arrive as diffs you review</h4>
+<p>The bundled <code>radioactive</code> workflow runs eleven phases in order: classify, discover, UX design (if there is UI), plan, blueprint, execute, tests, review, fix loop, blueprints, changelog. Two of its gates matter for a team:</p>
+<ul><li>It stops after discovery questions and after the plan, and waits for a person to answer or approve before it writes code.</li><li>Phase 10 writes what the run discovered back into the contracts. So when an agent learns something, the lesson shows up as a change to a markdown file in the same branch.</li></ul>
+<p>Your normal review now covers both: the code, and the rule the agent wants to keep. If the lesson is wrong, you say so in review, like any other line. That is <strong>risk reduction</strong> you already know how to run, because it is just your pull request process.</p>
+<div class="slot">MEDIA M2 (screenshot slot)</div>
+<h4>Start from your plan, not a blank page</h4>
+<p>Most leads already have a plan for the next quarter's work. The <code>plan-to-blueprint</code> workflow takes a technical plan (milestones, tasks, acceptance criteria, constraints) and turns it into project skills with router commands and a manifest. Acceptance criteria become review gates, which turns "done" into pass or fail checks instead of a feeling.</p>
+<p>For bigger, domain-heavy work there is <code>embed-aihero-radioactive</code>: fourteen phases that add Matt Pocock / AI Hero skills (wayfinder, grilling, domain-modeling, research, prototype, to-spec), and always run your project skill first.</p>
+<h4>The notebook travels with the repository</h4>
+<p>Because the contracts are committed, a new teammate who clones the repository gets them on day one, and so does every agent they use. The root doc keeps a "Start here" link to the project skill. Nobody has to send a prompt file around.</p>
+<p>When the setup is right, the team ships changes that were reviewed, tested and documented, with a changelog at the end of each radioactive run. That is the <strong>reputational assurance</strong> part for you as a lead: what leaves your team looks the same, whoever's agent wrote it.</p>
+<div class="slot">MEDIA M3 (screenshot slot)</div>
+<h4>Try it on one shared repository</h4>
+<p>Pick one repository the whole team touches. On a branch, install the blueprint and type <code>blueprint this project.</code>. Answer the five questions with your team's real hard rules. Open the result as a pull request and review it together, the same way you will review every lesson after that.</p>
+<p><strong>Install the blueprint:</strong> <code>npx skills add devton/agentic-workflow-blueprint</code></p>
+<p><strong>Talk to the maintainer on GitHub:</strong> if your stack needs a workflow the catalog does not have, open an issue and say which tools you use. That is how the infra and security catalog grew.</p>
+<p><strong>Invite your team:</strong> once the notebook is merged, every teammate who pulls the branch has it. Ask one of them to run their next task through <code>/&lt;project&gt; &lt;command&gt;</code> and review the lesson together.</p>
+<h4>Media plan</h4>
+<ul><li><strong>M1:</strong> a real <code>workflows/&lt;name&gt;/SKILL.md</code> with Invariants and Review gate highlighted.</li><li><strong>M2:</strong> a pull request view where one file is code and one is a contract diff from phase 10.</li><li><strong>M3:</strong> the generated root doc with its "Start here" link.</li></ul>
+<h4>FAQ</h4>
+<h5>Who approves a new rule?</h5>
+<p>Whoever reviews the pull request. Lessons are lines in markdown files, merged like code.</p>
+<h5>Can one person's agent change the rules for everyone?</h5>
+<p>Only through a merged pull request. Until then the change lives on their branch.</p>
+<h5>Does the agent ever skip the plan approval?</h5>
+<p>radioactive waits for explicit approval after the plan and does not skip phases.</p>
+<h5>Can we keep our own conventions?</h5>
+<p>Yes. You give your hard rules at setup, and contracts are plain markdown you edit in conversation.</p>
+<h5>How do we test it safely?</h5>
+<p>Generate it on a branch and review the files before merging. The scaffold writes files in your repository: the skill folder and the root doc link.</p></details><details><summary><span class="chip live">PASS</span> <strong>Trivy, Kubernetes and GitHub Actions checks your agent runs the same way every time</strong><br><span class="meta">article · lane A · platform-engineer · stage 02 · loop integrations · Risk reduction, Integration, Reduced anxiety</span></summary><h3>Trivy, Kubernetes and GitHub Actions checks your agent runs the same way every time</h3>
+<p>Letting a coding agent near your CI or your cluster config is a trust problem. Not because the agent cannot run <code>trivy image</code>, but because it might run it differently every time: another severity threshold, another flag, a skipped step when the output gets long.</p>
+<p>What you want is what you already do for people: a written procedure, the same every time, with a check at the end that says pass or fail.</p>
+<h4>What shipped</h4>
+<p>In August 2026 the workflow-blueprint catalog grew from a developer toolkit into something platform teams can use. A contribution from outside the project added infrastructure and security contracts, and today the repository ships 18 security workflows and 5 infrastructure workflows as templates, among 46 in total.</p>
+<p>The security set includes, by name:</p>
+<ul><li><strong>Trivy:</strong> <code>scanning-containers-with-trivy-in-cicd</code>, <code>scanning-docker-images-with-trivy</code>, <code>performing-container-security-scanning-with-trivy</code>.</li><li><strong>Kubernetes:</strong> <code>performing-kubernetes-cis-benchmark-with-kube-bench</code>, <code>scanning-kubernetes-manifests-with-kubesec</code>, <code>implementing-pod-security-admission-controller</code>, <code>implementing-rbac-hardening-for-kubernetes</code>, <code>implementing-network-policies-for-kubernetes</code>, <code>analyzing-kubernetes-audit-logs</code>, <code>securing-kubernetes-on-cloud</code>.</li><li><strong>CI and cloud:</strong> <code>securing-github-actions-workflows</code>, <code>securing-aws-iam-permissions</code>, <code>remediating-s3-bucket-misconfiguration</code>.</li><li><strong>Triage and images:</strong> <code>triaging-vulnerabilities-with-ssvc-framework</code>, <code>performing-container-image-hardening</code>, <code>securing-container-registry-images</code>.</li></ul>
+<p>The infrastructure set: <code>network-engineering</code>, <code>infra-operations</code>, <code>iac</code>, <code>os-platform</code>, with runbooks for network changes, IaC delivery and OS hardening and patch windows.</p>
+<div class="slot">MEDIA M1 (screenshot slot)</div>
+<h4>Why a contract and not a prompt: <strong>risk reduction</strong></h4>
+<p>Every one of these is a contract with the same sections: Goal, Scope, Triggers, Inputs, Invariants, Procedure, Outputs, Review gate and References. The Procedure is a fixed sequence, so two runs do the same thing. The Review gate is a pass/fail list. If it fails, the work is not done.</p>
+<p>When the change goes through the <code>radioactive</code> lifecycle, one more rule applies: work that touches network, infrastructure, IaC or OS baselines must include an explicit rollback, align with a change window and validate health after the change.</p>
+<p>These workflows describe authorized checks on systems you own or are allowed to test.</p>
+<h4>Fits the tools you already run: <strong>integration</strong></h4>
+<p>The contracts are named after the tools, so they route like any other task. Once a Trivy contract is in your <code>skills/&lt;project&gt;/workflows/</code>, a request like "scan the release image" is classified by the routing matrix and loads that one page, not your whole runbook folder.</p>
+<p>They are templates: copy, rename and adapt them to your thresholds and your registry. Your version is plain markdown in your repository.</p>
+<div class="slot">MEDIA M2 (screenshot slot)</div>
+<h4>The part that keeps getting better: <strong>reduced anxiety</strong></h4>
+<p>The first run on your repo will find things the template did not know: your base image, the CVE you accepted with a reason, the namespace that must keep a looser policy. In radioactive, phase 10 writes those discoveries back into the contract as new invariants. The next scan already knows them, and so does the next engineer who reads the file.</p>
+<p>You stop being the only place where "we accepted this finding on this image, and here is why" lives.</p>
+<div class="slot">MEDIA M3 (screenshot slot)</div>
+<h4>What a run looks like</h4>
+<p>You ask for the change in plain words. The project skill classifies it, the routing matrix sends it to the security contract, and the agent works through its Procedure in order. At the end it checks the Review gate. If a check fails, the run is not marked done: in radioactive, the fix loop runs up to three times and must clear every blocker and high finding first. What you get back is the change, the evidence and, after phase 10, a contract that knows a little more about your systems than it did this morning.</p>
+<h4>Start with one check</h4>
+<p>Pick the check you run most often. Install the blueprint, add that workflow when it asks which workflows you want, and run it on a branch.</p>
+<p><strong>Install the blueprint:</strong> <code>npx skills add devton/agentic-workflow-blueprint</code></p>
+<p><strong>Name your tool:</strong> if the tool your team relies on has no contract yet, open an issue on the GitHub repository and say which one. That is how the catalog grows, and the page for yours will help the next team that uses it.</p>
+<h4>Media plan</h4>
+<ul><li><strong>M1:</strong> the <code>workflows/</code> folder of the repo filtered to the security contracts.</li><li><strong>M2:</strong> <code>scanning-containers-with-trivy-in-cicd/SKILL.md</code> with its Review gate visible.</li><li><strong>M3:</strong> a phase 10 diff adding one invariant to a copied Trivy contract (from a real run).</li></ul>
+<h4>FAQ</h4>
+<h5>Does this make my pipeline compliant?</h5>
+<p>No. The contracts write down how a check runs and when it passes. Compliance is your organization's decision.</p>
+<h5>Can the agent run scans on systems I do not own?</h5>
+<p>The workflows describe authorized checks on systems you own or are allowed to test.</p>
+<h5>Do I need all 18?</h5>
+<p>No. Ask only for the workflows you use; the blueprint adds only what you request.</p>
+<h5>How do I change a threshold?</h5>
+<p>Edit the contract's Invariants or Procedure in conversation. It is markdown in your repo.</p>
+<h5>How do I test it?</h5>
+<p>Run it on a branch and read the output and the gate result before anything merges.</p></details><details><summary><span class="chip live">PASS</span> <strong>landing/home.md</strong></summary><h3>Landing spec: Home (workflow-blueprint.com/)</h3>
+<p>Workflow: <code>landing</code>. Date: 2026-11-23. Inputs: <code>positioning.md</code>, <code>product-map.md</code>, current pages in <code>../sources/site/</code>.</p>
+<h4>1. Current pages (what each says, who it serves)</h4>
+<div class="tw"><table><thead><tr><th>Page</th><th>What it says</th><th>Persona</th><th>Elements shown</th><th>Keep / change</th></tr></thead><tbody><tr><td>Home</td><td>Hero "Don't teach your agent the task. Teach it how to learn your project."; four levels (explain every time, giant manual, notebook, self-correcting notebook); Route / Do / Record; run 1 to run 10 example; eight questions of a contract; "learning in the repo"; three-step start</td><td>agent-developer</td><td>Vision, Time savings, Organization, Transparency, Growth &amp; development</td><td><strong>Keep the structure.</strong> It already follows job over feature. Fix C-01 and C-04 (below). Add a persona row and an integrations row.</td></tr><tr><td>/radioactive/</td><td>11 phases, "the last two are where it learns", phase 10 diff, classic vs embed-aihero</td><td>tech-lead</td><td>Risk reduction, Reputational assurance, Growth &amp; development</td><td>Keep. Add the plan and discovery approval stops (F-014), today implicit.</td></tr><tr><td>/docs/</td><td>Three paths (understand, set up, extend), reference, glossary, "Workflows (41)"</td><td>all</td><td>Information, Organization</td><td>Fix the count (46) and remove <code>html-manual</code> (C-02). Write the promised "Write a contract by hand" page (G-02) or remove the card. Drop "under ~100 lines" (C-03).</td></tr><tr><td>/workflows/&lt;name&gt;/</td><td>One page per workflow</td><td>platform-engineer, tech-lead</td><td>Integration, Expertise</td><td>Base for the integration pages below.</td></tr></tbody></table></div>
+<h4>2. Home spec</h4>
+<p>The current home is close to the target. The spec keeps its order and changes five things.</p>
+<div class="tw"><table><thead><tr><th>#</th><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>1</td><td>Eyebrow</td><td>A meta-skill for coding agents</td><td>F-005</td><td>(category)</td></tr><tr><td>2</td><td>Hero</td><td>Don't teach your agent the task. Teach it how to learn your project.</td><td>site promise</td><td>Vision (5)</td></tr><tr><td>3</td><td>Sub-line (<strong>changed</strong>)</td><td>A notebook your coding agent writes, reads and corrects: one short page per part of your codebase, opened only when the task needs it.</td><td>F-005, F-007, F-016</td><td>Organization (3)</td></tr><tr><td>4</td><td>Primary CTA</td><td><strong>Install the blueprint</strong> + <code>npx skills add devton/agentic-workflow-blueprint</code> [Copy]</td><td>F-001</td><td>Reduced effort (3)</td></tr><tr><td>5</td><td>Secondary link</td><td>See how it learns</td><td>—</td><td>—</td></tr><tr><td>6</td><td>Product visual</td><td>The real contract excerpt already on the page (<code>skills/shop/workflows/payments/SKILL.md</code>, Triggers / Invariants / Review gate, red "learned in review" mark). Label it "example project".</td><td>F-008, F-016, F-029</td><td>Transparency (3)</td></tr><tr><td>7</td><td>Headline facts (<strong>new row under hero</strong>)</td><td>One page per task · One setup prompt · Learns from review · Lessons you can read · No "done" without a gate</td><td><code>positioning.md</code> §4</td><td>Time savings, Reduced effort, Growth &amp; development, Transparency, Reduced anxiety</td></tr><tr><td>8</td><td>The problem (four levels)</td><td>Keep. Level 4 cost line: replace "Cost: zero, it is a phase" with "Cost: no extra setup, it is a phase"</td><td>F-016 (C-04)</td><td>Reduced anxiety (4)</td></tr><tr><td>9</td><td>Route / Do / Record</td><td>Keep</td><td>F-007, F-008, F-016</td><td>Time savings (3)</td></tr><tr><td>10</td><td>Run 1 to run 10</td><td>Keep, with the "Illustrative example" line visible next to the numbers, not only under them</td><td>F-029</td><td>Growth &amp; development (4)</td></tr><tr><td>11</td><td>Eight questions</td><td>Keep</td><td>F-008</td><td>Information (3)</td></tr><tr><td>12</td><td>Learning in the repo (<strong>changed</strong>)</td><td>Replace "Works with Claude, Codex, Cursor or the next one" with "Plain markdown in your repository" until F-028 is confirmed</td><td>F-026 (C-01)</td><td>Flexibility (3)</td></tr><tr><td>13</td><td>Who it is for (<strong>new</strong>)</td><td>Three cards: "You use an agent every day" -&gt; home; "Your team shares a repo" -&gt; persona-tech-lead; "You run infra and security" -&gt; persona-platform-engineer</td><td><code>positioning.md</code> §3</td><td>Reach (3)</td></tr><tr><td>14</td><td>Works with your tools (<strong>new</strong>)</td><td>Linear · Trivy · Kubernetes · GitHub Actions · AI Hero skills · Remotion, each linking to its integration page. Footer line: "Missing your tool? Tell us on GitHub."</td><td>F-019, F-022, F-023, F-024</td><td>Integration (3)</td></tr><tr><td>15</td><td>Get started</td><td>Keep the three steps; step 3 stays <code>/shop radioactive "add pix payments"</code></td><td>F-001, F-002, F-016</td><td>Reduced effort (3)</td></tr><tr><td>16</td><td>Footer</td><td>workflow-blueprint · @devton</td><td>owner rule</td><td>—</td></tr></tbody></table></div>
+<p>No pricing, no lane labels, no sign-up. One primary CTA.</p>
+<h4>3. Choice: where the "example project" lives (G-01)</h4>
+<ul><li><strong>A.</strong> Keep the shop example as a site illustration only (today).</li><li><strong>B.</strong> Publish a public example repository with the generated <code>skills/shop/</code> and two lessons in its history; link it as "See a real notebook".</li><li><strong>C.</strong> Embed a recorded run (terminal capture) instead of a repo.</li></ul>
+<p><strong>Recommendation: B.</strong> It turns the illustration into proof (Transparency, Reduced anxiety) and gives stage 03 a risk-free try. It is a hand-off to product; nothing on the page changes until it exists.</p></details><details><summary><span class="chip live">PASS</span> <strong>landing/integration-ai-hero.md</strong></summary><h3>Landing spec: integration page, Matt Pocock / AI Hero skills</h3>
+<p>URL proposal: <code>/integrations/ai-hero/</code> (today partly covered by <code>/workflows/embed-aihero-radioactive/</code>).</p>
+<div class="tw"><table><thead><tr><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>Hero</td><td>Deep discovery before code: radioactive with AI Hero skills.</td><td>F-019</td><td>Expertise (3)</td></tr><tr><td>What you can do</td><td>Run 14 phases with wayfinder (orientation), grilling (assumption checks), domain-modeling, research spikes, prototype and to-spec.</td><td>F-019</td><td>Risk reduction (3)</td></tr><tr><td>Steps it adds</td><td>Phase 1 always runs your project skill first, then wayfinder.</td><td>F-019</td><td>Configurability (3)</td></tr><tr><td>Goes well with</td><td><code>radioactive</code> (classic, 11 phases), <code>plan-to-blueprint</code></td><td>F-012, F-013</td><td>—</td></tr><tr><td>CTA</td><td><strong>Install the blueprint</strong></td><td>F-001</td><td>—</td></tr></tbody></table></div>
+<p><code>[to confirm]</code>: wording the skill authors are comfortable with when their names appear on the page.</p></details><details><summary><span class="chip live">PASS</span> <strong>landing/integration-linear.md</strong></summary><h3>Landing spec: integration page, Linear</h3>
+<p>URL proposal: <code>/integrations/linear/</code>.</p>
+<div class="tw"><table><thead><tr><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>Hero</td><td>Turn a plan into Linear projects and issues, with a check before anything is created.</td><td>F-023</td><td>Organization (3)</td></tr><tr><td>What you can do</td><td><code>linear</code>: create projects and issues via MCP for multi-PR work. <code>mcp-linear-planner</code>: preflight check and execution plan. <code>mcp-linear-sync</code>: run the planned operations.</td><td><code>product/README.md</code> table</td><td>Integration (3)</td></tr><tr><td>Steps it adds</td><td>Planner first, sync after the plan is validated (runbooks <code>linear-mcp.md</code>, <code>mcp-linear-sync.md</code>).</td><td>F-021, F-023</td><td>Risk reduction (3)</td></tr><tr><td>Goes well with</td><td><code>plan-to-blueprint</code>, <code>radioactive</code></td><td>F-012, F-013</td><td>Time savings (3)</td></tr><tr><td>CTA</td><td><strong>Install the blueprint</strong></td><td>F-001</td><td>—</td></tr></tbody></table></div>
+<p><code>[to confirm]</code>: which Linear MCP server the workflows were tested with.</p></details><details><summary><span class="chip live">PASS</span> <strong>landing/integration-trivy.md</strong></summary><h3>Landing spec: integration page, Trivy</h3>
+<p>URL proposal: <code>/integrations/trivy/</code> (links to the three <code>/workflows/&lt;name&gt;/</code> pages).</p>
+<div class="tw"><table><thead><tr><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>Hero</td><td>Trivy scans your agent runs the same way every time.</td><td>F-008, F-022</td><td>Risk reduction (3)</td></tr><tr><td>What you can do</td><td>Gate container promotion in CI (<code>scanning-containers-with-trivy-in-cicd</code>), scan Docker images with SBOM (<code>scanning-docker-images-with-trivy</code>), run vuln, misconfig, secret and license scans (<code>performing-container-security-scanning-with-trivy</code>).</td><td><code>product/README.md</code> table</td><td>Integration (3)</td></tr><tr><td>Steps it adds</td><td>The contract's Procedure and Review gate, routed by the project skill when the task is a scan.</td><td>F-007, F-008</td><td>Reduced effort (3)</td></tr><tr><td>Goes well with</td><td><code>triaging-vulnerabilities-with-ssvc-framework</code>, <code>securing-container-registry-images</code>, <code>radioactive</code> (phase 10 keeps accepted findings as invariants)</td><td>F-016, F-022</td><td>Expertise (3)</td></tr><tr><td>Regulated line</td><td>Authorized checks on systems you own or are allowed to test.</td><td><code>config.regulatedTopics</code></td><td>—</td></tr><tr><td>CTA</td><td><strong>Install the blueprint</strong></td><td>F-001</td><td>—</td></tr></tbody></table></div>
+<p>Skipped on purpose: a generic "how it works in 3 steps" section (the home has it).</p></details><details><summary><span class="chip live">PASS</span> <strong>landing/persona-agent-developer.md</strong></summary><h3>Landing spec: persona page, Developer with a coding agent</h3>
+<p>The flagship. The home page already talks to this person, so this page is the home itself; no separate URL is needed. This file records the persona's sections for reuse in articles and ads.</p>
+<div class="tw"><table><thead><tr><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>Who it is for</td><td>You work with a coding agent every day, on a repository with several modules.</td><td><code>positioning.md</code> §1</td><td>—</td></tr><tr><td>The job</td><td>Stop re-explaining your project. Get the same result on task ten as on task one.</td><td><code>positioning.md</code> §3</td><td>Time savings (3)</td></tr><tr><td>What it does</td><td>Your agent writes a short contract per module and a table of contents, and opens only the page the task needs.</td><td>F-005, F-007</td><td>Organization (3)</td></tr><tr><td>What changes after a run</td><td>What review caught becomes a rule in the contract.</td><td>F-016</td><td>Growth &amp; development (4)</td></tr><tr><td>Reused section</td><td>Route / Do / Record (from Home)</td><td>F-007, F-008, F-016</td><td>Reduced anxiety (4)</td></tr><tr><td>CTA</td><td><strong>Install the blueprint</strong> <code>npx skills add devton/agentic-workflow-blueprint</code></td><td>F-001</td><td>Reduced effort (3)</td></tr></tbody></table></div></details><details><summary><span class="chip live">PASS</span> <strong>landing/persona-platform-engineer.md</strong></summary><h3>Landing spec: persona page, Platform and security engineer</h3>
+<p>URL proposal: <code>/platform/</code>.</p>
+<div class="tw"><table><thead><tr><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>Hero</td><td>Infra and security checks your agent runs the same way every time.</td><td>F-008, F-022</td><td>Risk reduction (3)</td></tr><tr><td>Who it is for</td><td>You run CI, clusters and cloud accounts, and you want agents to help without improvising.</td><td><code>positioning.md</code> §3</td><td>—</td></tr><tr><td>The job</td><td>Fixed steps, a pass/fail gate, and rollback for every infra change.</td><td>F-008, F-018</td><td>Reduced anxiety (4)</td></tr><tr><td>What is included</td><td>18 security and 5 infrastructure workflow templates, plus runbooks for network changes, IaC delivery and OS patch windows.</td><td>F-021, F-022</td><td>Expertise (3)</td></tr><tr><td>Tools</td><td>Trivy, Kubernetes, GitHub Actions, AWS IAM, S3, Nessus, rsyslog (links to integration pages)</td><td>F-022</td><td>Integration (3)</td></tr><tr><td>Regulated line</td><td>These workflows describe authorized checks on systems you own or are allowed to test.</td><td><code>config.regulatedTopics</code></td><td>—</td></tr><tr><td>Only what you need</td><td>The scaffold adds only the workflows you ask for.</td><td>F-034</td><td>Simplification (3)</td></tr><tr><td>CTA</td><td><strong>Install the blueprint</strong>; "Missing your tool? Tell us on GitHub."</td><td>F-001</td><td>Reduced effort (3)</td></tr></tbody></table></div></details><details><summary><span class="chip live">PASS</span> <strong>landing/persona-tech-lead.md</strong></summary><h3>Landing spec: persona page, Tech lead of a team using agents</h3>
+<p>URL proposal: <code>/teams/</code>.</p>
+<div class="tw"><table><thead><tr><th>Section</th><th>Copy</th><th>Fact</th><th>Value element</th></tr></thead><tbody><tr><td>Hero</td><td>Your team's agents, one set of rules. Reviewed like code.</td><td>F-008, F-016</td><td>Transparency (3)</td></tr><tr><td>Who it is for</td><td>You lead a team where several people work with coding agents on the same repository.</td><td><code>positioning.md</code> §3</td><td>—</td></tr><tr><td>The job</td><td>Every teammate's agent follows the same rules, and you see every rule change in a pull request.</td><td>F-016, F-026</td><td>Risk reduction (3)</td></tr><tr><td>How it works</td><td>The blueprint commits <code>skills/&lt;project&gt;/</code> to your repo. Each contract has Invariants and a pass/fail Review gate. Lessons from a run arrive as diffs in the same branch.</td><td>F-005, F-008, F-016</td><td>Transparency (3)</td></tr><tr><td>Stops for a person</td><td>radioactive waits for answers after discovery and for approval after the plan.</td><td>F-014</td><td>Risk reduction (3)</td></tr><tr><td>From your plan</td><td><code>plan-to-blueprint</code> turns a technical plan into project skills; acceptance criteria become review gates.</td><td>F-012</td><td>Organization (3)</td></tr><tr><td>More rigor</td><td><code>embed-aihero-radioactive</code>: 14 phases with wayfinder, grilling, domain-modeling, research, prototype, to-spec.</td><td>F-019</td><td>Expertise (3)</td></tr><tr><td>What leaves your team</td><td>Reviewed, tested, documented changes, with a changelog at the end of each run.</td><td>F-013, F-017</td><td>Reputational assurance (4)</td></tr><tr><td>Reused section</td><td>radioactive pipeline (from /radioactive/)</td><td>F-013</td><td>—</td></tr><tr><td>CTA</td><td><strong>Install the blueprint</strong>, then: "Need a workflow for your stack? Talk to the maintainer on GitHub."</td><td>F-001</td><td>Responsiveness (3) <code>[to confirm: response commitment]</code></td></tr></tbody></table></div></details>
+
+<h2 id="manual">8. Manual</h2>
+<details open><summary><strong>manual/manual.md</strong> (pt-BR)</summary><h3>Manual de marca e vendas: workflow-blueprint</h3>
+<p>Workflow: <code>manual</code>. Data: 2026-11-23. Idioma do time: pt-BR (<code>config.language.team</code>). Os textos públicos continuam em inglês (<code>config.language.content</code>); as frases entre aspas abaixo são as que vão para o público.</p>
+<h4>Parte 1. Posicionamento</h4>
+<h5>Quem somos</h5>
+<p>workflow-blueprint é uma meta-skill para agentes de código: um conjunto de arquivos markdown que o agente instala e segue para escrever as skills do próprio projeto do usuário. Em vez de um <code>AGENTS.md</code> gigante, o agente passa a ter um caderno: uma página curta por parte do código, um índice na frente, e uma regra nova a cada revisão.</p>
+<p>A promessa: <strong>"We teach your agent to keep a notebook of your project, so you stop explaining the same rules every session."</strong></p>
+<h5>Para quem falamos primeiro</h5>
+<p>Para a pessoa desenvolvedora que trabalha com um agente de código todo dia, num repositório com vários módulos. Ela perde tempo reexplicando as mesmas regras a cada sessão, ou mantém um <code>AGENTS.md</code> enorme que custa tokens em toda tarefa e esconde a regra que importa.</p>
+<p>Depois dela, e nessa ordem: tech leads de times que usam agentes, e engenheiros de plataforma e segurança.</p>
+<h5>As personas, de dois jeitos</h5>
+<p><strong>Por conta própria</strong></p>
+<ul><li><em>Dev com agente de código:</em> quer parar de reexplicar o projeto. Primeiro valor: a segunda tarefa já abre só o contrato certo, sem pedir contexto.</li><li><em>Engenharia de plataforma e segurança:</em> quer que mudanças de infra e checagens de segurança sigam sempre os mesmos passos, com rollback. Primeiro valor: um contrato de Trivy ou Kubernetes copiado roda o gate no repositório dela.</li></ul>
+<p><strong>Com o mantenedor</strong></p>
+<ul><li><em>Tech lead:</em> quer que o agente de cada pessoa do time siga as mesmas regras, revisadas como código. Primeiro valor: o primeiro pull request em que uma lição do agente é revisada por uma pessoa.</li></ul>
+<p>Essa divisão é interna. Nenhuma página fala em "self-serve" ou "assistido".</p>
+<h5>Princípios</h5>
+<ol><li>Vendemos a facilidade da <strong>segunda</strong> execução, não da primeira.</li><li>Mostramos os arquivos de verdade antes de prometer qualquer coisa.</li><li>Falamos do trabalho da pessoa, não do nome da funcionalidade.</li><li>Frases curtas, sem hype, sem números que não podemos mostrar.</li><li>Todo convite é o mesmo: <strong>"Install the blueprint"</strong> com o comando <code>npx skills add devton/agentic-workflow-blueprint</code>.</li></ol>
+<h5>Fatos de destaque</h5>
+<div class="tw"><table><thead><tr><th>Rótulo público</th><th>O que quer dizer para quem decide</th></tr></thead><tbody><tr><td>One page per task</td><td>O agente lê só o contrato que precisa</td></tr><tr><td>One setup prompt</td><td>Digita <code>blueprint this project.</code> e responde cinco perguntas</td></tr><tr><td>Learns from review</td><td>O que a revisão pegou vira regra no contrato</td></tr><tr><td>Lessons you can read</td><td>Markdown no repositório, revisado em pull request</td></tr><tr><td>No "done" without a gate</td><td>Todo contrato termina em checagens de passa/falha</td></tr></tbody></table></div>
+<h5>Pode dizer / nunca diga</h5>
+<div class="tw"><table><thead><tr><th>Nunca diga</th><th>Diga</th></tr></thead><tbody><tr><td>preço, plano, "free", "trial"</td><td>nada; o convite é o comando de instalação</td></tr><tr><td>"open source", qualquer licença</td><td>"repositório público no GitHub" (não há LICENSE ainda, a confirmar)</td></tr><tr><td>"economiza X% de tokens"</td><td>"lê só a página que precisa"</td></tr><tr><td>"treina o seu agente"</td><td>"escreve lições no seu repositório"</td></tr><tr><td>"funciona com qualquer agente"</td><td>"markdown no seu repositório" (até confirmar Claude, Codex, Cursor)</td></tr><tr><td>nome de cliente, empresa ou contribuidor</td><td>"um time", "um contribuidor"</td></tr><tr><td>o nome completo do dono</td><td>"@devton"</td></tr><tr><td><code>html-manual</code></td><td>(não citar; foi removido)</td></tr><tr><td>"Sign up free", "Request a demo", "Join the waitlist"</td><td>"Install the blueprint"</td></tr></tbody></table></div>
+<p>Tema sensível: os workflows de segurança são sempre descritos como "checagens autorizadas em sistemas que você possui ou tem permissão para testar". Nunca como conformidade.</p>
+<h4>Parte 2. A máquina</h4>
+<h5>Etapa por etapa</h5>
+<ol><li><strong>01 Alimentar.</strong> Artigos, páginas de workflow e notas de release levam cada persona ao seu caso.</li><li><strong>02 Atrair.</strong> A pessoa instala com <code>npx skills add</code>. Hoje não sabemos quem instalou; a proposta é um modelo de issue "Which workflow do you need?" ao lado do comando.</li><li><strong>03 Ativar.</strong> A pessoa digita <code>blueprint this project.</code> e o agente gera <code>skills/&lt;projeto&gt;/</code>. A proposta é um repositório de exemplo (a loja do site) para ver antes de mexer no próprio código.</li><li><strong>04 Qualificar.</strong> Por conta própria: primeira tarefa roteada, primeira lição, segunda lição. Com o mantenedor: o time roda <code>plan-to-blueprint</code> e pede ou envia um workflow no GitHub.</li><li><strong>05 Converter.</strong> Adoção: o caderno continua vivo depois de 60 dias, ou o workflow do time é publicado. Se existe oferta paga aqui é decisão do dono (a confirmar).</li><li><strong>06 Realimentar.</strong> Os loops abaixo trazem a próxima leva.</li></ol>
+<h5>Loops</h5>
+<ul><li><strong>Integrações:</strong> a pessoa diz que ferramentas usa, entra um contrato para a ferramenta, a página dessa ferramenta atrai outros usuários dela. É o mais forte, e já aconteceu uma vez com o catálogo de infra e segurança.</li><li><strong>Convites:</strong> o caderno vai junto com o repositório; quem clona recebe e instala em outro repo.</li><li><strong>Conteúdo:</strong> lições reais, anonimizadas, viram exemplos e artigos.</li></ul>
+<h5>Quem faz o quê</h5>
+<div class="tw"><table><thead><tr><th>Papel</th><th>Cuida de</th><th>Entrega para</th></tr></thead><tbody><tr><td>Conteúdo e marca</td><td>artigos, páginas, tom</td><td>páginas prontas para o mantenedor</td></tr><tr><td>Mantenedor (vendas + sucesso)</td><td>issues, pedidos de workflow, times</td><td>pedidos de integração para produto</td></tr><tr><td>Produto</td><td>o fluxo de instalação, os contratos, o repo de exemplo</td><td>notas de release para conteúdo</td></tr><tr><td>Agente operador</td><td>rascunhos, análises, auditoria, relatório</td><td>o relatório para o dono</td></tr></tbody></table></div>
+<p>Hoje esses papéis são a mesma pessoa (@devton). A separação serve para saber que chapéu está sendo usado em cada entrega.</p>
+<h5>O que medimos</h5>
+<p>Conversão entre etapas a cada 100 instalações, dias entre etapas, força de cada loop (novas instalações por leva mensal de adotantes) e cobertura de valor por persona. Quase nada disso tem dado hoje: a primeira tarefa do produto é ligar a instrumentação listada em <code>loops.md</code>.</p></details>
+<details><summary><strong>manual/ebook.md</strong>, outline awaiting the owner's ok</summary><h3>Ebook de treinamento: proposta de sumário</h3>
+<p>Workflow: <code>manual</code>, passo 3. <strong>Status: sumário proposto, aguardando ok do dono.</strong> Os capítulos só são escritos depois da aprovação (regra da skill).</p>
+<h4>Parte 1. Antes de vender</h4>
+<ol><li>O que é o workflow-blueprint (meta-skill, caderno do agente, os quatro níveis).</li><li>Para quem é: dev com agente, tech lead, plataforma e segurança.</li><li>Regras de fala: pode dizer / nunca diga, o convite único, o tema sensível de segurança.</li></ol>
+<h4>Parte 2. Tour pelo produto (um capítulo por área do <code>product-map.md</code>)</h4>
+<ol><li>Instalação e primeira execução (<code>npx skills add</code>, <code>blueprint this project.</code>, as cinco perguntas). [espaço para captura]</li><li>O que é gerado: orquestrador, routing matrix, contratos, <code>template.json</code>, runbooks. [espaço para captura]</li><li>Roteamento de comandos e encadeamento (<code>/&lt;skill&gt; document review changelog</code>). [espaço para captura]</li><li>radioactive: as 11 fases e a fase 10. [espaço para captura]</li><li>embed-aihero-radioactive: as 14 fases. [espaço para captura]</li><li>plan-to-blueprint. [espaço para captura]</li><li>Catálogo: qualidade de código, documentação, Linear, infra, segurança, criativos. [espaço para captura]</li></ol>
+<h4>Parte 3. Vendendo</h4>
+<ol><li>Casos de uso por persona.</li><li>Roteiro de demo de 20 minutos: instalar, gerar o caderno num repo de exemplo, rodar uma tarefa, mostrar o diff da fase 10.</li><li>Objeções e respostas ("já tenho um AGENTS.md", "não quero que o agente mude regras sozinho", "funciona com o meu agente?", "quanto custa?" -&gt; não respondemos preço).</li><li>Glossário (skill, orquestrador, routing matrix, contrato, review gate, template.json).</li></ol></details>
+
+<h2 id="system">9. System</h2>
+<p>The finished machine as an agent-operated system. Specification only: nothing is executed.</p>
+<h3>Agents and roles</h3><ul><li><strong>agent.operator</strong>: Runs the routines: sweeps public activity, drafts content and pages, audits, writes notes for the maintainer, refreshes the report</li><li><strong>agent.auditor</strong>: Runs value-audit on every draft and the spec self-check before a hand-off</li><li><strong>role.owner</strong> owns config.json, say / never-say, what conversion means, the to-confirm list</li><li><strong>role.content</strong> owns articles, site pages, tone</li><li><strong>role.maintainer</strong> owns GitHub issues and pull requests, team requests, new workflow contracts</li><li><strong>role.product</strong> owns install path, the scaffold, example repository, instrumentation</li></ul>
+<h3>Routine calendar</h3><div class="tw"><table><thead><tr><th>routine</th><th>when</th><th>agent</th><th>runs</th><th>delivers to</th></tr></thead><tbody><tr><td>weekly_articles</td><td>weekly mon 09:00 &lt;tz&gt;</td><td>agent.operator</td><td>workflow.article_batch</td><td>handoff.articles</td></tr><tr><td>on_release</td><td>on event.release_merged</td><td>agent.operator</td><td>workflow.release_sweep</td><td>handoff.pages</td></tr><tr><td>weekly_adoption</td><td>weekly fri 18:00 &lt;tz&gt;</td><td>agent.operator</td><td>workflow.adoption_sweep</td><td>handoff.instrumentation</td></tr><tr><td>on_team_request</td><td>on event.team_request_opened</td><td>agent.operator</td><td>workflow.lead_note</td><td>handoff.lead</td></tr><tr><td>monthly_coverage</td><td>monthly day 1 09:00 &lt;tz&gt;</td><td>agent.operator</td><td>workflow.coverage_review</td><td>handoff.articles</td></tr><tr><td>on_rule_change</td><td>on event.rule_changed</td><td>agent.auditor</td><td>workflow.rule_change_sweep</td><td>handoff.report</td></tr><tr><td>after_every_run</td><td>on end of any routine</td><td>agent.operator</td><td>workflow.report_refresh</td><td>handoff.report</td></tr></tbody></table></div>
+<h3>Workflows and gates</h3><ul><li><strong>article_batch</strong>: pick_gaps → draft → audit · gate <code>gate.content</code></li><li><strong>release_sweep</strong>: explore_delta → site_drift → lane_a · gate <code>gate.content</code></li><li><strong>adoption_sweep</strong>: record_milestones → check_signals → measure · gate <code>gate.metrics</code></li><li><strong>lead_note</strong>: build_note · gate <code>gate.lead</code></li><li><strong>coverage_review</strong>: matrix → next_batch · gate <code>gate.content</code></li><li><strong>rule_change_sweep</strong>: reaudit → fix_with_history · gate <code>gate.content</code></li><li><strong>report_refresh</strong>: spec_check → build · gate <code>gate.report</code></li></ul>
+<details><summary><strong>system/sales-machine.hcl</strong></summary><pre><code># workflow-blueprint sales machine, as an agent-operated system.
+# Written by the sales-machine-scaffold `system-spec` workflow on 2026-11-23.
+
+spec &quot;sales_machine&quot; {
+  product  = &quot;workflow-blueprint&quot;
+  version  = &quot;1.0.0&quot;
+  date     = &quot;2026-11-23&quot;
+  access   = &quot;open&quot;
+  operator = agent.operator
+  note     = &quot;Specification only. Not infrastructure. Nothing here is executed.&quot;
+}
+
+# Agents
+
+agent &quot;operator&quot; {
+  purpose      = &quot;Runs the routines: sweeps public activity, drafts content and pages, audits, writes notes for the maintainer, refreshes the report&quot;
+  reads        = [source.product_repo, source.site, source.github_activity, source.public_notebooks, source.install_counts, source.workspace]
+  writes       = [&quot;sales-machine/&quot;]
+  never        = [rule.no_publish_without_review, rule.never_say, rule.no_contact, rule.no_names]
+  escalates_to = role.owner
+}
+
+agent &quot;auditor&quot; {
+  purpose      = &quot;Runs value-audit on every draft and the spec self-check before a hand-off&quot;
+  reads        = [source.workspace]
+  writes       = [&quot;sales-machine/audit/findings.json&quot;]
+  never        = [rule.facts_only]
+  escalates_to = role.owner
+}
+
+# People (today one person, @devton, wears every hat)
+
+role &quot;owner&quot; {
+  owns     = [&quot;config.json&quot;, &quot;say / never-say&quot;, &quot;what conversion means&quot;, &quot;the to-confirm list&quot;]
+  approves = [handoff.report, handoff.instrumentation]
+}
+
+role &quot;content&quot; {
+  owns     = [&quot;articles&quot;, &quot;site pages&quot;, &quot;tone&quot;]
+  approves = [handoff.articles, handoff.pages]
+}
+
+role &quot;maintainer&quot; {
+  owns     = [&quot;GitHub issues and pull requests&quot;, &quot;team requests&quot;, &quot;new workflow contracts&quot;]
+  approves = [handoff.lead]
+}
+
+role &quot;product&quot; {
+  owns = [&quot;install path&quot;, &quot;the scaffold&quot;, &quot;example repository&quot;, &quot;instrumentation&quot;]
+}
+
+# Sources
+
+source &quot;product_repo&quot; {
+  kind            = &quot;files&quot;
+  path_or_channel = &quot;&lt;local clone of devton/agentic-workflow-blueprint&gt;&quot;
+  refresh         = &quot;on release&quot;
+}
+
+source &quot;site&quot; {
+  kind            = &quot;files&quot;
+  path_or_channel = &quot;&lt;local copy of the workflow-blueprint.com build&gt;&quot;
+  refresh         = &quot;on site deploy&quot;
+}
+
+source &quot;github_activity&quot; {
+  kind            = &quot;export&quot;
+  path_or_channel = &quot;&lt;weekly export of issues, pull requests, stars and forks of the product repo&gt;&quot;
+  refresh         = &quot;weekly&quot;
+}
+
+source &quot;public_notebooks&quot; {
+  kind            = &quot;export&quot;
+  path_or_channel = &quot;[to confirm: export of public repositories that contain a generated skills/&lt;project&gt;/template.json]&quot;
+  refresh         = &quot;weekly&quot;
+}
+
+source &quot;install_counts&quot; {
+  kind            = &quot;export&quot;
+  path_or_channel = &quot;[to confirm: does the skills CLI publish install counts?]&quot;
+  refresh         = &quot;weekly&quot;
+}
+
+source &quot;workspace&quot; {
+  kind            = &quot;files&quot;
+  path_or_channel = &quot;sales-machine/&quot;
+  refresh         = &quot;on change&quot;
+}
+
+# Events
+
+event &quot;content_published&quot; {
+  captures = [&quot;persona&quot;, &quot;stage&quot;, &quot;loop&quot;, &quot;page&quot;]
+}
+
+event &quot;site_visit&quot; {
+  captures = [&quot;page&quot;, &quot;referrer&quot;]
+}
+
+event &quot;blueprint_installed&quot; {
+  captures = [&quot;[to confirm: referrer]&quot;, &quot;[to confirm: agent host]&quot;]
+}
+
+event &quot;workflow_requested&quot; {
+  captures = [&quot;goal&quot;, &quot;stack&quot;, &quot;tools used&quot;]
+}
+
+event &quot;scaffold_generated&quot; {
+  captures = [&quot;repository&quot;, &quot;workflows wanted&quot;, &quot;first seen date&quot;]
+}
+
+event &quot;lesson_committed&quot; {
+  captures = [&quot;repository&quot;, &quot;contract changed&quot;, &quot;date&quot;]
+}
+
+event &quot;team_request_opened&quot; {
+  captures = [&quot;issue or pull request&quot;, &quot;stack&quot;, &quot;tools&quot;, &quot;workflow asked for or added&quot;]
+}
+
+event &quot;adopted&quot; {
+  captures = [&quot;repository or team&quot;, &quot;lane&quot;, &quot;date&quot;]
+}
+
+event &quot;release_merged&quot; {
+  captures = [&quot;merged pull request&quot;, &quot;workflows added or removed&quot;, &quot;date&quot;]
+}
+
+event &quot;rule_changed&quot; {
+  captures = [&quot;config field&quot;, &quot;old value&quot;, &quot;new value&quot;]
+}
+
+# Stages
+
+stage &quot;feed&quot; {
+  order  = 1
+  entry  = event.content_published
+  exit   = event.site_visit
+  value  = [&quot;Vision&quot;, &quot;Time savings&quot;, &quot;Reduced anxiety&quot;]
+  metric = metric.visits_per_piece
+  owner  = role.content
+}
+
+stage &quot;attract&quot; {
+  order  = 2
+  entry  = event.site_visit
+  exit   = event.blueprint_installed
+  value  = [&quot;Time savings&quot;, &quot;Reduced effort&quot;, &quot;Vision&quot;]
+  metric = metric.visit_to_install
+  owner  = role.content
+}
+
+stage &quot;activate&quot; {
+  order  = 3
+  entry  = event.blueprint_installed
+  exit   = event.scaffold_generated
+  value  = [&quot;Reduced effort&quot;, &quot;Simplification&quot;, &quot;Decreased hassles&quot;, &quot;Reduced anxiety&quot;]
+  metric = metric.install_to_scaffold
+  owner  = role.product
+}
+
+stage &quot;qualify&quot; {
+  order  = 4
+  entry  = event.scaffold_generated
+  exit   = &quot;signal.notebook_alive or signal.team_request is met&quot;
+  lanes  = [lane.self_serve, lane.assisted]
+  value  = [&quot;Time savings&quot;, &quot;Configurability&quot;, &quot;Integration&quot;, &quot;Expertise&quot;, &quot;Transparency&quot;]
+  metric = metric.scaffold_to_signal
+  owner  = role.maintainer
+}
+
+stage &quot;convert&quot; {
+  order  = 5
+  entry  = &quot;signal met&quot;
+  exit   = event.adopted
+  value  = [&quot;Risk reduction&quot;, &quot;Reputational assurance&quot;, &quot;Transparency&quot;, &quot;Commitment&quot;]
+  metric = metric.signal_to_adoption
+  owner  = role.maintainer
+  note   = &quot;[to confirm: adoption only, or a paid offer; no copy mentions money]&quot;
+}
+
+stage &quot;feed_back&quot; {
+  order  = 6
+  entry  = event.adopted
+  exit   = event.content_published
+  loops  = [loop.integrations, loop.invites, loop.content]
+  value  = [&quot;Network expansion&quot;, &quot;Connection&quot;, &quot;Integration&quot;, &quot;Reach&quot;]
+  metric = metric.installs_per_cohort
+  owner  = role.product
+}
+
+# Lanes and signals
+
+lane &quot;self_serve&quot; {
+  label  = &quot;On their own&quot;
+  path   = [&quot;scaffold generated&quot;, &quot;first routed task&quot;, &quot;first lesson committed&quot;, &quot;second lesson committed&quot;]
+  signal = signal.notebook_alive
+}
+
+lane &quot;assisted&quot; {
+  label  = &quot;With the maintainer&quot;
+  path   = [&quot;scaffold in a team repository&quot;, &quot;plan-to-blueprint on a real plan&quot;, &quot;a teammate&#x27;s PR changes a contract&quot;, &quot;team asks for or sends a workflow&quot;]
+  signal = signal.team_request
+}
+
+signal &quot;notebook_alive&quot; {
+  when = &quot;[to confirm: a public repository commits skills/&lt;project&gt;/ and changes a contract in a later commit within 30 days]&quot;
+  then = workflow.lead_note
+}
+
+signal &quot;team_request&quot; {
+  when = &quot;event.team_request_opened on the product repository&quot;
+  then = workflow.lead_note
+}
+
+# Loops
+
+loop &quot;integrations&quot; {
+  steps  = [&quot;a developer names the tools they use&quot;, &quot;a contract for that tool is added&quot;, &quot;the tool&#x27;s page attracts its other users&quot;, &quot;they install and name their tools&quot;]
+  owner  = role.product
+  metric = metric.installs_per_cohort
+  feeds  = stage.feed
+}
+
+loop &quot;invites&quot; {
+  steps  = [&quot;an adopter commits skills/&lt;project&gt;/&quot;, &quot;teammates who clone the repo get the notebook&quot;, &quot;a teammate installs the blueprint in another repository&quot;, &quot;that repository commits its own notebook&quot;]
+  owner  = role.product
+  metric = metric.installs_per_cohort
+  feeds  = stage.attract
+}
+
+loop &quot;content&quot; {
+  steps  = [&quot;real runs produce lessons&quot;, &quot;anonymized lessons become examples and articles&quot;, &quot;articles bring new installs&quot;, &quot;new adopters produce new lessons&quot;]
+  owner  = role.content
+  metric = metric.installs_per_cohort
+  feeds  = stage.feed
+}
+
+# Workflows of the running machine
+
+workflow &quot;article_batch&quot; {
+  inputs = [source.workspace, &quot;articles/index.json&quot;, source.product_repo]
+
+  step &quot;pick_gaps&quot; {
+    does = &quot;Coverage persona x stage x loop x value element; pick the gaps first&quot;
+  }
+
+  step &quot;draft&quot; {
+    does = &quot;Write 3 ready articles, at least 2 from the sales lane, with value, loop hook, CTA and FAQ&quot;
+    uses = [rule.cta, rule.never_say, rule.facts_only, rule.no_names]
+  }
+
+  step &quot;audit&quot; {
+    does = &quot;Run value-audit on each article&quot;
+    uses = [agent.auditor]
+  }
+
+  outputs     = [&quot;articles/&lt;date&gt;/*.md&quot;, &quot;articles/index.json&quot;]
+  review_gate = gate.content
+}
+
+workflow &quot;release_sweep&quot; {
+  inputs = [source.product_repo, source.site]
+
+  step &quot;explore_delta&quot; {
+    does = &quot;Update product-map.md: new, changed and removed workflows, with evidence&quot;
+    uses = [rule.rollout_honesty, rule.facts_only]
+  }
+
+  step &quot;site_drift&quot; {
+    does = &quot;List site claims the new ledger no longer supports (counts, removed workflows)&quot;
+  }
+
+  step &quot;lane_a&quot; {
+    does = &quot;Draft one release-driven article and an integration page spec if a tool shipped&quot;
+    uses = [rule.cta, rule.never_say, rule.regulated_security]
+  }
+
+  outputs     = [&quot;product-map.md&quot;, &quot;articles/&lt;date&gt;/*.md&quot;, &quot;landing/integration-&lt;slug&gt;.md&quot;]
+  review_gate = gate.content
+}
+
+workflow &quot;adoption_sweep&quot; {
+  inputs = [source.github_activity, source.public_notebooks, source.install_counts]
+
+  step &quot;record_milestones&quot; {
+    does = &quot;Record installs, scaffolds, lessons and team requests with their real dates&quot;
+  }
+
+  step &quot;check_signals&quot; {
+    does = &quot;Evaluate signal.notebook_alive and signal.team_request&quot;
+  }
+
+  step &quot;measure&quot; {
+    does = &quot;Compute stage conversions, days between stages and loop strength; list what could not be measured&quot;
+  }
+
+  outputs     = [&quot;sales-machine/metrics/&lt;date&gt;.md&quot;]
+  review_gate = gate.metrics
+}
+
+workflow &quot;lead_note&quot; {
+  inputs = [source.github_activity, source.public_notebooks]
+
+  step &quot;build_note&quot; {
+    does = &quot;What they built, which workflows, which tools, which lane; public facts only&quot;
+    uses = [rule.no_contact]
+  }
+
+  outputs     = [&quot;lead note for the maintainer&quot;]
+  review_gate = gate.lead
+}
+
+workflow &quot;coverage_review&quot; {
+  inputs = [source.workspace]
+
+  step &quot;matrix&quot; {
+    does = &quot;Persona x stage and value element x persona counts; mark empty cells&quot;
+  }
+
+  step &quot;next_batch&quot; {
+    does = &quot;Propose the next article and page topics from the gaps&quot;
+  }
+
+  outputs     = [&quot;sales-machine/coverage/&lt;date&gt;.md&quot;]
+  review_gate = gate.content
+}
+
+workflow &quot;rule_change_sweep&quot; {
+  inputs = [source.workspace]
+
+  step &quot;reaudit&quot; {
+    does = &quot;Run value-audit on every existing article, spec and manual chapter against the new config&quot;
+    uses = [agent.auditor]
+  }
+
+  step &quot;fix_with_history&quot; {
+    does = &quot;Fix failing files, keeping the previous version in history/&lt;file&gt;-&lt;date&gt;&quot;
+  }
+
+  outputs     = [&quot;audit/findings.json&quot;, &quot;history/&quot;]
+  review_gate = gate.content
+}
+
+workflow &quot;report_refresh&quot; {
+  inputs = [source.workspace]
+
+  step &quot;spec_check&quot; {
+    does = &quot;Self-check this spec: braces, block types, references, no forbidden blocks&quot;
+  }
+
+  step &quot;build&quot; {
+    does = &quot;Write the self-contained HTML report from every workspace file&quot;
+  }
+
+  outputs     = [&quot;report/sales-machine-report.html&quot;]
+  review_gate = gate.report
+}
+
+# Routines
+
+routine &quot;weekly_articles&quot; {
+  schedule    = &quot;weekly mon 09:00 &lt;tz&gt;&quot;
+  agent       = agent.operator
+  runs        = workflow.article_batch
+  delivers_to = handoff.articles
+}
+
+routine &quot;on_release&quot; {
+  on          = event.release_merged
+  agent       = agent.operator
+  runs        = workflow.release_sweep
+  delivers_to = handoff.pages
+}
+
+routine &quot;weekly_adoption&quot; {
+  schedule    = &quot;weekly fri 18:00 &lt;tz&gt;&quot;
+  agent       = agent.operator
+  runs        = workflow.adoption_sweep
+  delivers_to = handoff.instrumentation
+}
+
+routine &quot;on_team_request&quot; {
+  on          = event.team_request_opened
+  agent       = agent.operator
+  runs        = workflow.lead_note
+  delivers_to = handoff.lead
+}
+
+routine &quot;monthly_coverage&quot; {
+  schedule    = &quot;monthly day 1 09:00 &lt;tz&gt;&quot;
+  agent       = agent.operator
+  runs        = workflow.coverage_review
+  delivers_to = handoff.articles
+}
+
+routine &quot;on_rule_change&quot; {
+  on          = event.rule_changed
+  agent       = agent.auditor
+  runs        = workflow.rule_change_sweep
+  delivers_to = handoff.report
+}
+
+routine &quot;after_every_run&quot; {
+  on          = &quot;end of any routine&quot;
+  agent       = agent.operator
+  runs        = workflow.report_refresh
+  delivers_to = handoff.report
+}
+
+# Gates
+
+gate &quot;content&quot; {
+  checks  = [&quot;only ledger facts&quot;, &quot;2-4 value elements, at least one from level 3 or 4&quot;, &quot;loop hook&quot;, &quot;FAQ&quot;, &quot;CTA is Install the blueprint&quot;, &quot;no forbidden word or CTA&quot;, &quot;no names&quot;]
+  on_fail = &quot;fix, or record FAIL in audit/findings.json and hand off&quot;
+}
+
+gate &quot;lead&quot; {
+  checks  = [&quot;signal met&quot;, &quot;public facts only&quot;, &quot;no contact made&quot;]
+  on_fail = &quot;hold and report&quot;
+}
+
+gate &quot;metrics&quot; {
+  checks  = [&quot;every number has its source export&quot;, &quot;missing data written as to-confirm, never estimated&quot;]
+  on_fail = &quot;publish the gaps instead of the numbers&quot;
+}
+
+gate &quot;report&quot; {
+  checks  = [&quot;spec self-check clean&quot;, &quot;no external resource in the HTML&quot;, &quot;counts match audit/findings.json&quot;]
+  on_fail = &quot;fix before delivery&quot;
+}
+
+# Metrics
+
+metric &quot;visits_per_piece&quot; {
+  formula = &quot;site visits referred by a piece / pieces published&quot;
+  per     = &quot;piece [to confirm: no analytics yet]&quot;
+}
+
+metric &quot;visit_to_install&quot; {
+  formula = &quot;installs / site visits&quot;
+  per     = &quot;100 visits&quot;
+}
+
+metric &quot;install_to_scaffold&quot; {
+  formula = &quot;scaffolds seen / installs&quot;
+  per     = &quot;100 installs&quot;
+}
+
+metric &quot;scaffold_to_signal&quot; {
+  formula = &quot;repositories or teams with a signal / scaffolds&quot;
+  per     = &quot;100 scaffolds, per lane&quot;
+}
+
+metric &quot;signal_to_adoption&quot; {
+  formula = &quot;adoptions / signals&quot;
+  per     = &quot;100 signals&quot;
+}
+
+metric &quot;installs_per_cohort&quot; {
+  formula = &quot;new installs / adopters of the month, per loop&quot;
+  per     = &quot;monthly adopter cohort&quot;
+}
+
+# Rules
+
+rule &quot;cta&quot; {
+  text = &quot;Every call to action is Install the blueprint with the npx skills add command; the only secondary one is Talk to the maintainer on GitHub&quot;
+}
+
+rule &quot;never_say&quot; {
+  text = &quot;Nothing from config.neverSay or config.internalOnly: no prices or plans, no free or trial, no license claim, no token or speed numbers, no training claims&quot;
+}
+
+rule &quot;no_names&quot; {
+  text = &quot;No customer, company or contributor names; the owner appears only as @devton&quot;
+}
+
+rule &quot;rollout_honesty&quot; {
+  text = &quot;Removed or unconfirmed items (html-manual, named agent hosts) are never shown as live&quot;
+}
+
+rule &quot;regulated_security&quot; {
+  text = &quot;Security workflows describe authorized checks on systems you own or are allowed to test; never sold as compliance&quot;
+}
+
+rule &quot;facts_only&quot; {
+  text = &quot;Every product claim maps to a fact in product-map.md; unknowns stay to-confirm&quot;
+}
+
+rule &quot;no_publish_without_review&quot; {
+  text = &quot;The agent drafts and hands off; people publish&quot;
+}
+
+rule &quot;no_contact&quot; {
+  text = &quot;The agent never contacts a person or opens an issue; it writes notes for the maintainer&quot;
+}
+
+# Hand-offs
+
+handoff &quot;articles&quot; {
+  from     = agent.operator
+  to       = role.content
+  artifact = &quot;articles/&lt;date&gt;/*.md&quot;
+  when     = &quot;after gate.content passes&quot;
+}
+
+handoff &quot;pages&quot; {
+  from     = agent.operator
+  to       = role.content
+  artifact = &quot;landing/*.md and site drift list&quot;
+  when     = &quot;after gate.content passes&quot;
+}
+
+handoff &quot;lead&quot; {
+  from     = agent.operator
+  to       = role.maintainer
+  artifact = &quot;lead note&quot;
+  when     = &quot;after gate.lead passes&quot;
+}
+
+handoff &quot;instrumentation&quot; {
+  from     = agent.operator
+  to       = role.product
+  artifact = &quot;metrics note with the instrumentation still missing&quot;
+  when     = &quot;after gate.metrics passes&quot;
+}
+
+handoff &quot;report&quot; {
+  from     = agent.operator
+  to       = role.owner
+  artifact = &quot;report/sales-machine-report.html&quot;
+  when     = &quot;after gate.report passes&quot;
+}
+</code></pre></details>
+<details><summary><strong>system/operator.md</strong></summary><h3>Operator instructions: workflow-blueprint sales machine</h3>
+<p>Load these as the standing instructions of the agent workspace that runs the machine.</p>
+<ol><li>Load <code>system/sales-machine.hcl</code>. It is the machine. Do nothing it does not describe.</li><li>Run each <code>routine</code>'s workflow on its <code>schedule</code> or <code>on</code> event, with the agent it names. Times are in the owner's time zone (<code>&lt;tz&gt;</code>: [to confirm]).</li><li>Read only the <code>source</code> blocks. Sources marked <code>[to confirm]</code> do not exist yet: skip the step that needs them and write the gap in the run note.</li><li>Obey every <code>rule</code>. The most likely to be broken here: no license claim, no token or speed numbers, no names (the owner is only "@devton"), no <code>html-manual</code>, no "works with any agent".</li><li>Stop at every <code>gate</code>. On a failure, fix it or record the FAIL in <code>audit/findings.json</code>.</li><li>Deliver only through a <code>handoff</code>. Never publish, never open an issue, never contact anyone.</li><li>End every run with <code>workflow.report_refresh</code>.</li><li>To change the machine, change the spec first (<code>/sales-machine-scaffold system-spec</code>).</li></ol></details>
+
+<h2 id="audit">10. Audit</h2>
+<div class="tw"><table><thead><tr><th>file</th><th>verdict</th><th>open findings</th></tr></thead><tbody><tr><td>../sources/site/home.txt</td><td><span class="chip fail">FAIL</span></td><td>2</td></tr><tr><td>../sources/site/docs.txt</td><td><span class="chip fail">FAIL</span></td><td>3</td></tr><tr><td>../sources/site/radioactive.txt</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>articles/2026-11-23/01-agents-md-too-long.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>articles/2026-11-23/02-review-what-your-agent-learned.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>articles/2026-11-23/03-security-workflows-as-contracts.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/home.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/persona-agent-developer.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/persona-tech-lead.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/persona-platform-engineer.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/integration-trivy.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/integration-linear.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>landing/integration-ai-hero.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>manual/manual.md</td><td><span class="chip live">PASS</span></td><td>0</td></tr><tr><td>system/sales-machine.hcl</td><td><span class="chip live">PASS</span></td><td>0</td></tr></tbody></table></div>
+<h3>Findings (open first, then fixed during the run)</h3>
+<div class="tw"><table><thead><tr><th></th><th>file</th><th>rule</th><th>quote</th><th>fix</th></tr></thead><tbody><tr><td><span class="chip fail">open</span></td><td>../sources/site/home.txt</td><td>facts only (F-028 unconfirmed)</td><td>Works with Claude, Codex, Cursor or the next one</td><td>Plain markdown in your repository. (Restore the names once each agent is tested or documented.)</td></tr><tr><td><span class="chip fail">open</span></td><td>../sources/site/home.txt</td><td>facts only</td><td>Cost: zero, it is a phase</td><td>Cost: no extra setup, it is a phase</td></tr><tr><td><span class="chip fail">open</span></td><td>../sources/site/docs.txt</td><td>rollout honesty (removed feature shown as live)</td><td>Workflows (41) ... html-manual</td><td>Workflows (46); remove the html-manual card and page (removed 2026-09-29, F-030)</td></tr><tr><td><span class="chip fail">open</span></td><td>../sources/site/docs.txt</td><td>facts only</td><td>skills/&lt;project&gt;/SKILL.md, under ~100 lines.</td><td>skills/&lt;project&gt;/SKILL.md. Classifies the task and picks a workflow.</td></tr><tr><td><span class="chip fail">open</span></td><td>../sources/site/docs.txt</td><td>facts only (promised page missing, G-02)</td><td>Extend  Write a contract by hand ... 15 min</td><td>Write the guide from the contract format in README.md, or remove the card</td></tr><tr><td><span class="chip live">fixed</span></td><td>articles/2026-11-23/02-review-what-your-agent-learned.md</td><td>facts only</td><td>Nothing is applied outside the repo.</td><td>The scaffold writes files in your repository: the skill folder and the root doc link. (Linear workflows do act outside the repo.)</td></tr><tr><td><span class="chip live">fixed</span></td><td>articles/2026-11-23/03-security-workflows-as-contracts.md</td><td>real UI only</td><td>we always pass `--ignore-unfixed` on this image</td><td>we accepted this finding on this image, and here is why</td></tr><tr><td><span class="chip live">fixed</span></td><td>articles/2026-11-23/03-security-workflows-as-contracts.md</td><td>facts only</td><td>Every tool in the list above started that way</td><td>That is how the catalog grows</td></tr></tbody></table></div>
+
+<h2 id="handoff">11. Hand-off</h2>
+<div class="tw"><table><thead><tr><th>Role</th><th>Takes</th><th>From</th></tr></thead><tbody>
+<tr><td>owner</td><td>Answer the to-confirm list (license, conversion meaning, agent hosts, signals, time zone)</td><td>this report</td></tr>
+<tr><td>content</td><td>Publish the three articles in <code>articles/2026-11-23/</code> after review</td><td>Content</td></tr>
+<tr><td>content</td><td>Apply the home spec changes: sub-line, headline facts, "who it is for", "works with your tools"; fix C-01 and C-04</td><td>landing/home.md</td></tr>
+<tr><td>content</td><td>Docs page: count 46, remove html-manual, drop "under ~100 lines", write or remove "Write a contract by hand"</td><td>Audit</td></tr>
+<tr><td>content</td><td>Build <code>/teams/</code>, <code>/platform/</code> and three integration pages (Trivy, Linear, AI Hero)</td><td>landing/*.md</td></tr>
+<tr><td>product</td><td>Public example repository with a generated <code>skills/shop/</code> and two lessons (option B)</td><td>landing/home.md §3</td></tr>
+<tr><td>product</td><td>Issue template "Which workflow do you need?" (goal, stack, tools) linked next to the install command</td><td>loops.md</td></tr>
+<tr><td>product</td><td>Decide on a "Generated with workflow-blueprint" line in generated root docs (needs a SKILL.md change)</td><td>loops.md</td></tr>
+<tr><td>product</td><td>Site analytics and install counts, or record that they will not exist</td><td>loops.md</td></tr>
+<tr><td>owner</td><td>Approve the ebook outline before chapters are written</td><td>manual/ebook.md</td></tr>
+</tbody></table></div>
+<h3>Everything still [to confirm]</h3><ul><li><code>config.json:30</code> "buyingSignal": "[to confirm: no usage data exists. Proposed: a public repository commits skills/&lt;project&gt;/ and changes a contract in a second commit within 30 days]"</li><li><code>config.json:35</code> "buyingSignal": "[to confirm: is there an assisted offer at all? Proposed: a team opens an issue or pull request asking for a workflow for their stack]"</li><li><code>config.json:52</code> { "slug": "agent-hosts", "name": "Claude, Codex, Cursor", "kind": "coding agent", "live": "[to confirm: named on the site only, no test or doc in the repo]" }</li><li><code>config.json:57</code> "\"open source\" or any license claim (the repository has no LICENSE file) [to confirm with owner]",</li><li><code>landing/integration-ai-hero.md:13</code> <code>[to confirm]</code>: wording the skill authors are comfortable with when their names appear on the page.</li><li><code>landing/integration-linear.md:13</code> <code>[to confirm]</code>: which Linear MCP server the workflows were tested with.</li><li><code>landing/persona-tech-lead.md:16</code> | CTA | <strong>Install the blueprint</strong>, then: "Need a workflow for your stack? Talk to the maintainer on GitHub." | F-001 | Responsiveness (3) <code>[to confirm: response commitment]</code> |</li><li><code>loops.md:55</code> | Install counts from the skills CLI | all | not in sources <code>[to confirm]</code> | product |</li><li><code>loops.md:57</code> | Site analytics (visits per page) | content, integrations | none in sources <code>[to confirm]</code> | content |</li><li><code>machine.md:9</code> is the owner's call: <code>[to confirm]</code>. Every event below is either observable today on public</li><li><code>machine.md:20</code> - <strong>Metric:</strong> visits per published piece. <code>[to confirm: the site has no analytics in the sources]</code>.</li><li><code>machine.md:30</code> - <strong>Metric:</strong> installs per 100 visits. <code>[to confirm: does the skills CLI publish install counts?]</code></li><li><code>machine.md:53</code> - <strong>Signal <code>notebook_alive</code>:</strong> <code>[to confirm]</code> proposed rule: a repository commits</li><li><code>machine.md:78</code> - <strong>What "customer" means:</strong> <code>[to confirm with owner]</code>: adoption only, or a paid offer</li><li><code>machine.md:105</code> | visit_to_install | installs / site visits | per 100 visits <code>[to confirm data]</code> |</li><li><code>positioning.md:76</code> | "open source", any license claim | "public repository on GitHub" | no LICENSE file (F-032) [to confirm] |</li><li><code>positioning.md:79</code> | "works with any agent" | "plain markdown in your repository" until F-028 is confirmed | F-028 [to confirm] |</li><li><code>product-map.md:59</code> | Claude, Codex, Cursor | "Works with Claude, Codex, Cursor or the next one" | <strong>[to confirm]</strong> site claim only | <code>site/home.txt</code> |</li><li><code>product-map.md:127</code> | F-028 | "Works with Claude, Codex, Cursor or the next one" | <code>site/home.txt</code> | [to confirm] |</li><li><code>system/README.md:32</code> Values in quotes that start with <code>[to confirm</code> are open questions for the owner.</li><li><code>system/operator.md:7</code> Times are in the owner's time zone (<code>&lt;tz&gt;</code>: [to confirm]).</li><li><code>system/operator.md:8</code> 3. Read only the <code>source</code> blocks. Sources marked <code>[to confirm]</code> do not exist yet: skip the step</li><li><code>system/sales-machine.hcl:74</code> path_or_channel = "[to confirm: export of public repositories that contain a generated skills/&lt;project&gt;/template.json]"</li><li><code>system/sales-machine.hcl:80</code> path_or_channel = "[to confirm: does the skills CLI publish install counts?]"</li><li><code>system/sales-machine.hcl:101</code> captures = ["[to confirm: referrer]", "[to confirm: agent host]"]</li><li><code>system/sales-machine.hcl:178</code> note   = "[to confirm: adoption only, or a paid offer; no copy mentions money]"</li><li><code>system/sales-machine.hcl:206</code> when = "[to confirm: a public repository commits skills/&lt;project&gt;/ and changes a contract in a later commit within 30 days]"</li><li><code>system/sales-machine.hcl:436</code> per     = "piece [to confirm: no analytics yet]"</li></ul>
+<p class="small">Sources are plain paths under <code>examples/workflow-blueprint.com/sources/</code>. This page loads nothing from the network.</p>
+</main></body></html>

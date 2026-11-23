@@ -184,7 +184,15 @@ config.example.json      config shape with placeholders
 reference/               routing matrix, role contracts, Elements of Value, example HCL spec
 workflows/<cmd>/SKILL.md one contract per command (same text as in SKILL.md)
 runbooks/                operating sequence
+examples/                full runs on real products (sources + every output)
 ```
+
+## Examples
+
+[`examples/workflow-blueprint.com`](examples/workflow-blueprint.com/) is a full run on
+workflow-blueprint.com, a product with open access and no usage data: config, product map and
+fact ledger, positioning, machine, loops, three articles, seven page specs, the manual, the audit
+(including the live site), the HCL system spec and the HTML report.
 
 `SKILL.md` is the source of truth. The files under `workflows/`, `reference/` and `runbooks/` are
 split from it for agents that load one contract at a time.

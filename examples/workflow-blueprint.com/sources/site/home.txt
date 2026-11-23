@@ -1,0 +1,107 @@
+workflow-blueprint · Teach your agent how to learn your project
+Skip to content
+workflow - blueprint
+How it learns
+radioactive
+Docs
+GitHub →
+A meta-skill for coding agents
+Don't teach your agent the task .
+Teach it how to learn your project.
+Your agent forgets everything between sessions. workflow-blueprint teaches it to write its own notebook: one small skill per part of your codebase, read only when needed, and corrected after every job.
+npx skills add devton/agentic-workflow-blueprint Copy
+See how it learns
+skills/shop/workflows/payments/SKILL.md rev 3
+## Triggers
+"add a payment method", "fix checkout"
+## Invariants
+All calls go through PaymentService
+Amounts are integers in cents
+↑ learned in review, run #2
+## Review gate
+checkout.spec passes · no float math
+The problem
+Every session, your agent starts from zero.
+Think of a brilliant new colleague who wakes up every morning with no memory of yesterday. You have four ways to work with them.
+Level 1
+Explain it every time
+You paste context into every prompt. It works until you forget a rule.
+You are the memory.
+Cost: your time, every task
+Level 2
+Write one giant manual
+A 500-line AGENTS.md. The agent reads all of it for every task, and the one rule that matters gets buried.
+One file is the memory.
+Cost: tokens and focus
+Level 3 · blueprint
+Teach it to keep a notebook
+The agent writes one short contract per module and a table of contents. For each task it opens only the right page.
+The agent writes the memory.
+Cost: one setup prompt
+Level 4 · radioactive
+Let the notebook correct itself
+After every job, what went wrong in review becomes a new rule in the contract. Run ten is better than run one.
+The agent improves the memory.
+Cost: zero, it is a phase
+The learning loop: route, do, record, around the skills notebook
+skills/
+Route
+Do
+Record
+opens one page
+this is the learning step
+next run starts
+smarter
+How it learns
+Three verbs, repeated on every task.
+1 Route
+The agent reads a short table of contents (the routing matrix), decides what kind of task this is, and opens only that contract. A bug fix never loads your infra docs.
+2 Do
+It follows the contract step by step and must pass the review gate at the end. No gate, no "done".
+3 Record
+Whatever it discovered or got wrong goes back into the contract as a rule, a trigger or a new workflow. This is what makes the next run better.
+Watch it grow
+The same agent on run 1 and on run 10.
+Click through the runs of an example online shop. The model never changes. The notebook does.
+Run 1
+Run 2
+Run 3
+Run 10
+You said
+0
+workflow contracts
+0
+rules learned from review
+0
+questions it had to ask you
+Illustrative example. Numbers show the shape of the effect, not a benchmark.
+What a lesson looks like
+Each contract answers eight plain questions.
+A workflow contract is a markdown file. If a section is missing or the gate fails, the workflow fails. There is no best-effort fallback.
+Goal What are we doing? One sentence the agent can check its result against.
+Scope Where may I touch? Folders and modules in bounds, and the ones that are not.
+Triggers When do I open this page? The phrases and task types that route here.
+Inputs What do I need first? Files, tickets, or answers required before starting.
+Invariants What must never break? The rules learned so far. This list grows the most.
+Procedure What are the steps? A fixed sequence, so two runs do the same thing.
+Outputs What do I hand over? The files, diff, or notes the next step expects.
+Review gate How do I know I'm done? Pass or fail checks. Failing here feeds the next lesson.
+Why it works with any model
+Contracts change. Weights don't need to.
+Learning in the model
+Needs fine-tuning or a vendor feature
+You can't read what it learned
+Lost when you switch models
+Learning in the repo
+Plain markdown, reviewed in a pull request
+You can read, edit or delete any lesson
+Works with Claude, Codex, Cursor or the next one
+Get started
+Teach it once. It keeps learning.
+1. Install the meta-skill
+npx skills add devton/agentic-workflow-blueprint Adds the blueprint to your agent's skills.
+2. Ask for the notebook
+blueprint this project. It asks for your stack and hard rules, then writes skills/<project>/ and wires AGENTS.md.
+3. Work normally
+/shop radioactive "add pix payments" Each finished task ends by updating the contracts it used.
+workflow-blueprint @devton

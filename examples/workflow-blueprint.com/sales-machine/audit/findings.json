@@ -1,0 +1,244 @@
+[
+  {
+    "file": "../sources/site/home.txt",
+    "kind": "current live copy",
+    "verdict": "FAIL",
+    "value_shown": [
+      "Vision",
+      "Time savings",
+      "Organization",
+      "Transparency",
+      "Growth & development"
+    ],
+    "findings": [
+      {
+        "rule": "facts only (F-028 unconfirmed)",
+        "quote": "Works with Claude, Codex, Cursor or the next one",
+        "fix": "Plain markdown in your repository. (Restore the names once each agent is tested or documented.)"
+      },
+      {
+        "rule": "facts only",
+        "quote": "Cost: zero, it is a phase",
+        "fix": "Cost: no extra setup, it is a phase"
+      }
+    ]
+  },
+  {
+    "file": "../sources/site/docs.txt",
+    "kind": "current live copy",
+    "verdict": "FAIL",
+    "value_shown": [
+      "Information",
+      "Organization"
+    ],
+    "findings": [
+      {
+        "rule": "rollout honesty (removed feature shown as live)",
+        "quote": "Workflows (41) ... html-manual",
+        "fix": "Workflows (46); remove the html-manual card and page (removed 2026-09-29, F-030)"
+      },
+      {
+        "rule": "facts only",
+        "quote": "skills/<project>/SKILL.md, under ~100 lines.",
+        "fix": "skills/<project>/SKILL.md. Classifies the task and picks a workflow."
+      },
+      {
+        "rule": "facts only (promised page missing, G-02)",
+        "quote": "Extend  Write a contract by hand ... 15 min",
+        "fix": "Write the guide from the contract format in README.md, or remove the card"
+      }
+    ]
+  },
+  {
+    "file": "../sources/site/radioactive.txt",
+    "kind": "current live copy",
+    "verdict": "PASS",
+    "value_shown": [
+      "Risk reduction",
+      "Reputational assurance",
+      "Growth & development"
+    ],
+    "findings": [],
+    "notes": [
+      "Machine fit: add the two stops for a person (phase 2 answers, phase 4 plan approval, F-014); today implicit."
+    ]
+  },
+  {
+    "file": "articles/2026-11-23/01-agents-md-too-long.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Time savings: 'the notebook is organized so that each task reads one page'",
+      "Organization: same sentence",
+      "Reduced anxiety: 'You are no longer the only thing standing between a rule you learned last month and the agent forgetting it today.'"
+    ],
+    "machine_fit": {
+      "persona": "agent-developer",
+      "stage": "01",
+      "loop": "content",
+      "next_step": "install + blueprint this project.",
+      "cta": "Install the blueprint"
+    },
+    "findings": []
+  },
+  {
+    "file": "articles/2026-11-23/02-review-what-your-agent-learned.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Transparency: 'you can see exactly what the agents are told'",
+      "Risk reduction: 'If the lesson is wrong, you say so in review'",
+      "Reputational assurance: 'what leaves your team looks the same, whoever's agent wrote it'"
+    ],
+    "machine_fit": {
+      "persona": "tech-lead",
+      "stage": "04",
+      "loop": "invites",
+      "next_step": "generate on a branch, open as a PR",
+      "cta": "Install the blueprint + Talk to the maintainer on GitHub"
+    },
+    "findings": [],
+    "fixed_during_run": [
+      {
+        "rule": "facts only",
+        "quote": "Nothing is applied outside the repo.",
+        "fix": "The scaffold writes files in your repository: the skill folder and the root doc link. (Linear workflows do act outside the repo.)"
+      }
+    ]
+  },
+  {
+    "file": "articles/2026-11-23/03-security-workflows-as-contracts.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Risk reduction: 'If it fails, the work is not done.'",
+      "Integration: 'The contracts are named after the tools, so they route like any other task.'",
+      "Reduced anxiety: 'You stop being the only place where ... lives.'"
+    ],
+    "machine_fit": {
+      "persona": "platform-engineer",
+      "stage": "02",
+      "loop": "integrations",
+      "next_step": "copy one security contract and run it on a branch",
+      "cta": "Install the blueprint"
+    },
+    "regulated": "stated as the config rule inside the flow and in the FAQ; never sold as compliance",
+    "findings": [],
+    "fixed_during_run": [
+      {
+        "rule": "real UI only",
+        "quote": "we always pass `--ignore-unfixed` on this image",
+        "fix": "we accepted this finding on this image, and here is why"
+      },
+      {
+        "rule": "facts only",
+        "quote": "Every tool in the list above started that way",
+        "fix": "That is how the catalog grows"
+      }
+    ]
+  },
+  {
+    "file": "landing/home.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Vision",
+      "Organization",
+      "Reduced effort",
+      "Time savings",
+      "Transparency",
+      "Integration"
+    ],
+    "findings": []
+  },
+  {
+    "file": "landing/persona-agent-developer.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Time savings",
+      "Organization",
+      "Growth & development"
+    ],
+    "findings": []
+  },
+  {
+    "file": "landing/persona-tech-lead.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Transparency",
+      "Risk reduction",
+      "Reputational assurance"
+    ],
+    "findings": [],
+    "notes": [
+      "Responsiveness is shown only if the owner confirms a response commitment."
+    ]
+  },
+  {
+    "file": "landing/persona-platform-engineer.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Risk reduction",
+      "Expertise",
+      "Reduced anxiety"
+    ],
+    "findings": []
+  },
+  {
+    "file": "landing/integration-trivy.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Risk reduction",
+      "Integration",
+      "Expertise"
+    ],
+    "findings": []
+  },
+  {
+    "file": "landing/integration-linear.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Organization",
+      "Integration",
+      "Risk reduction"
+    ],
+    "findings": []
+  },
+  {
+    "file": "landing/integration-ai-hero.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "Expertise",
+      "Risk reduction",
+      "Configurability"
+    ],
+    "findings": []
+  },
+  {
+    "file": "manual/manual.md",
+    "verdict": "PASS",
+    "value_shown": [
+      "n/a (internal)"
+    ],
+    "findings": [],
+    "notes": [
+      "No technical detail beyond command names the team must say; no internal-only numbers."
+    ]
+  },
+  {
+    "file": "system/sales-machine.hcl",
+    "kind": "spec self-check",
+    "verdict": "PASS",
+    "checks": {
+      "balanced braces and quotes": true,
+      "only allowed block types": true,
+      "every type.name reference declared": true,
+      "no provider/resource/module/data/terraform": true,
+      "no ${} interpolation": true,
+      "no URLs": true,
+      "no secrets": true,
+      "every routine names agent and workflow": true,
+      "every workflow has review_gate": true,
+      "every stage has entry/exit/metric": true,
+      "every loop has steps/owner/metric/feeds": true,
+      "parsed by python-hcl2": true
+    },
+    "findings": []
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "2026-11-23-01",
+    "file": "articles/2026-11-23/01-agents-md-too-long.md",
+    "title": "Your AGENTS.md is too long. Give your agent a notebook instead.",
+    "lane": "B",
+    "persona": "agent-developer",
+    "stage": "01",
+    "loop": "content",
+    "value": ["Time savings", "Organization", "Reduced anxiety"]
+  },
+  {
+    "id": "2026-11-23-02",
+    "file": "articles/2026-11-23/02-review-what-your-agent-learned.md",
+    "title": "Review what your team's agents learned, in the same pull request as the code",
+    "lane": "B",
+    "persona": "tech-lead",
+    "stage": "04",
+    "loop": "invites",
+    "value": ["Transparency", "Risk reduction", "Reputational assurance"]
+  },
+  {
+    "id": "2026-11-23-03",
+    "file": "articles/2026-11-23/03-security-workflows-as-contracts.md",
+    "title": "Trivy, Kubernetes and GitHub Actions checks your agent runs the same way every time",
+    "lane": "A",
+    "persona": "platform-engineer",
+    "stage": "02",
+    "loop": "integrations",
+    "value": ["Risk reduction", "Integration", "Reduced anxiety"]
+  }
+]

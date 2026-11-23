@@ -1,0 +1,48 @@
+radioactive · workflow-blueprint
+Skip to content
+workflow - blueprint
+How it learns
+radioactive
+Docs
+GitHub →
+Workflow · full lifecycle
+radioactive
+A full development cycle with eleven gates. Unproven output "decays" phase by phase until it is tested, reviewed and documented. The last steps turn what the agent learned into permanent contracts.
+half-life of a guess evidence
+Plan → grounded in code reads
+Execute → grounded in git diff
+Tests → grounded in test output
+Review → severity-ranked findings
+Blueprints → findings become rules
+The pipeline
+Eleven phases. The last two are where it learns.
+01 Classify & Init pick task type, branch
+02 Discover read the code that matters
+03 UX Design only for UI work
+04 Plan steps tied to evidence
+05 Blueprint task spec as contract
+06 Execute write the change
+07 Tests prove it works
+08 Review severity-ranked findings
+09 Fix Loop fix and re-review, up to 3×
+10 Blueprints save discoveries into contracts
+11 Changelog record what changed and why
+Blue bar: how much is still unproven Red: knowledge written back to skills/ * conditional phase
+Phase 10, up close
+"The agent learned something. Make it permanent."
+A review finding fixed once is luck. A review finding written into the contract is never made again. Phase 10 opens the contracts this run used and adds what the run taught.
+skills/shop/workflows/payments/SKILL.md
+## Invariants
+- All calls go through PaymentService
++ - Amounts are integers in cents
++ (review run #2: float rounding on refunds)
+## Review gate
+- checkout.spec passes
++ - grep finds no parseFloat in payments/
+What you get every run
+Task spec, walkthrough.md, a git commit and changelog notes.
+What you keep forever
+A reusable workflow contract and updated project skills. Future runs load them instead of starting over.
+Want more rigor?
+embed-aihero-radioactive expands to 14 phases with grilling, domain modeling, research spikes and prototyping.
+workflow-blueprint · radioactive @devton
