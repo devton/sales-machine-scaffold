@@ -33,7 +33,7 @@ The current home is close to the target. The spec keeps its order and changes fi
 | 13 | Who it is for (**new**) | Three cards: "You use an agent every day" -> home; "Your team shares a repo" -> persona-tech-lead; "You run infra and security" -> persona-platform-engineer | `positioning.md` §3 | Reach (3) |
 | 14 | Works with your tools (**new**) | Linear · Trivy · Kubernetes · GitHub Actions · AI Hero skills · Remotion, each linking to its integration page. Footer line: "Missing your tool? Tell us on GitHub." | F-019, F-022, F-023, F-024 | Integration (3) |
 | 15 | Get started | Keep the three steps; step 3 stays `/shop radioactive "add pix payments"` | F-001, F-002, F-016 | Reduced effort (3) |
-| 16 | Footer | workflow-blueprint · @devton | owner rule | — |
+| 16 | Footer | workflow-blueprint · MIT license · @devton | owner rule, F-035 (link the LICENSE file once it exists, G-05) | Risk reduction (3) |
 
 No pricing, no lane labels, no sign-up. One primary CTA.
 

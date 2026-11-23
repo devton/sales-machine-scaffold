@@ -5,8 +5,8 @@ Workflow: `machine`. Date: 2026-11-23. Inputs: `positioning.md`, `product-map.md
 **How this product changes the template.** Access is `open`: there is no access request, no
 invite and no purchase in the sources. So stage 02 is the install, the "buying signal" is a
 repository that keeps its notebook alive, and stage 05 is **adoption** (a team commits the
-notebook and asks the maintainer for more). Whether there is any commercial offer behind stage 05
-is the owner's call: `[to confirm]`. Every event below is either observable today on public
+notebook and asks the maintainer for more). There is no commercial offer behind stage 05: the
+product is open source under MIT with no paid tier (owner, 2026-11-23). Every event below is either observable today on public
 GitHub, or marked **proposed** with the instrumentation it needs (see `loops.md`).
 
 ## Stages
@@ -75,8 +75,8 @@ Regulated steps: the security workflows only appear in the platform engineer's p
   for assisted, the maintainer answers and the team's workflow is merged or published as a template.
 - **The maintainer talks to someone already using it:** the team's issue already names its stack
   and its tools.
-- **What "customer" means:** `[to confirm with owner]`: adoption only, or a paid offer
-  (setup help, private workflows). Nothing in the sources mentions money, so no copy may.
+- **What "customer" means:** an adopter. No paid offer exists (MIT, owner 2026-11-23), so no copy
+  mentions money, plans or a "pro" version.
 - **Value:** Risk reduction, Reputational assurance, Transparency, Commitment.
 - **Metric:** adoptions per 100 signals.
 - **Owner:** maintainer.

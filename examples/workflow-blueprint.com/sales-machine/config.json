@@ -4,20 +4,45 @@
     "tagline": "Teach your agent how to learn your project.",
     "category": "meta-skill for coding agents"
   },
-  "language": { "content": "en", "team": "pt-BR", "secondaryContent": [] },
+  "language": {
+    "content": "en",
+    "team": "pt-BR",
+    "secondaryContent": []
+  },
   "sources": {
-    "code": ["../sources/product/SKILL.md", "../sources/product/workflows/", "../sources/product/catalog.md"],
-    "docs": ["../sources/product/README.md", "../sources/site/docs.txt"],
-    "releaseNotes": ["../sources/product/history.md"],
+    "code": [
+      "../sources/product/SKILL.md",
+      "../sources/product/workflows/",
+      "../sources/product/catalog.md"
+    ],
+    "docs": [
+      "../sources/product/README.md",
+      "../sources/site/docs.txt"
+    ],
+    "releaseNotes": [
+      "../sources/product/history.md"
+    ],
     "featureFlags": [],
-    "notes": ["../sources/site/home.txt", "../sources/site/radioactive.txt", "../sources/site/live-notes.md"]
+    "notes": [
+      "../sources/site/home.txt",
+      "../sources/site/radioactive.txt",
+      "../sources/site/live-notes.md",
+      "../sources/owner-answers.md"
+    ]
   },
   "access": {
     "mode": "open",
     "primaryCta": "Install the blueprint",
     "primaryCtaDetail": "npx skills add devton/agentic-workflow-blueprint",
     "secondaryCta": "Talk to the maintainer on GitHub",
-    "forbiddenCtas": ["Sign up free", "Create your account", "Start your free trial", "Request a demo", "Buy now", "Join the waitlist"]
+    "forbiddenCtas": [
+      "Sign up free",
+      "Create your account",
+      "Start your free trial",
+      "Request a demo",
+      "Buy now",
+      "Join the waitlist"
+    ]
   },
   "flagship": {
     "who": "A developer who works with a coding agent every day on a repository with several modules",
@@ -36,25 +61,89 @@
     }
   ],
   "personas": [
-    { "id": "agent-developer", "name": "Developer with a coding agent", "wants": "Stop re-explaining the project to the agent and get the same result on the tenth task as on the first", "lane": "self-serve" },
-    { "id": "tech-lead", "name": "Tech lead of a team using agents", "wants": "Make every teammate's agent follow the same rules, reviewed like code", "lane": "assisted" },
-    { "id": "platform-engineer", "name": "Platform and security engineer", "wants": "Run infra and security changes through the same checked steps every time, with rollback and evidence", "lane": "self-serve" }
+    {
+      "id": "agent-developer",
+      "name": "Developer with a coding agent",
+      "wants": "Stop re-explaining the project to the agent and get the same result on the tenth task as on the first",
+      "lane": "self-serve"
+    },
+    {
+      "id": "tech-lead",
+      "name": "Tech lead of a team using agents",
+      "wants": "Make every teammate's agent follow the same rules, reviewed like code",
+      "lane": "assisted"
+    },
+    {
+      "id": "platform-engineer",
+      "name": "Platform and security engineer",
+      "wants": "Run infra and security changes through the same checked steps every time, with rollback and evidence",
+      "lane": "self-serve"
+    }
   ],
   "integrations": [
-    { "slug": "skills-cli", "name": "skills CLI (npx skills)", "kind": "installer", "live": true },
-    { "slug": "agents-md", "name": "AGENTS.md / CLAUDE.md root docs", "kind": "agent instruction file", "live": true },
-    { "slug": "linear", "name": "Linear (via MCP)", "kind": "project management", "live": true },
-    { "slug": "ai-hero", "name": "Matt Pocock / AI Hero skills", "kind": "bundled methodology", "live": true },
-    { "slug": "trivy", "name": "Trivy", "kind": "security scanner", "live": true },
-    { "slug": "kubernetes", "name": "Kubernetes (kube-bench, Kubesec, Pod Security Admission, RBAC, network policies)", "kind": "platform", "live": true },
-    { "slug": "github-actions", "name": "GitHub Actions", "kind": "CI", "live": true },
-    { "slug": "remotion", "name": "Remotion", "kind": "video", "live": true },
-    { "slug": "agent-hosts", "name": "Claude, Codex, Cursor", "kind": "coding agent", "live": "[to confirm: named on the site only, no test or doc in the repo]" }
+    {
+      "slug": "skills-cli",
+      "name": "skills CLI (npx skills)",
+      "kind": "installer",
+      "live": true
+    },
+    {
+      "slug": "agents-md",
+      "name": "AGENTS.md / CLAUDE.md root docs",
+      "kind": "agent instruction file",
+      "live": true
+    },
+    {
+      "slug": "linear",
+      "name": "Linear (via MCP)",
+      "kind": "project management",
+      "live": true
+    },
+    {
+      "slug": "ai-hero",
+      "name": "Matt Pocock / AI Hero skills",
+      "kind": "bundled methodology",
+      "live": true
+    },
+    {
+      "slug": "trivy",
+      "name": "Trivy",
+      "kind": "security scanner",
+      "live": true
+    },
+    {
+      "slug": "kubernetes",
+      "name": "Kubernetes (kube-bench, Kubesec, Pod Security Admission, RBAC, network policies)",
+      "kind": "platform",
+      "live": true
+    },
+    {
+      "slug": "github-actions",
+      "name": "GitHub Actions",
+      "kind": "CI",
+      "live": true
+    },
+    {
+      "slug": "remotion",
+      "name": "Remotion",
+      "kind": "video",
+      "live": true
+    },
+    {
+      "slug": "agent-hosts",
+      "name": "Claude, Codex, Cursor",
+      "kind": "coding agent",
+      "live": "[to confirm: named on the site only, no test or doc in the repo]"
+    }
   ],
-  "loops": ["integrations", "invites", "content"],
+  "loops": [
+    "integrations",
+    "invites",
+    "content"
+  ],
   "neverSay": [
     "prices, plans, tiers, limits, \"free\", \"trial\"",
-    "\"open source\" or any license claim (the repository has no LICENSE file) [to confirm with owner]",
+    "any license other than MIT, or a paid tier, plan or \"pro\" version (owner, 2026-11-23: full MIT, no paid offer)",
     "token savings or speed-ups as numbers (the site's run 1 to run 10 numbers are illustrative, not a benchmark)",
     "that the agent or model is trained or fine-tuned (it changes markdown, not weights)",
     "customer or company names, and contributors' names",
@@ -69,12 +158,23 @@
     "memory feature": "lessons in the repo",
     "users": "developers"
   },
-  "internalOnly": ["install counts, stars and any adoption numbers until the owner publishes them", "the to-confirm list in this workspace"],
+  "internalOnly": [
+    "install counts, stars and any adoption numbers until the owner publishes them",
+    "the to-confirm list in this workspace"
+  ],
   "regulatedTopics": [
     {
       "topic": "security scanning workflows (Nessus, Trivy, cloud IAM)",
       "rule": "The workflows describe authorized checks on systems you own or are allowed to test; they do not certify compliance."
     }
   ],
-  "batch": { "articlesPerRun": 3, "minSalesLane": 2 }
+  "batch": {
+    "articlesPerRun": 3,
+    "minSalesLane": 2
+  },
+  "license": {
+    "name": "MIT",
+    "source": "../sources/owner-answers.md",
+    "licenseFileInRepo": false
+  }
 }

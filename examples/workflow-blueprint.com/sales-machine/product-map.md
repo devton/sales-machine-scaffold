@@ -76,6 +76,7 @@ prompt the user types and the files the agent writes. Names below are copied fro
 | Growth & development (4) | The agent's notebook grows run after run (F-016) |
 | Reputational assurance (4) | Reviewed, tested, documented changes with a changelog (F-013, F-017) |
 | Vision (5) | "Don't teach your agent the task. Teach it how to learn your project." (site promise) |
+| Risk reduction (3) | Open source under MIT: anyone can read, fork and keep the contracts (F-035) |
 
 Not provable from the sources, so never used: Stability, Social responsibility, Cost reduction as
 a number, Scalability as a number, Acceptable price, Regulatory compliance.
@@ -131,6 +132,7 @@ example (F-029). See gap G-01.
 | F-032 | The repository has no LICENSE file | `product/catalog.md` | internal |
 | F-033 | Templates are meant to be copied, renamed and adapted | `product/README.md` Included workflow examples | live |
 | F-034 | The scaffold adds only the workflows the user requested | `product/SKILL.md` Invariants (Minimal surface) | live |
+| F-035 | The product is open source under the MIT license, with no paid offer | `owner-answers.md` (2026-11-23) | live (LICENSE file still missing, G-05) |
 
 ## 7. Gaps
 
@@ -141,6 +143,8 @@ example (F-029). See gap G-01.
 - G-03 No page per integration (Linear, Trivy, Kubernetes, GitHub Actions) although the
   contracts exist.
 - G-04 `plan-to-blueprint` has a runbook but no site page that sells it to tech leads.
+- G-05 The owner states the product is MIT (F-035), but the repository has no LICENSE file
+  (F-032). Until it is added, GitHub shows no license and copy can only cite the owner.
 
 **Claims in current copy the ledger does not support:**
 - C-01 "Works with Claude, Codex, Cursor or the next one" (`site/home.txt`): no test or doc. F-028.
