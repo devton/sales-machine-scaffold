@@ -1,0 +1,42 @@
+Docs · workflow-blueprint
+Skip to content
+workflow - blueprint
+How it learns
+radioactive
+Docs
+GitHub →
+Learn the idea
+Start here
+The learning loop
+Your first blueprint
+Reference
+SKILL.md orchestrator
+template.json
+Routing matrix
+Contract sections
+Runbooks
+Workflows (41)
+Full lifecycle · 5
+Code quality · 3
+Documentation · 5
+Security · 18
+More…
+Docs · Start here
+Pick the path that matches where you are.
+Documentation here is something the agent follows, not just reads. Start with the idea, then set it up, then shape it to your project.
+Understand How the agent learns
+The four levels, the route-do-record loop, and why lessons live in the repo.
+5 min read
+Set up Your first blueprint
+Install, run "blueprint this project", and read what it generated.
+10 min · one prompt
+Extend Write a contract by hand
+The eight sections, the review gate, and keeping template.json in sync.
+15 min
+Skill A folder of markdown the agent can load. The blueprint is a skill that writes other skills.
+Orchestrator skills/<project>/SKILL.md, under ~100 lines. Classifies the task and picks a workflow.
+Routing matrix The table of contents. Maps task types and commands to one contract each.
+Workflow contract workflows/<name>/SKILL.md with eight required sections. One lesson per module or task type.
+Review gate Pass or fail checks at the end of a contract. Failures become new invariants.
+template.json Machine-readable manifest for CLIs, IDE plugins and CI. Must match the workflows folder.
+workflow-blueprint · docs @devton
