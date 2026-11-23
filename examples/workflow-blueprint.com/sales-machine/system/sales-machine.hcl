@@ -175,7 +175,7 @@ stage "convert" {
   value  = ["Risk reduction", "Reputational assurance", "Transparency", "Commitment"]
   metric = metric.signal_to_adoption
   owner  = role.maintainer
-  note   = "[to confirm: adoption only, or a paid offer; no copy mentions money]"
+  note   = "Adoption only: open source under MIT, no paid offer (owner, 2026-11-23)"
 }
 
 stage "feed_back" {
@@ -468,7 +468,7 @@ rule "cta" {
 }
 
 rule "never_say" {
-  text = "Nothing from config.neverSay or config.internalOnly: no prices or plans, no free or trial, no license claim, no token or speed numbers, no training claims"
+  text = "Nothing from config.neverSay or config.internalOnly: no prices or plans, no free or trial, no license other than MIT, no paid tier, no token or speed numbers, no training claims"
 }
 
 rule "no_names" {

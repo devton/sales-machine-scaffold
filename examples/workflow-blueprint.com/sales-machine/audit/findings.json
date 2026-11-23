@@ -145,7 +145,10 @@
       "Transparency",
       "Integration"
     ],
-    "findings": []
+    "findings": [],
+    "notes": [
+      "2026-11-23 rule change (MIT, no paid offer): re-audited, still PASS."
+    ]
   },
   {
     "file": "landing/persona-agent-developer.md",
@@ -218,7 +221,8 @@
     ],
     "findings": [],
     "notes": [
-      "No technical detail beyond command names the team must say; no internal-only numbers."
+      "No technical detail beyond command names the team must say; no internal-only numbers.",
+      "2026-11-23 rule change (MIT, no paid offer): re-audited, still PASS."
     ]
   },
   {

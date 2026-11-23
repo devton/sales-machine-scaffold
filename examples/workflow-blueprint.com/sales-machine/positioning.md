@@ -52,6 +52,7 @@ lead's proof is the pull request review, not the routing. No merge.
 | One setup prompt | Type `blueprint this project.` and answer five questions | F-002, F-004 |
 | Learns from review | What review caught becomes a rule in the contract | F-016 |
 | Lessons you can read | Plain markdown in your repo, reviewed in a pull request | F-026, F-016 |
+| Open source, MIT | Read it, fork it, keep it; nothing to buy | F-035 |
 | No "done" without a gate | Every contract ends in pass/fail checks | F-008 |
 
 ## 5. Principles
@@ -73,7 +74,7 @@ lead's proof is the pull request review, not the routing. No merge.
 | Never say | Say instead | Why |
 |---|---|---|
 | prices, plans, "free", "trial" | nothing; the CTA is the install command | `config.neverSay` |
-| "open source", any license claim | "public repository on GitHub" | no LICENSE file (F-032) [to confirm] |
+| any license other than MIT, "pro" / paid version | "open source, MIT license" | owner, 2026-11-23 (F-035); add the LICENSE file (G-05) |
 | "saves 70% tokens", any number | "reads only the page it needs" | no benchmark; site numbers are illustrative (F-029) |
 | "trains / fine-tunes your agent" | "writes lessons into your repo" | it changes markdown, not weights |
 | "works with any agent" | "plain markdown in your repository" until F-028 is confirmed | F-028 [to confirm] |

@@ -64,7 +64,7 @@ Essa divisão é interna. Nenhuma página fala em "self-serve" ou "assistido".
 | Nunca diga | Diga |
 |---|---|
 | preço, plano, "free", "trial" | nada; o convite é o comando de instalação |
-| "open source", qualquer licença | "repositório público no GitHub" (não há LICENSE ainda, a confirmar) |
+| outra licença que não MIT, versão "pro" ou paga | "open source, licença MIT" (falta o arquivo LICENSE no repo) |
 | "economiza X% de tokens" | "lê só a página que precisa" |
 | "treina o seu agente" | "escreve lições no seu repositório" |
 | "funciona com qualquer agente" | "markdown no seu repositório" (até confirmar Claude, Codex, Cursor) |
@@ -88,7 +88,7 @@ sistemas que você possui ou tem permissão para testar". Nunca como conformidad
 4. **04 Qualificar.** Por conta própria: primeira tarefa roteada, primeira lição, segunda lição.
    Com o mantenedor: o time roda `plan-to-blueprint` e pede ou envia um workflow no GitHub.
 5. **05 Converter.** Adoção: o caderno continua vivo depois de 60 dias, ou o workflow do time é
-   publicado. Se existe oferta paga aqui é decisão do dono (a confirmar).
+   publicado. Não existe oferta paga: o produto é MIT (resposta do dono, 2026-11-23).
 6. **06 Realimentar.** Os loops abaixo trazem a próxima leva.
 
 ### Loops

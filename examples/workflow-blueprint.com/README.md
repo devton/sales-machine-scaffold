@@ -14,7 +14,8 @@ It stretches the template in ways a typical B2B product does not:
 
 - **Access is `open`.** There is no access request, invite or purchase. Stage 02 becomes the
   install command, the buying signal becomes "the notebook stays alive", and stage 05 becomes
-  adoption. What conversion means commercially is left `[to confirm]` for the owner.
+  adoption. The owner confirmed it is open source under MIT with no paid offer, so adoption
+  is the end of the funnel.
 - **The "UI" is files.** UI names come from the install command, the prompt and the generated
   file tree, not from screens.
 - **No usage data.** Most metrics are defined with the instrumentation they need instead of
@@ -31,13 +32,14 @@ It stretches the template in ways a typical B2B product does not:
 | `sources/product/history.md` | Commit subjects and dates (author names removed), used as release notes |
 | `sources/site/home.txt`, `radioactive.txt`, `docs.txt` | Text of the site build from the 2026-10 redesign |
 | `sources/site/live-notes.md` | What the live site showed on 2026-11-23 that differs from that build |
+| `sources/owner-answers.md` | The owner's answers to the `[to confirm]` list (so far: MIT, no paid offer) |
 
 ## Commands run and what they wrote
 
 | Command | Output |
 |---|---|
 | `setup` | `sales-machine/config.json` (values the owner has not confirmed are `[to confirm]`) |
-| `explore` | `sales-machine/product-map.md`: 17 features, 9 integrations, 34 ledger facts, gaps |
+| `explore` | `sales-machine/product-map.md`: 17 features, 9 integrations, 35 ledger facts, gaps |
 | `position` | `sales-machine/positioning.md` |
 | `machine` | `sales-machine/machine.md` |
 | `loops` | `sales-machine/loops.md` |
@@ -54,4 +56,6 @@ It stretches the template in ways a typical B2B product does not:
   under `sources/`. The live site was read once to write `live-notes.md`.
 - `setup` normally asks the owner one question round. This run was made without it: every
   answer it would have asked for is written `[to confirm]` and listed at the end of the report.
+  The owner's later answers are in `sources/owner-answers.md`; files changed by an answer keep
+  their previous version in `sales-machine/history/`.
 - The HCL spec passed the skill's self-check and was also parsed with `python-hcl2`.
