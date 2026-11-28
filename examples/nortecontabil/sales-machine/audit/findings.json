@@ -1,0 +1,110 @@
+[
+  {
+    "file": "../site/index.html",
+    "kind": "landing construída (hand-off desta rodada)",
+    "verdict": "FAIL",
+    "publishable": false,
+    "value_shown": ["Reduced anxiety", "Expertise", "Time savings", "Decreased hassles", "Transparency", "Risk reduction"],
+    "findings": [
+      {
+        "rule": "fatos (P- não confirmado)",
+        "quote": "Seu contador responde com o plano e o enquadramento explicado, em até N horas úteis.",
+        "fix": "Preencher o prazo real (P-010) ou trocar por \"Seu contador responde com o plano e o enquadramento explicado.\""
+      },
+      {
+        "rule": "fatos (P- não confirmado)",
+        "quote": "Notas fiscais de serviço [a confirmar: emitimos ou orientamos]",
+        "fix": "\"Emitimos as suas notas fiscais de serviço\" ou \"Te orientamos a emitir as suas notas\", conforme G-05/P-006."
+      },
+      {
+        "rule": "neverSay (preços)",
+        "quote": "R$ a confirmar /mês",
+        "fix": "Manter sem valor até o dono decidir publicar preços (G-01); se não publicar, trocar por \"Valor na sua proposta\"."
+      },
+      {
+        "rule": "regulado R-01 (CRC)",
+        "quote": "Razão social a confirmar · CNPJ 00.000.000/0000-00 · CRC UF 000000/O-0",
+        "fix": "Preencher com os dados reais antes de publicar (G-02). Não publicar sem eles."
+      },
+      {
+        "rule": "regulado R-03 (LGPD)",
+        "quote": "Você pode pedir a exclusão quando quiser em e-mail a confirmar.",
+        "fix": "Preencher o e-mail do encarregado e publicar a Política de privacidade linkada no rodapé."
+      },
+      {
+        "rule": "fatos (P-009 não confirmado)",
+        "quote": "Tem fidelidade? a confirmar",
+        "fix": "Responder com a regra real ou tirar a pergunta do FAQ e o item \"sem fidelidade?\" de \"Em todos os planos\"."
+      },
+      {
+        "rule": "prova social (hard rule 4)",
+        "quote": "Espaço para depoimentos reais.",
+        "fix": "Publicar só depoimentos reais com autorização (G-07) ou remover a caixa antes de ir ao ar."
+      },
+      {
+        "rule": "promessa absoluta (corrigido nesta rodada)",
+        "quote": "Saia na hora certa, sem multa por atraso",
+        "fix": "Aplicado: \"Saia na hora certa, antes de virar multa\"."
+      },
+      {
+        "rule": "entrada em aberto (G-09)",
+        "quote": "var ENTRADA = { modo: \"formulario\", whatsapp: \"\", formEndpoint: \"\" ...",
+        "fix": "Dono escolhe o modo; preencher número de WhatsApp e/ou endpoint do formulário. Sem eles, o envio só registra no console (modo de revisão)."
+      }
+    ]
+  },
+  {
+    "file": "landing/home.md",
+    "verdict": "FAIL",
+    "value_shown": ["Reduced anxiety", "Expertise", "Time savings", "Simplification", "Transparency", "Vision"],
+    "findings": [
+      {
+        "rule": "fatos (P- não confirmado)",
+        "quote": "linhas 9, 10, 12, 13 e FAQ apoiadas em P-004 a P-010",
+        "fix": "Confirmar P-004 a P-010 com o dono; o resto da spec passa nas regras (CTA, neverSay, regulados, sem nomes)."
+      }
+    ]
+  },
+  {
+    "file": "landing/persona-prestador-pj.md",
+    "verdict": "PASS",
+    "value_shown": ["Expertise", "Reduced anxiety", "Transparency", "Simplification"],
+    "findings": []
+  },
+  {
+    "file": "landing/persona-mei-limite.md",
+    "verdict": "PASS",
+    "value_shown": ["Risk reduction", "Reduced anxiety", "Expertise", "Reduced effort"],
+    "findings": []
+  },
+  {
+    "file": "landing/persona-troca-contador.md",
+    "verdict": "FAIL",
+    "value_shown": ["Decreased hassles", "Responsiveness", "Risk reduction", "Transparency"],
+    "findings": [
+      {
+        "rule": "fatos (P-002 não confirmado)",
+        "quote": "Nós pedimos os documentos ao contador atual. Conferimos guias em aberto, certidões e enquadramento.",
+        "fix": "Confirmar com o dono que a Nortecontábil faz essa conferência na entrada (P-002)."
+      }
+    ]
+  },
+  {
+    "file": "landing/integration-segmento-tecnologia.md",
+    "verdict": "FAIL",
+    "value_shown": ["Reach", "Configurability", "Expertise", "Network expansion"],
+    "findings": [
+      {
+        "rule": "fatos (G-08)",
+        "quote": "Serviço para cliente no exterior [a confirmar: atende exportação de serviço?]",
+        "fix": "Manter só se a Nortecontábil atende exportação de serviço; senão remover o caso."
+      }
+    ]
+  },
+  {
+    "file": "system/sales-machine.hcl",
+    "kind": "self-check do spec",
+    "verdict": "PASS",
+    "findings": []
+  }
+]

@@ -1,0 +1,637 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Relatório da máquina de vendas · Nortecontábil</title><style>
+:root{--bg:#fff;--fg:#0F1B2D;--mu:#51607A;--ln:#DCE3EC;--bx:#F4F7FA;--ac:#0B2545;--gr:#12A36B;--fa:#B42318;--fabg:#FDECEA;--pabg:#E6F6EF;--tb:#FFF4CC;--tbi:#7A5B00}
+@media (prefers-color-scheme:dark){:root{--bg:#0D1726;--fg:#E5ECF5;--mu:#9FB3CC;--ln:#24364F;--bx:#132238;--ac:#9CC3F0;--gr:#3CCB8F;--fa:#FF8A80;--fabg:#3A1D1D;--pabg:#173A2C;--tb:#3D3412;--tbi:#FFE38A}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:1060px;margin:0 auto;padding:24px 16px 80px}h1,h2,h3,h4{color:var(--ac);line-height:1.2}h2{margin-top:56px;padding-top:16px;border-top:2px solid var(--ln)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}nav.toc a{font-size:.85rem;padding:4px 10px;border:1px solid var(--ln);border-radius:99px;text-decoration:none;color:var(--fg)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem;margin:12px 0}th,td{border:1px solid var(--ln);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--bx)}
+code{background:var(--bx);padding:1px 4px;border-radius:4px;font-size:.88em}pre{background:var(--bx);padding:12px;overflow:auto;font-size:.8rem;border-radius:8px}
+.tbc{background:var(--tb);color:var(--tbi);border-radius:4px;padding:0 4px}.chip{font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:99px}.pass{background:var(--pabg);color:var(--gr)}.fail{background:var(--fabg);color:var(--fa)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.card{border:1px solid var(--ln);border-radius:10px;padding:14px;background:var(--bx)}.card b{display:block;font-size:1.6rem;color:var(--ac)}
+details{border:1px solid var(--ln);border-radius:8px;margin:8px 0}summary{cursor:pointer;padding:10px 12px;font-weight:600}.db{padding:0 14px 10px}
+blockquote{border-left:4px solid var(--gr);margin:12px 0;padding:6px 14px;background:var(--bx)}.muted{color:var(--mu);font-size:.9rem}
+td.gap{background:var(--fabg);color:var(--fa)}td.ok{background:var(--pabg)}
+svg{width:100%;height:auto;margin:12px 0}svg text{font:600 13px system-ui,sans-serif;fill:var(--fg);text-anchor:middle}svg .k{font-weight:800;fill:var(--ac)}svg .s,svg .sm{font-size:11px;font-weight:500}
+svg .n{fill:var(--bx);stroke:var(--ac);stroke-width:1.5}svg .g{stroke:var(--gr)}svg .e{stroke:var(--mu);stroke-width:1.6;fill:none}svg .d{stroke-dasharray:6 5;stroke:var(--gr)}svg .ah{fill:var(--mu)}svg .ring{fill:none;stroke:var(--ln);stroke-width:2;stroke-dasharray:4 4}
+@media print{nav.toc{display:none}details{border:0}details>*{display:block}h2{break-before:page}}
+</style></head><body><main>
+<h1>Máquina de vendas · Nortecontábil</h1><p class="muted">Relatório do sales-machine-scaffold · 2026-11-28 · pt-BR · acesso: open</p>
+<nav class="toc"><a href="#resumo">Resumo</a><a href="#mapa">Mapa do produto</a><a href="#pos">Posicionamento</a><a href="#maq">Máquina</a><a href="#loops">Loops</a><a href="#cob">Cobertura</a><a href="#cont">Conteúdo</a><a href="#man">Manual</a><a href="#sis">Sistema</a><a href="#aud">Auditoria</a><a href="#ho">Hand-off</a></nav>
+<h2 id="resumo">1. Resumo</h2>
+<div class="cards"><div class="card"><b>3</b>PASS</div><div class="card"><b>4</b>FAIL (quase todos por dado <span class="tbc">a confirmar</span>)</div><div class="card"><b>89</b>linhas com <span class="tbc">a confirmar</span></div><div class="card"><b>1</b>landing construída (<code>site/index.html</code>)</div></div>
+<p><strong>Veredito:</strong> a estrutura, a copy e a máquina estão prontas para revisão. A landing <strong>não está pronta para publicar</strong> até os dados obrigatórios (CNPJ, CRC, contato, entrada) chegarem.</p>
+<h3>Top 5 ações</h3><ol><li>Escolher como o cliente entra: formulário + WhatsApp, cadastro, ou os dois (G-09) e preencher <code>ENTRADA</code> na landing.</li><li>Enviar razão social, CNPJ, CRC e nome do contador responsável (G-02): sem eles a landing não pode ir ao ar.</li><li>Definir faixas de faturamento, nomes e valores dos planos, e a regra de fidelidade (G-01, P-009).</li><li>Confirmar as propostas P-001 a P-010 (o que a Nortecontábil faz de fato), principalmente emissão de nota (P-006) e prazo da proposta (P-010).</li><li>Mandar número de WhatsApp, e-mail, logo oficial e fotos/depoimentos reais (G-03, G-04, G-07).</li></ol>
+<h2 id="mapa">2. Mapa do produto</h2><p>Workflow: <code>explore</code>. Data: 2026-11-28. Fontes: <code>config.sources</code> (<code>../sources/owner-answers.md</code>, <code>../sources/reference-notes.md</code>).</p>
+<p><strong>Como este produto muda o template.</strong> A Nortecontábil é um <strong>serviço</strong> (contabilidade online por assinatura), não um software com código, docs e flags. Ainda não há site, sistema, tabela de preços nem registro publicados nas fontes. Por isso:</p>
+<ul><li>Quase tudo abaixo é <strong>proposto</strong> (status <code>a confirmar</code>): é a oferta que o setor usa, desenhada para a Nortecontábil, esperando o ok do dono.</li><li>O site de referência serve só de inspiração de <strong>estrutura</strong>; ele nunca é fonte de fato sobre a Nortecontábil, e nenhum texto, preço ou número dele é reaproveitado.</li><li>O "UI real" (hard rule 10) aqui é o formulário, a mensagem de WhatsApp e a proposta. Os nomes abaixo são os que a landing desta rodada usa; mudam se o dono mudar.</li></ul>
+<h4>1. Superfícies</h4>
+<div class="tw"><table><thead><tr><th>Superfície</th><th>O que a pessoa vê ou faz</th><th>Status</th><th>Fonte</th></tr></thead><tbody><tr><td>Landing de vendas</td><td><code>site/index.html</code> (construída nesta rodada a partir de <code>landing/home.md</code>)</td><td>proposto</td><td>esta rodada</td></tr><tr><td>Formulário "Receber minha proposta"</td><td>nome, WhatsApp, e-mail, o que precisa, faixa de faturamento, atividade, CNPJ (só na troca)</td><td>proposto; entrada em aberto (F-007, G-09)</td><td><code>reference-notes.md</code> (fluxo típico)</td></tr><tr><td>Simulador de imposto</td><td>faixa de faturamento + tipo de atividade -&gt; qual enquadramento olhar e por quê</td><td>proposto, <strong>sem números</strong> até o contador validar as alíquotas</td><td><code>reference-notes.md</code></td></tr><tr><td>WhatsApp</td><td>mensagem pré-preenchida por contexto (abrir, trocar, MEI, dúvida)</td><td>proposto <code><span class="tbc">[a confirmar: número]</span></code></td><td><code>reference-notes.md</code></td></tr><tr><td>Proposta</td><td>plano recomendado pela faixa, o que inclui, prazos estimados</td><td>proposto</td><td>—</td></tr><tr><td>Área do cliente / sistema</td><td><code><span class="tbc">[a confirmar: existe? qual?]</span></code></td><td>desconhecido</td><td>—</td></tr></tbody></table></div>
+<h4>2. Serviços</h4>
+<div class="tw"><table><thead><tr><th>#</th><th>Serviço (como a landing chama)</th><th>Trabalho que resolve</th><th>Persona</th><th>Status</th><th>Evidência</th></tr></thead><tbody><tr><td>1</td><td>Abrir minha empresa</td><td>Abrir CNPJ com o enquadramento certo (tipo de empresa, atividade, regime)</td><td>prestador-pj</td><td>confirmado (F-004)</td><td><code>owner-answers.md</code> resposta 1</td></tr><tr><td>2</td><td>Trocar de contador</td><td>Migrar a contabilidade sem perder prazo, guia ou documento</td><td>troca-contador</td><td>confirmado (F-004)</td><td><code>owner-answers.md</code> resposta 1</td></tr><tr><td>3</td><td>Sair do MEI</td><td>Desenquadrar o MEI que passou (ou vai passar) do limite</td><td>mei-limite</td><td>confirmado (F-004)</td><td><code>owner-answers.md</code> resposta 1</td></tr><tr><td>4</td><td>Contabilidade mensal</td><td>Impostos calculados e guias enviadas, folha de pró-labore, obrigações em dia</td><td>todas</td><td>confirmado (F-004)</td><td><code>owner-answers.md</code> resposta 1</td></tr><tr><td>5</td><td>Notas fiscais</td><td>Emissão ou orientação de emissão de NFS-e</td><td>prestador-pj</td><td><code><span class="tbc">[a confirmar: quem emite]</span></code></td><td>—</td></tr><tr><td>6</td><td>Extrato organizado e relatórios</td><td>Conciliação da conta PJ e relatório mensal (DRE simples)</td><td>troca-contador</td><td><code><span class="tbc">[a confirmar]</span></code></td><td>—</td></tr><tr><td>7</td><td>Serviços avulsos</td><td>Alterações contratuais, certidões, alvarás</td><td>todas</td><td><code><span class="tbc">[a confirmar: lista e valores]</span></code></td><td>—</td></tr><tr><td>8</td><td>Planos por faixa de faturamento</td><td>Mensalidade que acompanha o tamanho da empresa</td><td>todas</td><td>estrutura confirmada (F-006), <strong>valores <code><span class="tbc">[a confirmar]</span></code></strong></td><td><code>reference-notes.md</code></td></tr></tbody></table></div>
+<h4>3. Integrações (canais e provedores)</h4>
+<div class="tw"><table><thead><tr><th>Provedor</th><th>O que a pessoa faz com ele</th><th>Status</th></tr></thead><tbody><tr><td>WhatsApp</td><td>tira dúvida, recebe guia e lembrete de vencimento</td><td><code><span class="tbc">[a confirmar]</span></code></td></tr><tr><td>Emissor de NFS-e da prefeitura</td><td>nota emitida pela Nortecontábil ou pelo cliente</td><td><code><span class="tbc">[a confirmar]</span></code></td></tr><tr><td>Contas PJ (bancos digitais)</td><td>extrato para conciliação (OFX, Open Finance ou envio manual)</td><td><code><span class="tbc">[a confirmar]</span></code></td></tr></tbody></table></div>
+<h4>4. Mapa de valor (Elements of Value)</h4>
+<div class="tw"><table><thead><tr><th>Elemento (nível)</th><th>O que na oferta entrega</th><th>Prova</th></tr></thead><tbody><tr><td>Reduced anxiety (4)</td><td>"Seu contador" com nome e canal direto; guias chegam antes do vencimento</td><td>P-004, P-005</td></tr><tr><td>Time savings (3)</td><td>Guias prontas no WhatsApp; nada de calcular imposto</td><td>P-005</td></tr><tr><td>Decreased hassles (3)</td><td>Troca de contador: a gente pede os documentos ao contador anterior</td><td>P-002</td></tr><tr><td>Expertise (3)</td><td>Enquadramento escolhido por contador registrado no CRC</td><td>P-001, R-01</td></tr><tr><td>Transparency (3)</td><td>Plano por faixa de faturamento; o que está incluso escrito na proposta</td><td>P-008</td></tr><tr><td>Responsiveness (3)</td><td>Resposta no WhatsApp em horário comercial <code><span class="tbc">[a confirmar: prazo]</span></code></td><td>P-004</td></tr><tr><td>Risk reduction (3)</td><td>Conferência de pendências (guias, certidões) na entrada</td><td>P-002</td></tr><tr><td>Simplification (3)</td><td>Uma mensalidade, um canal, um contador</td><td>P-008, P-004</td></tr><tr><td>Flexibility (3)</td><td>Sem fidelidade <code><span class="tbc">[a confirmar]</span></code></td><td>P-009</td></tr></tbody></table></div>
+<p>Não usar: Acceptable price (nunca vender preço), Regulatory compliance (é piso, não argumento), Stability (sem histórico), Social responsibility (sem fonte).</p>
+<h4>5. Primeira experiência (first run)</h4>
+<p>Proposta, a confirmar com o dono:</p>
+<ol><li>A pessoa escolhe o que precisa (abrir / trocar / sair do MEI / outro) e a faixa de faturamento.</li><li>O formulário pede só nome, WhatsApp e e-mail (e o CNPJ na troca).</li><li>Em até <code><span class="tbc">[a confirmar]</span></code> horas úteis, um contador responde no WhatsApp com a proposta: plano recomendado pela faixa, o que está incluso, próximos passos e prazo estimado.</li><li><strong>Primeiro momento de valor:</strong> a pessoa entende em uma mensagem qual enquadramento faz sentido para ela e por quê, antes de pagar qualquer coisa.</li></ol>
+<h4>6. Livro de fatos (fact ledger)</h4>
+<p><code>F-</code> = fato confirmado pelo dono. <code>P-</code> = proposta desta rodada, só vai para o ar depois do ok do dono. <code>R-</code> = regra de tema regulado (config).</p>
+<div class="tw"><table><thead><tr><th>Id</th><th>Afirmação</th><th>Fonte</th><th>Status</th></tr></thead><tbody><tr><td>F-001</td><td>A marca é Nortecontábil</td><td><code>owner-answers.md</code> 2026-11-28</td><td>confirmado</td></tr><tr><td>F-002</td><td>O modelo é uma contabilidade online parecida com a referência, para uso próprio</td><td><code>owner-answers.md</code> 2026-11-28</td><td>confirmado</td></tr><tr><td>F-003</td><td>Primeiros entregáveis: sales machine e landing de vendas</td><td><code>owner-answers.md</code> 2026-11-28</td><td>confirmado</td></tr><tr><td>F-004</td><td>Serviços: abrir empresa, trocar de contador, sair do MEI, contabilidade mensal</td><td><code>owner-answers.md</code> resposta 1</td><td>confirmado</td></tr><tr><td>F-005</td><td>Público principal: prestador de serviço PJ (dev, consultor, profissional liberal)</td><td><code>owner-answers.md</code> resposta 1</td><td>confirmado</td></tr><tr><td>F-006</td><td>Mensalidade por faixa de faturamento (valores e faixas em aberto)</td><td><code>owner-answers.md</code> resposta 1</td><td>confirmado (estrutura)</td></tr><tr><td>F-007</td><td>Entrada do cliente: <strong>em aberto</strong> (formulário + WhatsApp não confirmado; cadastro direto é a alternativa)</td><td><code>owner-answers.md</code> resposta 2</td><td>a confirmar</td></tr><tr><td>F-008</td><td>Identidade: azul-marinho + verde, ideia de "norte"/bússola (logo oficial em aberto)</td><td><code>owner-answers.md</code> resposta 1</td><td>confirmado (paleta)</td></tr><tr><td>P-001</td><td>Abrimos empresa com enquadramento escolhido junto com o contador</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-002</td><td>Na troca, pedimos os documentos ao contador anterior e conferimos pendências antes de assumir</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-003</td><td>Ajudamos o MEI que passou do limite a sair do MEI no momento certo</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-004</td><td>Cada empresa tem um contador de referência, com atendimento pelo WhatsApp</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-005</td><td>Guias de imposto chegam prontas pelo WhatsApp antes do vencimento</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-006</td><td>Notas fiscais de serviço: emissão ou orientação</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-007</td><td>Relatório mensal simples (quanto entrou, quanto saiu, quanto foi de imposto)</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-008</td><td>Planos mensais por faixa de faturamento; o que inclui fica escrito na proposta</td><td>proposta</td><td>a confirmar (valores e faixas)</td></tr><tr><td>P-009</td><td>Sem fidelidade, com aviso prévio para cancelar</td><td>proposta</td><td>a confirmar</td></tr><tr><td>P-010</td><td>Proposta enviada em até N horas úteis</td><td>proposta</td><td>a confirmar (N)</td></tr><tr><td>R-01</td><td>Contador responsável registrado no CRC</td><td><code>config.regulatedTopics</code></td><td>a confirmar (nome, nº)</td></tr><tr><td>R-02</td><td>Enquadramento correto dentro da lei; imposto depende de atividade e faturamento</td><td><code>config.regulatedTopics</code></td><td>regra</td></tr><tr><td>R-03</td><td>Uso dos dados do formulário (LGPD)</td><td><code>config.regulatedTopics</code></td><td>a confirmar (e-mail)</td></tr><tr><td>R-04</td><td>Prazo de abertura depende de prefeitura e Junta Comercial</td><td><code>config.regulatedTopics</code></td><td>regra</td></tr></tbody></table></div>
+<h4>7. Lacunas</h4>
+<div class="tw"><table><thead><tr><th>Id</th><th>Lacuna</th><th>Quem resolve</th></tr></thead><tbody><tr><td>G-01</td><td>Preços, faixas de faturamento e o que cada plano inclui</td><td>dono</td></tr><tr><td>G-02</td><td>Razão social, CNPJ, CRC e contador responsável (obrigatórios no rodapé)</td><td>dono</td></tr><tr><td>G-03</td><td>WhatsApp, e-mail, endereço; para onde o formulário envia (planilha, CRM, e-mail)</td><td>dono + produto</td></tr><tr><td>G-09</td><td>Como o cliente entra: formulário + WhatsApp com pessoa, cadastro direto num sistema, ou os dois (F-007)</td><td>dono</td></tr><tr><td>G-04</td><td>Logo oficial (paleta azul-marinho + verde confirmada, F-008)</td><td>dono</td></tr><tr><td>G-05</td><td>Sistema/área do cliente: existe? Emite nota? Lê extrato?</td><td>dono + produto</td></tr><tr><td>G-06</td><td>Alíquotas para o simulador: só publicar números validados por contador</td><td>contador responsável</td></tr><tr><td>G-07</td><td>Prova social: avaliações, depoimentos reais, fotos da equipe</td><td>dono + conteúdo</td></tr><tr><td>G-08</td><td>Segmentos que a Nortecontábil atende bem (CNAEs aceitos)</td><td>dono</td></tr></tbody></table></div>
+<h2 id="pos">3. Posicionamento</h2><p>Workflow: <code>position</code>. Data: 2026-11-28. Entradas: <code>product-map.md</code>, <code>config.json</code>.</p>
+<h4>1. Cliente principal (flagship)</h4>
+<p><strong>Quem:</strong> prestador de serviço que vai abrir ou já tem CNPJ: dev, designer, consultor, profissional liberal. Fatura sozinho ou com um sócio (F-005).</p>
+<p><strong>O que perde hoje:</strong> não sabe se está no enquadramento certo, paga imposto sem entender a conta, descobre guia vencida tarde e, quando tem dúvida, espera dias por uma resposta genérica.</p>
+<p><strong>O que muda:</strong> um contador de referência que responde no WhatsApp (P-004), guias prontas antes do vencimento (P-005) e o enquadramento explicado em palavras simples antes de fechar (P-001).</p>
+<p>A home fala com essa pessoa primeiro. MEI que passou do limite e quem está trocando de contador vêm depois.</p>
+<h4>2. Promessa</h4>
+<blockquote>A gente cuida da contabilidade da sua empresa, com um contador de verdade do seu lado, para você parar de se preocupar com imposto e prazo e voltar a cuidar do seu trabalho.</blockquote>
+<p>Opções de tagline:</p>
+<div class="tw"><table><thead><tr><th>#</th><th>Opção</th><th>Nota</th></tr></thead><tbody><tr><td>A</td><td>Contabilidade online com um contador que te responde.</td><td>Diz o que é (categoria) e o diferencial (gente). Recomendada.</td></tr><tr><td>B</td><td>Seu norte para abrir, organizar e crescer sua empresa.</td><td>Usa a marca ("norte"); bonito, mas não diz o que é. Bom como linha de apoio.</td></tr><tr><td>C</td><td>Imposto certo, prazo em dia, dúvida respondida.</td><td>Três benefícios concretos; bom para anúncios e chips.</td></tr><tr><td>D</td><td>Pare de adivinhar quanto de imposto pagar.</td><td>Dor primeiro; bom para artigo e anúncio, negativo demais para o hero.</td></tr></tbody></table></div>
+<p><strong>Recomendação: A no hero, B como sub-linha de marca, C nos chips.</strong> A carrega Reduced anxiety e Expertise sem prometer economia; B dá identidade à marca; C vira os "headline facts".</p>
+<h4>3. Matriz de personas</h4>
+<div class="tw"><table><thead><tr><th>Persona</th><th>Trabalho a fazer (JTBD)</th><th>Faixa</th><th>Primeiro momento de valor</th><th>Elementos de valor</th><th>Prova</th></tr></thead><tbody><tr><td><strong>Prestador de serviço PJ</strong> (flagship)</td><td>Abrir o CNPJ, emitir nota e pagar o imposto certo sem virar especialista</td><td>por conta própria</td><td>A proposta explica qual enquadramento faz sentido e por quê, em uma mensagem</td><td>Reduced anxiety (4), Expertise (3), Time savings (3), Simplification (3)</td><td>F-004, F-005, P-001, P-004</td></tr><tr><td><strong>MEI que passou do limite</strong></td><td>Sair do MEI no momento certo, sem multa, no enquadramento certo</td><td>por conta própria</td><td>Saber se precisa sair agora e o que muda no imposto</td><td>Risk reduction (3), Reduced anxiety (4), Expertise (3)</td><td>F-004, P-003</td></tr><tr><td><strong>Dono de empresa trocando de contador</strong></td><td>Trocar sem perder prazo, guia ou documento, e passar a ter resposta rápida</td><td>com o contador</td><td>Receber a lista de pendências encontradas na conferência de entrada</td><td>Decreased hassles (3), Risk reduction (3), Responsiveness (3), Transparency (3)</td><td>F-004, P-002, P-004</td></tr></tbody></table></div>
+<p><strong>Checagem de sobreposição:</strong> prestador PJ e MEI-limite compartilham "imposto certo". Ficam separados porque o momento é outro (abrir vs. migrar de regime) e o medo é outro (errar o começo vs. multa por desenquadramento). Sem fusão.</p>
+<h4>4. Headline facts</h4>
+<div class="tw"><table><thead><tr><th>Rótulo (~20 car.)</th><th>O que significa para quem decide</th><th>Fato</th></tr></thead><tbody><tr><td>Contador de verdade</td><td>Uma pessoa com nome cuida da sua empresa</td><td>P-004, R-01</td></tr><tr><td>Guias no WhatsApp</td><td>O imposto chega pronto, antes de vencer</td><td>P-005</td></tr><tr><td>Enquadramento certo</td><td>Atividade e regime escolhidos com você, dentro da lei</td><td>P-001, R-02</td></tr><tr><td>Troca sem dor</td><td>A gente fala com o contador anterior</td><td>P-002</td></tr><tr><td>Plano pela sua faixa</td><td>Mensalidade acompanha o faturamento</td><td>F-006</td></tr></tbody></table></div>
+<h4>5. Princípios</h4>
+<ol><li><strong>Venda tranquilidade, não preço.</strong> O argumento é "alguém sabe e cuida", nunca "o mais barato".</li><li><strong>Mostre antes de cobrar.</strong> A proposta já explica o enquadramento; a pessoa entende antes de pagar.</li><li><strong>Trabalho antes de serviço.</strong> "Emitir nota e pagar o imposto certo" antes de "escrituração fiscal".</li><li><strong>Palavras simples.</strong> Frases curtas. "Imposto", "guia", "nota", "seu contador". Sem juridiquês, sem "soluções contábeis", sem hype.</li><li><strong>Gente na frente.</strong> O contador aparece com nome e rosto (quando houver fotos, G-07).</li><li><strong>Acesso.</strong> Aberto: qualquer pessoa pode pedir. Todo CTA principal é <strong>Receber minha proposta</strong>; o secundário é <strong>Falar no WhatsApp</strong>. Como a proposta chega depende da decisão G-09.</li><li><strong>Faixas são internas.</strong> A página nunca diz "por conta própria" ou "com o contador".</li></ol>
+<h4>6. Diga / nunca diga</h4>
+<div class="tw"><table><thead><tr><th>Nunca diga</th><th>Diga</th><th>Por quê</th></tr></thead><tbody><tr><td>preços, descontos, cupons</td><td>"plano pela sua faixa de faturamento" + "valores na proposta"</td><td><code>neverSay</code> até G-01</td></tr><tr><td>"grátis", "sem custo" (abertura/troca)</td><td>"a gente te explica o que é taxa do governo e o que é nosso"</td><td><code>neverSay</code> até o dono confirmar</td></tr><tr><td>"pague menos imposto", "economize X%"</td><td>"pague o imposto certo, no enquadramento certo"</td><td><code>sayInstead</code>, R-02</td></tr><tr><td>"CNPJ em 24h"</td><td>"o prazo depende da prefeitura e da Junta; a estimativa vem na proposta"</td><td>R-04</td></tr><tr><td>"mais de N clientes", "nota 5"</td><td>(nada até existir dado)</td><td><code>neverSay</code></td></tr><tr><td>"100% automático", "robô", "sem contador"</td><td>"contador de verdade"</td><td><code>neverSay</code></td></tr><tr><td>"suporte"</td><td>"seu contador"</td><td><code>sayInstead</code></td></tr><tr><td>nomes de clientes, depoimentos inventados</td><td>(espaço reservado para depoimento real)</td><td>hard rule 4</td></tr><tr><td>"Teste grátis", "Crie sua conta", "Agende uma demo"</td><td>"Receber minha proposta"</td><td><code>forbiddenCtas</code></td></tr><tr><td>textos, números e imagens do site de referência</td><td>texto próprio</td><td><code>neverSay</code></td></tr></tbody></table></div>
+<p><strong>Temas regulados.</strong> CRC e responsável técnico aparecem só no rodapé e no "quem somos", como fato (R-01). Enquadramento só como "correto, dentro da lei" (R-02). O formulário tem a frase de uso de dados (R-03). Nunca "não precisa de contador" nem "sem burocracia".</p>
+<h2 id="maq">4. Máquina</h2><svg viewBox="0 0 980 275" role="img" aria-label="Seis estágios, divididos em duas faixas no 04, com seta do 06 de volta ao 01"><g><rect class="n" x="10" y="90" width="120" height="54" rx="10"/><text x="70.0" y="112" class="k">01</text><text x="70.0" y="130">Alimentar</text></g><g><rect class="n" x="150" y="90" width="120" height="54" rx="10"/><text x="210.0" y="112" class="k">02</text><text x="210.0" y="130">Atrair</text></g><g><rect class="n" x="290" y="90" width="120" height="54" rx="10"/><text x="350.0" y="112" class="k">03</text><text x="350.0" y="130">Ativar</text></g><g><rect class="n" x="440" y="30" width="150" height="54" rx="10"/><text x="515.0" y="52" class="k">04a</text><text x="515.0" y="70">Por conta própria</text></g><g><rect class="n" x="440" y="150" width="150" height="54" rx="10"/><text x="515.0" y="172" class="k">04b</text><text x="515.0" y="190">Com o contador</text></g><g><rect class="n" x="620" y="90" width="120" height="54" rx="10"/><text x="680.0" y="112" class="k">05</text><text x="680.0" y="130">Converter</text></g><g><rect class="n g" x="770" y="90" width="140" height="54" rx="10"/><text x="840.0" y="112" class="k">06</text><text x="840.0" y="130">Retroalimentar</text></g><line x1="130" y1="117" x2="150" y2="117" class="e"/><polygon class="ah" points="150.0,117.0 142.0,113.0 142.0,121.0"/><line x1="270" y1="117" x2="290" y2="117" class="e"/><polygon class="ah" points="290.0,117.0 282.0,113.0 282.0,121.0"/><line x1="410" y1="110" x2="440" y2="60" class="e"/><polygon class="ah" points="440.0,60.0 432.5,64.8 439.3,68.9"/><line x1="410" y1="124" x2="440" y2="177" class="e"/><polygon class="ah" points="440.0,177.0 439.5,168.1 432.6,172.0"/><line x1="590" y1="57" x2="620" y2="108" class="e"/><polygon class="ah" points="620.0,108.0 619.4,99.1 612.5,103.1"/><line x1="590" y1="177" x2="620" y2="126" class="e"/><polygon class="ah" points="620.0,126.0 612.5,130.9 619.4,134.9"/><line x1="740" y1="117" x2="770" y2="117" class="e"/><polygon class="ah" points="770.0,117.0 762.0,113.0 762.0,121.0"/><path d="M840,144 C840,285 70,285 70,146" class="e d"/><polygon class="ah" points="70.0,146.0 66.0,154.0 74.0,154.0"/><text x="455" y="270" class="s">loops: segmentos · indicações · conteúdo</text></svg><p>Workflow: <code>machine</code>. Data: 2026-11-28. Entradas: <code>positioning.md</code>, <code>product-map.md</code>, <code>config.json</code>.</p>
+<p><strong>Como este produto muda o template.</strong> É um serviço de assinatura: o "produto" que a pessoa experimenta antes de pagar é a <strong>proposta com diagnóstico</strong> (qual enquadramento, o que muda, quanto custa o plano). O estágio 03 é receber e entender a proposta; o 05 é assinar o contrato e pagar a primeira mensalidade. A forma de entrada (formulário + WhatsApp, cadastro direto, ou os dois) está em aberto (G-09); os eventos abaixo valem para as duas, com o nome do canal trocável.</p>
+<h4>Estágios</h4>
+<h5>01 Alimentar (Feed)</h5>
+<ul><li><strong>Entrada:</strong> <code>conteudo_publicado</code> (artigo, post, vídeo curto, página de segmento).</li><li><strong>Saída:</strong> <code>visita_site</code> vinda desse conteúdo (UTM).</li><li><strong>Cada persona acha o seu caso:</strong> prestador PJ -&gt; "Abrir CNPJ como prestador: o que decidir antes"; MEI -&gt; "Passei do limite do MEI: e agora?"; troca -&gt; "Como trocar de contador sem perder prazo".</li><li><strong>Valor:</strong> Reduced anxiety, Time savings, Expertise.</li><li><strong>Métrica:</strong> visitas por peça publicada.</li><li><strong>Dono:</strong> conteúdo.</li></ul>
+<h5>02 Atrair (Attract)</h5>
+<ul><li><strong>Entrada:</strong> <code>visita_site</code>.</li><li><strong>Saída:</strong> <code>pedido_proposta</code> (formulário enviado ou cadastro iniciado, conforme G-09).</li><li><strong>O que capturamos:</strong> o que precisa (abrir / trocar / sair do MEI / outro), faixa de faturamento, atividade, cidade, CNPJ (só troca), <strong>como conheceu</strong> (alimenta o loop de indicações) e <strong>segmento</strong> (alimenta o loop de segmentos).</li><li><strong>Confirmação:</strong> tela de obrigado + mensagem automática no canal escolhido dizendo quando o contador responde <code><span class="tbc">[a confirmar: N horas úteis, P-010]</span></code>.</li><li><strong>Valor:</strong> Time savings, Reduced effort, Reduced anxiety.</li><li><strong>Métrica:</strong> pedidos por 100 visitas.</li><li><strong>Dono:</strong> conteúdo (página) + vendas (resposta).</li></ul>
+<h5>03 Ativar (Activate)</h5>
+<ul><li><strong>Entrada:</strong> <code>pedido_proposta</code>.</li><li><strong>Saída:</strong> <code>proposta_entendida</code>: a pessoa respondeu à proposta (pergunta, aceite ou ajuste).</li><li><strong>Experimentar sem risco:</strong> a proposta já traz o diagnóstico (enquadramento sugerido e por quê, pendências que vimos, o que muda no imposto em palavras) antes de qualquer pagamento.</li><li><strong>O objetivo escolhe o caminho:</strong> abrir -&gt; checklist de documentos de abertura; trocar -&gt; checklist do que pedir ao contador atual; MEI -&gt; "precisa sair agora?" + data limite.</li><li><strong>Valor:</strong> Reduced effort, Simplification, Decreased hassles, Reduced anxiety.</li><li><strong>Métrica:</strong> propostas respondidas por 100 pedidos; tempo até a primeira resposta do contador.</li><li><strong>Dono:</strong> vendas.</li></ul>
+<h5>04 Qualificar (Qualify)</h5>
+<p>Duas faixas, separadas aqui. Internas; a página nunca mostra.</p>
+<p><strong>Por conta própria</strong> (prestador PJ, MEI-limite):</p>
+<ol><li>Pedido com faixa de faturamento e atividade.</li><li>Proposta com plano recomendado pela faixa.</li><li>Escolhe o plano e envia os documentos do checklist.</li><li><strong>Sinal <code>pronto_autoatendimento</code>:</strong> <code><span class="tbc">[a confirmar]</span></code> proposto: escolheu o plano <strong>e</strong> enviou os documentos (ou, sem sistema, mandou os documentos no WhatsApp).</li></ol>
+<p><strong>Com o contador</strong> (troca de contador, empresa com sócio/funcionário, faixa mais alta):</p>
+<ol><li>Pedido com CNPJ.</li><li>Conferência rápida de pendências pelo CNPJ (certidões, situação do Simples) <code><span class="tbc">[a confirmar: o que o time consegue ver só com o CNPJ]</span></code>.</li><li>Conversa de 15 minutos (ligação ou áudio) com o contador.</li><li><strong>Sinal <code>pronto_assistido</code>:</strong> pediu troca informando o CNPJ <strong>ou</strong> tem sócio/funcionário <strong>ou</strong> está na faixa mais alta.</li></ol>
+<p>Temas regulados só onde precisam: prazo de abertura (R-04) no checklist de abertura; enquadramento (R-02) na proposta.</p>
+<ul><li><strong>Valor (por conta própria):</strong> Time savings, Configurability, Simplification.</li><li><strong>Valor (com o contador):</strong> Expertise, Responsiveness, Risk reduction, Transparency.</li><li><strong>Métrica:</strong> sinal por faixa por 100 propostas; dias da proposta ao sinal.</li><li><strong>Dono:</strong> vendas.</li></ul>
+<h5>05 Converter (Convert)</h5>
+<ul><li><strong>Entrada:</strong> <code>pronto_autoatendimento</code> ou <code>pronto_assistido</code>.</li><li><strong>Saída:</strong> <code>cliente</code>: contrato assinado <strong>e</strong> primeira mensalidade paga.</li><li><strong>O time fala com quem já entendeu:</strong> o contador já tem objetivo, faixa, atividade e pendências.</li><li><strong>Depois do sim (onboarding):</strong> abertura -&gt; acompanhar até o CNPJ sair; troca -&gt; assumir na próxima competência; MEI -&gt; data do desenquadramento combinada.</li><li><strong>Valor:</strong> Risk reduction, Transparency, Commitment, Reduced anxiety.</li><li><strong>Métrica:</strong> clientes por 100 sinais; dias do pedido ao contrato.</li><li><strong>Dono:</strong> vendas -&gt; sucesso do cliente (contador de referência).</li></ul>
+<h5>06 Retroalimentar (Feed back)</h5>
+<ul><li><strong>Entrada:</strong> <code>cliente</code> com 60 dias (duas competências fechadas sem atraso).</li><li><strong>Saída:</strong> <code>indicacao_feita</code>, <code>depoimento_dado</code> ou <code>segmento_informado</code>.</li><li>Os três loops estão em <code>loops.md</code>: <strong>segmentos</strong>, <strong>indicações</strong>, <strong>conteúdo</strong>.</li><li><strong>Valor:</strong> Network expansion, Connection, Reputational assurance.</li><li><strong>Métrica:</strong> novos pedidos por coorte mensal de clientes, por loop.</li><li><strong>Dono:</strong> sucesso do cliente + conteúdo.</li></ul>
+<h4>Retenção (expandir / manter)</h4>
+<ul><li>Lembrete de vencimento de cada guia; relatório mensal simples (P-007); revisão de enquadramento quando a faixa de faturamento muda (vira upgrade de plano, não surpresa).</li><li><strong>Valor:</strong> Organization, Information, Scalability.</li><li><strong>Métrica:</strong> cancelamentos por 100 clientes/mês; mudanças de faixa.</li></ul>
+<h4>Motor (só especificação)</h4>
+<p>Uma checagem diária por pedido/cliente que:</p>
+<ol><li>registra cada marco com a hora real (<code>pedido_proposta</code>, <code>proposta_enviada</code>, <code>proposta_entendida</code>, sinal, <code>contrato_assinado</code>, <code>primeiro_pagamento</code>);</li><li>manda a mensagem certa por estágio (lembrete se a proposta não foi respondida em 2 dias úteis; checklist de documentos se o plano foi escolhido e faltam documentos);</li><li>mede conversão e tempo entre estágios.</li></ol>
+<p>Sem sistema hoje (G-05): a primeira versão pode ser uma planilha com uma linha por pedido e as colunas dos marcos acima; o agente lê e escreve só o relatório.</p>
+<h4>Métricas</h4>
+<div class="tw"><table><thead><tr><th>Métrica</th><th>Fórmula</th><th>Por</th></tr></thead><tbody><tr><td>visita_para_pedido</td><td>pedidos / visitas</td><td>100 visitas</td></tr><tr><td>pedido_para_proposta_entendida</td><td>propostas respondidas / pedidos</td><td>100 pedidos</td></tr><tr><td>tempo_primeira_resposta</td><td>mediana (proposta_enviada - pedido_proposta)</td><td>horas úteis</td></tr><tr><td>proposta_para_sinal</td><td>sinais / propostas</td><td>100 propostas, por faixa</td></tr><tr><td>sinal_para_cliente</td><td>clientes / sinais</td><td>100 sinais</td></tr><tr><td>pedido_para_cliente_dias</td><td>mediana (contrato - pedido)</td><td>dias</td></tr><tr><td>pedidos_por_coorte</td><td>novos pedidos atribuídos a clientes da coorte / clientes da coorte</td><td>por loop, mensal</td></tr><tr><td>cancelamento</td><td>cancelados / ativos</td><td>100 clientes/mês</td></tr></tbody></table></div>
+<h4>Diagrama (nós e arestas)</h4>
+<p>Nós: <code>01 Alimentar</code>, <code>02 Atrair</code>, <code>03 Ativar</code>, <code>04a Por conta própria</code>, <code>04b Com o contador</code>, <code>05 Converter</code>, <code>06 Retroalimentar</code>.</p>
+<p>Arestas: 01-&gt;02, 02-&gt;03, 03-&gt;04a, 03-&gt;04b, 04a-&gt;05, 04b-&gt;05, 05-&gt;06, 06-&gt;01 (loops).</p>
+<h2 id="loops">5. Loops</h2><svg viewBox="0 0 980 240" role="img" aria-label="Três loops de crescimento"><text x="160" y="16" class="k">Segmentos</text><circle cx="160" cy="120" r="80" class="ring"/><rect class="n" x="102" y="24" width="116" height="32" rx="8"/><text x="160" y="44" class="sm">diz o segmento</text><rect class="n" x="194" y="104" width="116" height="32" rx="8"/><text x="252" y="124" class="sm">juntamos padrões</text><rect class="n" x="102" y="184" width="116" height="32" rx="8"/><text x="160" y="204" class="sm">página atrai pares</text><rect class="n" x="10" y="104" width="116" height="32" rx="8"/><text x="68" y="124" class="sm">pares pedem</text><text x="490" y="16" class="k">Indicações</text><circle cx="490" cy="120" r="80" class="ring"/><rect class="n" x="432" y="24" width="116" height="32" rx="8"/><text x="490" y="44" class="sm">link aos 60 dias</text><rect class="n" x="524" y="104" width="116" height="32" rx="8"/><text x="582" y="124" class="sm">manda a colega</text><rect class="n" x="432" y="184" width="116" height="32" rx="8"/><text x="490" y="204" class="sm">colega pede</text><rect class="n" x="340" y="104" width="116" height="32" rx="8"/><text x="398" y="124" class="sm">vira cliente</text><text x="820" y="16" class="k">Conteúdo</text><circle cx="820" cy="120" r="80" class="ring"/><rect class="n" x="762" y="24" width="116" height="32" rx="8"/><text x="820" y="44" class="sm">dúvidas reais</text><rect class="n" x="854" y="104" width="116" height="32" rx="8"/><text x="912" y="124" class="sm">viram artigos</text><rect class="n" x="762" y="184" width="116" height="32" rx="8"/><text x="820" y="204" class="sm">trazem pedidos</text><rect class="n" x="670" y="104" width="116" height="32" rx="8"/><text x="728" y="124" class="sm">novas dúvidas</text></svg><p>Workflow: <code>loops</code>. Data: 2026-11-28. Entradas: <code>machine.md</code>, <code>config.integrations</code>, <code>config.loops</code>.</p>
+<p>O template fala em loop de <strong>integrações</strong> (provedores). Para uma contabilidade, o equivalente que compõe é o de <strong>segmentos</strong>: cada atividade bem atendida vira página, conteúdo e indicação dentro da mesma comunidade. Prioridade: <strong>segmentos</strong> e <strong>indicações</strong>; conteúdo é o mais lento.</p>
+<h4>1. Loop de segmentos (o mais forte)</h4>
+<ol><li>O cliente informa a atividade/segmento no pedido (dev, designer, consultor, saúde...).</li><li>A gente junta o que se repete nesse segmento (enquadramento comum, dúvidas, documentos) e escreve uma página de segmento e um guia.</li><li>A página e o guia atraem outros profissionais do mesmo segmento (busca, comunidades, grupos).</li><li>Eles pedem proposta e informam o segmento -&gt; volta ao 1.</li></ol>
+<ul><li><strong>Dono:</strong> conteúdo (páginas) + contador de referência (o que se repete).</li><li><strong>Prioridade:</strong> pelos segmentos com mais pedidos e clientes. Ponto de partida proposto: devs e profissionais de tecnologia, consultores, designers <code><span class="tbc">[a confirmar: segmentos que a Nortecontábil atende bem, G-08]</span></code>.</li><li><strong>Regra:</strong> a página nomeia o segmento, nunca o cliente.</li></ul>
+<h4>2. Loop de indicações</h4>
+<ol><li>Cliente com 60 dias sem atraso recebe um link de indicação pessoal.</li><li>Ele manda para um colega (sócio, amigo do mesmo ramo).</li><li>O colega pede proposta pelo link; o pedido chega marcado e o contador responde primeiro.</li><li>O colega vira cliente e recebe o próprio link -&gt; volta ao 1.</li></ol>
+<ul><li><strong>Dono:</strong> sucesso do cliente.</li><li><strong>Benefício para quem indica:</strong> <code><span class="tbc">[a confirmar: existe? qual? não publicar valor até o dono decidir]</span></code>. Sem benefício, o gancho é "seu colega fala com o mesmo contador que você".</li></ul>
+<h4>3. Loop de conteúdo</h4>
+<ol><li>Dúvidas reais que chegam no atendimento (anonimizadas).</li><li>Viram artigos curtos, posts e respostas de FAQ.</li><li>Trazem visitas e pedidos (01 -&gt; 02).</li><li>Novos clientes trazem novas dúvidas -&gt; volta ao 1.</li></ol>
+<ul><li><strong>Dono:</strong> conteúdo.</li></ul>
+<h4>Métrica</h4>
+<p><code>pedidos_por_coorte</code>: novos pedidos por coorte mensal de clientes, por loop.</p>
+<h4>Instrumentação necessária</h4>
+<div class="tw"><table><thead><tr><th>O que guardar</th><th>Onde</th><th>Loop</th><th>Existe?</th><th>Dono</th></tr></thead><tbody><tr><td>"Como conheceu" + UTM no pedido</td><td>formulário / cadastro</td><td>conteúdo, indicações</td><td>não (G-03, G-09)</td><td>produto</td></tr><tr><td>Segmento/atividade no pedido</td><td>formulário / cadastro</td><td>segmentos</td><td>não</td><td>produto</td></tr><tr><td>Código de indicação no link</td><td>formulário / cadastro</td><td>indicações</td><td>não</td><td>produto</td></tr><tr><td>Data de cada marco (pedido, proposta, contrato, pagamento)</td><td>planilha ou CRM</td><td>todos</td><td>não (G-05)</td><td>vendas</td></tr><tr><td>Dúvidas frequentes etiquetadas por tema</td><td>WhatsApp / atendimento</td><td>conteúdo</td><td>não</td><td>sucesso do cliente</td></tr></tbody></table></div>
+<h4>Regra para todo conteúdo</h4>
+<p>Toda peça dá à pessoa um motivo para alimentar um loop: dizer o segmento, indicar um colega ou começar pelo checklist do seu caso, não só "pedir proposta".</p>
+<h2 id="cob">6. Cobertura</h2><div class="tw"><table><thead><tr><th>Persona</th><th>01</th><th>02</th><th>03</th><th>04</th><th>05</th><th>06</th></tr></thead><tbody><tr><td>prestador-pj</td><td class="ok">1</td><td class="ok">2</td><td class="ok">1</td><td class="gap">lacuna</td><td class="gap">lacuna</td><td class="ok">1</td></tr><tr><td>mei-limite</td><td class="gap">lacuna</td><td class="ok">1</td><td class="ok">1</td><td class="gap">lacuna</td><td class="gap">lacuna</td><td class="gap">lacuna</td></tr><tr><td>troca-contador</td><td class="gap">lacuna</td><td class="ok">1</td><td class="ok">1</td><td class="ok">1</td><td class="gap">lacuna</td><td class="gap">lacuna</td></tr></tbody></table></div><p class="muted">Conta specs de landing (artigos ainda não rodados). Lacunas em 05 e 06 são cobertas por artigos e pelo loop de indicações na próxima rodada.</p>
+<h2 id="cont">7. Conteúdo</h2><h3>Artigos</h3><p class="muted">Não rodado ainda (<code>article-ideas</code>). Sugestão para a primeira leva: "Abrir CNPJ como prestador: o que decidir antes", "Passei do limite do MEI: e agora?", "Como trocar de contador sem perder prazo".</p><h3>Specs de landing</h3><details><summary>home.md · <span class="chip fail">FAIL</span></summary><div class="db"><h3>Spec de landing: Home de vendas (nortecontabil <code><span class="tbc">[a confirmar: domínio]</span></code>)</h3>
+<p>Workflow: <code>landing</code>. Data: 2026-11-28. Entradas: <code>positioning.md</code>, <code>product-map.md</code>, <code>config.json</code>, <code>../sources/reference-notes.md</code> (só estrutura).</p>
+<p>Construída como página real em <code>../../site/index.html</code> (hand-off de conteúdo -&gt; produto, feito nesta rodada a pedido do dono). Tudo que é <code><span class="tbc">[a confirmar]</span></code> aparece na página como marcação visível.</p>
+<h4>1. Páginas atuais</h4>
+<p>Não há site da Nortecontábil nas fontes. A estrutura abaixo segue a ordem que o setor já usa (<code>reference-notes.md</code>), com texto, identidade e oferta próprios.</p>
+<h4>2. Spec da home</h4>
+<div class="tw"><table><thead><tr><th>#</th><th>Seção</th><th>Copy</th><th>Fato</th><th>Elemento de valor</th></tr></thead><tbody><tr><td>1</td><td>Cabeçalho</td><td>Logo Nortecontábil · Abrir empresa · Trocar de contador · Sair do MEI · Planos · Dúvidas · botão <strong>Receber minha proposta</strong></td><td>F-001, F-004</td><td>—</td></tr><tr><td>2</td><td>Eyebrow</td><td>Contabilidade online para quem presta serviço como PJ</td><td>F-005</td><td>(categoria)</td></tr><tr><td>3</td><td>Hero</td><td>Contabilidade online com um contador que te responde.</td><td>positioning A</td><td>Reduced anxiety (4)</td></tr><tr><td>4</td><td>Sub-linha</td><td>A gente cuida do imposto, das guias e dos prazos da sua empresa. Você fala direto com o seu contador e volta a cuidar do seu trabalho.</td><td>P-004, P-005</td><td>Time savings (3)</td></tr><tr><td>5</td><td>CTAs</td><td><strong>Receber minha proposta</strong> (primário) · Falar no WhatsApp (secundário)</td><td>config.access</td><td>Reduced effort (3)</td></tr><tr><td>6</td><td>Chips</td><td>Contador de verdade · Guias no WhatsApp · Enquadramento certo · Plano pela sua faixa</td><td>positioning §4</td><td>Expertise, Time savings, Transparency</td></tr><tr><td>7</td><td>Visual do produto</td><td>Mock de conversa de WhatsApp: contador avisa que a guia do mês está pronta, com valor e vencimento <strong>de exemplo</strong> e o rótulo "exemplo".</td><td>P-005</td><td>Reduced anxiety (4)</td></tr><tr><td>8</td><td>O que você precisa? (3 cards)</td><td><strong>Abrir minha empresa</strong>: o enquadramento certo desde o primeiro dia. · <strong>Trocar de contador</strong>: a gente fala com o anterior e confere as pendências. · <strong>Sair do MEI</strong>: na hora certa, antes de virar multa. Cada card abre o formulário com o objetivo já marcado.</td><td>F-004, P-001, P-002, P-003</td><td>Decreased hassles (3), Risk reduction (3)</td></tr><tr><td>9</td><td>Como funciona (4 passos)</td><td>1. Conte o que precisa (2 minutos). 2. Seu contador responde com a proposta e o enquadramento explicado. 3. Você escolhe o plano e manda os documentos. 4. A gente assume: guias, notas e prazos.</td><td>P-001, P-010, R-04</td><td>Simplification (3)</td></tr><tr><td>10</td><td>Todo mês, sem você correr atrás</td><td>Imposto calculado e guia no WhatsApp · Pró-labore e obrigações em dia · Notas fiscais <code><span class="tbc">[a confirmar P-006]</span></code> · Relatório simples do mês · Revisão do enquadramento quando o faturamento muda</td><td>P-005, P-006, P-007</td><td>Organization (3), Information (3)</td></tr><tr><td>11</td><td>Para quem é (segmentos)</td><td>Devs e tecnologia · Designers e criativos · Consultores · Profissionais liberais · Outros prestadores de serviço. Rodapé: "Sua atividade não está aqui? Pergunte para o seu contador."</td><td>F-005, G-08</td><td>Reach (3)</td></tr><tr><td>12</td><td>Planos</td><td>Seletor "Quanto sua empresa fatura por mês?" com 3 faixas <code><span class="tbc">[a confirmar G-01]</span></code>; destaca o plano recomendado. Cards <strong>Essencial / Crescer / Completo</strong> <code><span class="tbc">[a confirmar nomes]</span></code> com "R$ — /mês <code><span class="tbc">[a confirmar]</span></code>" e o que muda entre eles; lista "Em todos os planos". Linha: "Valores e o que está incluso ficam escritos na sua proposta."</td><td>F-006, P-008, P-009</td><td>Transparency (3), Flexibility (3)</td></tr><tr><td>13</td><td>Quem cuida de você</td><td>Espaço para foto, nome e CRC do contador responsável <code><span class="tbc">[a confirmar R-01, G-07]</span></code>. Copy: "Sua empresa tem um contador de referência. Ele conhece o seu caso e é ele quem responde."</td><td>P-004, R-01</td><td>Expertise (3), Reduced anxiety (4)</td></tr><tr><td>14</td><td>Depoimentos</td><td><strong>Slot vazio</strong> com aviso interno: só publicar depoimentos reais com autorização (G-07).</td><td>hard rule 4</td><td>Reputational assurance (4)</td></tr><tr><td>15</td><td>Dúvidas</td><td>6 perguntas (abaixo) + "Ainda com dúvida? Falar no WhatsApp".</td><td>—</td><td>Information (3)</td></tr><tr><td>16</td><td>Formulário</td><td>Título "Receber minha proposta". Campos: o que precisa, nome, WhatsApp, e-mail, faixa de faturamento, atividade, CNPJ (só troca), como conheceu. Frase LGPD (R-03). <strong>Modo de entrada trocável (G-09).</strong></td><td>F-007 (aberto), R-03</td><td>Reduced effort (3)</td></tr><tr><td>17</td><td>CTA final</td><td>Seu norte para abrir, organizar e crescer sua empresa. <strong>Receber minha proposta</strong> · Falar no WhatsApp</td><td>positioning B</td><td>Vision (5)</td></tr><tr><td>18</td><td>Rodapé</td><td>Nortecontábil · razão social <code><span class="tbc">[a confirmar]</span></code> · CNPJ <code><span class="tbc">[a confirmar]</span></code> · CRC <code><span class="tbc">[a confirmar]</span></code> · endereço <code><span class="tbc">[a confirmar]</span></code> · contato <code><span class="tbc">[a confirmar]</span></code> · Política de privacidade</td><td>R-01, G-02</td><td>Risk reduction (3)</td></tr></tbody></table></div>
+<p>Sem preço publicado, sem rótulo de faixa interna, um CTA primário.</p>
+<h4>3. FAQ</h4>
+<div class="tw"><table><thead><tr><th>Pergunta</th><th>Resposta</th><th>Fato</th></tr></thead><tbody><tr><td>Quanto tempo leva para abrir minha empresa?</td><td>Depende da prefeitura e da Junta Comercial da sua cidade. A estimativa vem na sua proposta.</td><td>R-04</td></tr><tr><td>Como funciona a troca de contador?</td><td>Você assina com a gente, nós pedimos os documentos ao contador atual, conferimos pendências e assumimos a partir da competência combinada.</td><td>P-002</td></tr><tr><td>Sou MEI e passei do limite. E agora?</td><td>Conte quanto faturou no ano. O contador diz se precisa sair agora e qual enquadramento faz sentido.</td><td>P-003</td></tr><tr><td>Vou pagar menos imposto?</td><td>Você vai pagar o imposto certo, no enquadramento certo para a sua atividade e faturamento, dentro da lei.</td><td>R-02</td></tr><tr><td>Tem fidelidade?</td><td><code><span class="tbc">[a confirmar P-009]</span></code></td><td>P-009</td></tr><tr><td>Como falo com o meu contador?</td><td>Pelo WhatsApp, em horário comercial <code><span class="tbc">[a confirmar horário e prazo de resposta]</span></code>.</td><td>P-004</td></tr></tbody></table></div>
+<h4>4. Escolha: modo de entrada (G-09, decisão do dono)</h4>
+<ul><li><strong>A.</strong> Formulário curto -&gt; contador responde no WhatsApp com a proposta.</li><li><strong>B.</strong> Cadastro direto num sistema (<code><span class="tbc">[a confirmar: qual]</span></code>), plano escolhido na tela seguinte.</li><li><strong>C.</strong> Os dois: formulário para quem quer conversar, cadastro para quem quer resolver sozinho.</li></ul>
+<p><strong>Recomendação: A agora, C quando houver sistema.</strong> A funciona sem nenhum software novo e combina com o diferencial "contador que responde"; o formulário já pede tudo que B precisaria. A página troca de modo mudando só o objeto <code>ENTRADA</code> em <code>site/index.html</code>.</p></div></details><details><summary>integration-segmento-tecnologia.md · <span class="chip fail">FAIL</span></summary><div class="db"><h3>Spec de landing: segmento, Devs e profissionais de tecnologia</h3>
+<p>URL proposta: <code>/para/tecnologia/</code>. Página do loop de <strong>segmentos</strong> (equivalente às páginas de integração do template). Publicar só depois do ok do dono sobre os segmentos atendidos (G-08).</p>
+<div class="tw"><table><thead><tr><th>Seção</th><th>Copy</th><th>Fato</th><th>Elemento de valor</th></tr></thead><tbody><tr><td>Hero</td><td>Contabilidade para quem trabalha com tecnologia como PJ.</td><td>F-005</td><td>Reach (3)</td></tr><tr><td>Casos comuns</td><td>Contrato PJ com empresa brasileira · Serviço para cliente no exterior <code><span class="tbc">[a confirmar: atende exportação de serviço?]</span></code> · Freela com vários clientes</td><td>G-08</td><td>Configurability (3)</td></tr><tr><td>O que decidimos com você</td><td>Atividade (CNAE) e regime que fazem sentido para o seu tipo de serviço, dentro da lei.</td><td>P-001, R-02</td><td>Expertise (3)</td></tr><tr><td>Gancho do loop</td><td>"Trabalha com outros devs PJ? Mande esta página: eles falam com o mesmo contador."</td><td>loops §2</td><td>Network expansion (4)</td></tr><tr><td>CTA</td><td><strong>Receber minha proposta</strong> (segmento "Tecnologia" marcado) · Falar no WhatsApp</td><td>config</td><td>—</td></tr></tbody></table></div></div></details><details><summary>persona-mei-limite.md · <span class="chip pass">PASS</span></summary><div class="db"><h3>Spec de landing: persona, MEI que passou do limite</h3>
+<p>URL proposta: <code>/sair-do-mei/</code>.</p>
+<div class="tw"><table><thead><tr><th>Seção</th><th>Copy</th><th>Fato</th><th>Elemento de valor</th></tr></thead><tbody><tr><td>Hero</td><td>Passou do limite do MEI? Saia na hora certa.</td><td>P-003</td><td>Risk reduction (3)</td></tr><tr><td>Para quem é</td><td>Você é MEI e faturou, ou vai faturar, mais do que o MEI permite neste ano.</td><td>P-003</td><td>—</td></tr><tr><td>O trabalho</td><td>Saber se precisa sair agora, o que muda no imposto e não pagar multa por atraso.</td><td>P-003, R-02</td><td>Reduced anxiety (4)</td></tr><tr><td>O que a gente faz</td><td>Olha o seu faturamento do ano, diz a data certa para sair e cuida da mudança.</td><td>P-003</td><td>Expertise (3)</td></tr><tr><td>Pergunta-chave no formulário</td><td>"Quanto você faturou de janeiro até agora?"</td><td>—</td><td>Reduced effort (3)</td></tr><tr><td>CTA</td><td><strong>Receber minha proposta</strong> (objetivo "Sair do MEI" marcado) · Falar no WhatsApp</td><td>config</td><td>—</td></tr></tbody></table></div>
+<p>Nota: não citar o valor do limite do MEI nem multas em reais sem o contador validar o número vigente (G-06).</p></div></details><details><summary>persona-prestador-pj.md · <span class="chip pass">PASS</span></summary><div class="db"><h3>Spec de landing: persona, Prestador de serviço PJ (flagship)</h3>
+<p>URL proposta: <code>/abrir-empresa/</code>.</p>
+<div class="tw"><table><thead><tr><th>Seção</th><th>Copy</th><th>Fato</th><th>Elemento de valor</th></tr></thead><tbody><tr><td>Hero</td><td>Vai abrir seu CNPJ? Comece no enquadramento certo.</td><td>P-001</td><td>Expertise (3)</td></tr><tr><td>Para quem é</td><td>Você presta serviço (tecnologia, design, consultoria, saúde, direito...) e quer emitir nota como empresa.</td><td>F-005</td><td>—</td></tr><tr><td>O trabalho</td><td>Abrir a empresa, emitir a primeira nota e saber quanto vai pagar de imposto antes de começar.</td><td>P-001, P-006</td><td>Reduced anxiety (4)</td></tr><tr><td>O que decidimos com você</td><td>Tipo de empresa, atividade (CNAE) e regime. Explicado em palavras simples, na proposta.</td><td>P-001, R-02</td><td>Transparency (3)</td></tr><tr><td>Passos</td><td>Conte o que precisa · Receba a proposta · Mande os documentos · Acompanhe até o CNPJ sair</td><td>P-010, R-04</td><td>Simplification (3)</td></tr><tr><td>Prazo</td><td>O prazo depende da prefeitura e da Junta Comercial; a estimativa vem na proposta.</td><td>R-04</td><td>—</td></tr><tr><td>Seção reutilizada</td><td>"Todo mês, sem você correr atrás" (home #10)</td><td>P-005</td><td>Time savings (3)</td></tr><tr><td>CTA</td><td><strong>Receber minha proposta</strong> (objetivo "Abrir empresa" marcado) · Falar no WhatsApp</td><td>config</td><td>—</td></tr></tbody></table></div></div></details><details><summary>persona-troca-contador.md · <span class="chip fail">FAIL</span></summary><div class="db"><h3>Spec de landing: persona, Dono de empresa trocando de contador</h3>
+<p>URL proposta: <code>/trocar-de-contador/</code>.</p>
+<div class="tw"><table><thead><tr><th>Seção</th><th>Copy</th><th>Fato</th><th>Elemento de valor</th></tr></thead><tbody><tr><td>Hero</td><td>Trocar de contador sem perder prazo nem documento.</td><td>P-002</td><td>Decreased hassles (3)</td></tr><tr><td>Para quem é</td><td>Sua empresa já tem contador, mas a resposta demora e você não entende o que paga.</td><td>F-005</td><td>—</td></tr><tr><td>O trabalho</td><td>Mudar sem atraso de guia, sem documento perdido e passar a ter um contador que responde.</td><td>P-002, P-004</td><td>Responsiveness (3)</td></tr><tr><td>Como é a troca</td><td>1. Você assina com a gente. 2. Nós pedimos os documentos ao contador atual. 3. Conferimos guias em aberto, certidões e enquadramento. 4. Assumimos na competência combinada.</td><td>P-002</td><td>Risk reduction (3)</td></tr><tr><td>O que você recebe na entrada</td><td>A lista do que encontramos na conferência, em palavras simples.</td><td>P-002</td><td>Transparency (3)</td></tr><tr><td>Pergunta-chave no formulário</td><td>CNPJ da empresa</td><td>—</td><td>—</td></tr><tr><td>CTA</td><td><strong>Receber minha proposta</strong> (objetivo "Trocar de contador" marcado) · Falar no WhatsApp</td><td>config</td><td>—</td></tr></tbody></table></div></div></details><h3>Landing construída</h3><p><code>site/index.html</code>: página única, autocontida, construída a partir de <code>landing/home.md</code>. Entrada trocável pelo objeto <code>ENTRADA</code>.</p>
+<h2 id="man">8. Manual</h2><p class="muted">Não rodado ainda (<code>manual</code>). Roda depois que o dono confirmar as propostas P-, para o manual não ensinar o time a vender o que ainda não existe.</p>
+<h2 id="sis">9. Sistema</h2><p><strong>Este arquivo é uma especificação, não infraestrutura: nada é aplicado ou executado.</strong></p>
+<p><code>sales-machine.hcl</code> descreve a máquina <strong>pronta e rodando</strong>: quem faz o quê, quando, com quais entradas, saídas e pontos de revisão humana. HCL é usado só como linguagem legível e parseável.</p>
+<h4>Blocos</h4>
+<div class="tw"><table><thead><tr><th>Bloco</th><th>O que é</th></tr></thead><tbody><tr><td><code>spec</code></td><td>cabeçalho: produto, versão, data, agente operador</td></tr><tr><td><code>agent</code></td><td>agentes (operator, auditor): o que leem, escrevem, nunca fazem, a quem escalam</td></tr><tr><td><code>role</code></td><td>pessoas: dono, conteúdo, vendas, sucesso do cliente, produto</td></tr><tr><td><code>source</code></td><td>entradas: pedidos, planilha de marcos, etiquetas do atendimento, workspace</td></tr><tr><td><code>event</code></td><td>marcos com o que cada um registra</td></tr><tr><td><code>stage</code></td><td>os 6 estágios com entrada, saída, valor, métrica e dono</td></tr><tr><td><code>lane</code> / <code>signal</code></td><td>as duas faixas internas e o sinal de compra de cada uma</td></tr><tr><td><code>loop</code></td><td>segmentos, indicações, conteúdo</td></tr><tr><td><code>workflow</code> / <code>step</code></td><td>trabalhos recorrentes com passos, saídas e gate</td></tr><tr><td><code>routine</code></td><td>quando cada workflow roda (horário de São Paulo ou evento)</td></tr><tr><td><code>gate</code>, <code>metric</code>, <code>rule</code>, <code>handoff</code></td><td>checagens, fórmulas, regras e entregas para pessoas</td></tr></tbody></table></div>
+<h4>Como ler referências</h4>
+<p><code>tipo.nome</code> (ex.: <code>signal.pronto_assistido</code>) aponta para o bloco <code>tipo "nome"</code> declarado no mesmo arquivo.</p>
+<h4>Como validar</h4>
+<p>Qualquer parser de HCL lê o arquivo; nenhuma ferramenta é necessária para usá-lo. Nesta rodada ele passou no self-check do skill (chaves e aspas balanceadas, só blocos permitidos, toda referência declarada, sem <code>${</code>, URLs ou segredos) e foi parseado com <code>python-hcl2</code>.</p><h3>Calendário de rotinas</h3><div class="tw"><table><thead><tr><th>Rotina</th><th>Quando</th><th>Workflow</th><th>Entrega</th></tr></thead><tbody><tr><td>lead_on_signal</td><td>evento: signal.pronto_autoatendimento</td><td>workflow.lead_handoff</td><td>handoff.lead</td></tr><tr><td>lead_on_assisted</td><td>evento: signal.pronto_assistido</td><td>workflow.lead_handoff</td><td>handoff.lead</td></tr><tr><td>daily_followup</td><td>daily 08:30 America/Sao_Paulo</td><td>workflow.daily_followup</td><td>handoff.lead</td></tr><tr><td>weekly_articles</td><td>weekly tue 09:00 America/Sao_Paulo</td><td>workflow.article_batch</td><td>handoff.articles</td></tr><tr><td>monthly_segment</td><td>monthly day 1 09:00 America/Sao_Paulo</td><td>workflow.segment_page</td><td>handoff.pages</td></tr><tr><td>weekly_metrics</td><td>weekly mon 08:00 America/Sao_Paulo</td><td>workflow.metrics_review</td><td>handoff.report</td></tr><tr><td>report_after_change</td><td>evento: event.conteudo_publicado</td><td>workflow.report_refresh</td><td>handoff.report</td></tr></tbody></table></div><details><summary>HCL completo</summary><div class="db"><pre># Nortecontábil sales machine, as an agent-operated system.
+# Written by the sales-machine-scaffold `system-spec` workflow on 2026-11-28.
+
+spec &quot;sales_machine&quot; {
+  product  = &quot;Nortecontábil&quot;
+  version  = &quot;0.1.0&quot;
+  date     = &quot;2026-11-28&quot;
+  access   = &quot;open&quot;
+  language = &quot;pt-BR&quot;
+  operator = agent.operator
+  note     = &quot;Specification only. Not infrastructure. Nothing here is executed.&quot;
+}
+
+# Agents
+
+agent &quot;operator&quot; {
+  purpose      = &quot;Lê pedidos e marcos, mede a máquina, rascunha conteúdo e páginas, prepara o resumo diário para vendas e atualiza o relatório&quot;
+  reads        = [source.pedidos, source.marcos, source.atendimento, source.workspace]
+  writes       = [&quot;sales-machine/&quot;]
+  never        = [rule.no_publish_without_review, rule.never_say, rule.no_contact, rule.no_names, rule.regulated]
+  escalates_to = role.owner
+}
+
+agent &quot;auditor&quot; {
+  purpose      = &quot;Roda value-audit em todo rascunho e o self-check do spec antes de qualquer hand-off&quot;
+  reads        = [source.workspace]
+  writes       = [&quot;sales-machine/audit/findings.json&quot;]
+  never        = [rule.facts_only]
+  escalates_to = role.owner
+}
+
+# People
+
+role &quot;owner&quot; {
+  owns     = [&quot;config.json&quot;, &quot;preços e planos&quot;, &quot;diga / nunca diga&quot;, &quot;lista a confirmar&quot;]
+  approves = [handoff.report, handoff.instrumentation]
+}
+
+role &quot;content&quot; {
+  owns     = [&quot;artigos&quot;, &quot;páginas de segmento&quot;, &quot;landing&quot;, &quot;tom&quot;]
+  approves = [handoff.articles, handoff.pages]
+}
+
+role &quot;sales&quot; {
+  owns     = [&quot;resposta aos pedidos&quot;, &quot;propostas&quot;, &quot;contrato&quot;]
+  approves = [handoff.lead]
+}
+
+role &quot;success&quot; {
+  owns = [&quot;contador de referência&quot;, &quot;onboarding&quot;, &quot;indicações&quot;, &quot;dúvidas frequentes&quot;]
+}
+
+role &quot;product&quot; {
+  owns = [&quot;formulário ou cadastro&quot;, &quot;WhatsApp&quot;, &quot;planilha ou CRM de marcos&quot;, &quot;instrumentação&quot;]
+}
+
+# Sources
+
+source &quot;pedidos&quot; {
+  kind            = &quot;form&quot;
+  path_or_channel = &quot;&lt;destino do formulário ou do cadastro, a confirmar G-09&gt;&quot;
+  refresh         = &quot;on event&quot;
+}
+
+source &quot;marcos&quot; {
+  kind            = &quot;sheet&quot;
+  path_or_channel = &quot;&lt;planilha ou CRM com um pedido por linha&gt;&quot;
+  refresh         = &quot;daily&quot;
+}
+
+source &quot;atendimento&quot; {
+  kind            = &quot;chat&quot;
+  path_or_channel = &quot;&lt;WhatsApp da Nortecontábil, só etiquetas de tema, sem conteúdo pessoal&gt;&quot;
+  refresh         = &quot;weekly&quot;
+}
+
+source &quot;workspace&quot; {
+  kind            = &quot;files&quot;
+  path_or_channel = &quot;sales-machine/&quot;
+  refresh         = &quot;on change&quot;
+}
+
+# Events
+
+event &quot;conteudo_publicado&quot; {
+  captures = [&quot;peça&quot;, &quot;segmento&quot;, &quot;persona&quot;, &quot;utm&quot;]
+}
+
+event &quot;visita_site&quot; {
+  captures = [&quot;página&quot;, &quot;utm&quot;, &quot;ref&quot;]
+}
+
+event &quot;pedido_proposta&quot; {
+  captures = [&quot;objetivo&quot;, &quot;faixa&quot;, &quot;segmento&quot;, &quot;cidade&quot;, &quot;cnpj se troca&quot;, &quot;como conheceu&quot;, &quot;ref&quot;]
+}
+
+event &quot;proposta_enviada&quot; {
+  captures = [&quot;plano indicado&quot;, &quot;enquadramento sugerido&quot;, &quot;hora&quot;]
+}
+
+event &quot;proposta_entendida&quot; {
+  captures = [&quot;resposta da pessoa&quot;, &quot;hora&quot;]
+}
+
+event &quot;contrato_assinado&quot; {
+  captures = [&quot;plano&quot;, &quot;hora&quot;]
+}
+
+event &quot;primeiro_pagamento&quot; {
+  captures = [&quot;hora&quot;]
+}
+
+event &quot;cliente_60_dias&quot; {
+  captures = [&quot;duas competências sem atraso&quot;]
+}
+
+event &quot;indicacao_feita&quot; {
+  captures = [&quot;ref&quot;, &quot;segmento&quot;]
+}
+
+# Stages
+
+stage &quot;alimentar&quot; {
+  order  = 1
+  entry  = event.conteudo_publicado
+  exit   = event.visita_site
+  value  = [&quot;Reduced anxiety&quot;, &quot;Time savings&quot;, &quot;Expertise&quot;]
+  metric = metric.visitas_por_peca
+  owner  = role.content
+}
+
+stage &quot;atrair&quot; {
+  order  = 2
+  entry  = event.visita_site
+  exit   = event.pedido_proposta
+  value  = [&quot;Time savings&quot;, &quot;Reduced effort&quot;, &quot;Reduced anxiety&quot;]
+  metric = metric.visita_para_pedido
+  owner  = role.content
+}
+
+stage &quot;ativar&quot; {
+  order  = 3
+  entry  = event.pedido_proposta
+  exit   = event.proposta_entendida
+  value  = [&quot;Reduced effort&quot;, &quot;Simplification&quot;, &quot;Decreased hassles&quot;, &quot;Reduced anxiety&quot;]
+  metric = metric.pedido_para_proposta_entendida
+  owner  = role.sales
+}
+
+stage &quot;qualificar&quot; {
+  order  = 4
+  entry  = event.proposta_entendida
+  exit   = [signal.pronto_autoatendimento, signal.pronto_assistido]
+  lanes  = [lane.por_conta_propria, lane.com_o_contador]
+  value  = [&quot;Time savings&quot;, &quot;Expertise&quot;, &quot;Responsiveness&quot;, &quot;Risk reduction&quot;]
+  metric = metric.proposta_para_sinal
+  owner  = role.sales
+}
+
+stage &quot;converter&quot; {
+  order  = 5
+  entry  = [signal.pronto_autoatendimento, signal.pronto_assistido]
+  exit   = event.primeiro_pagamento
+  value  = [&quot;Risk reduction&quot;, &quot;Transparency&quot;, &quot;Commitment&quot;, &quot;Reduced anxiety&quot;]
+  metric = metric.sinal_para_cliente
+  owner  = role.sales
+}
+
+stage &quot;retroalimentar&quot; {
+  order  = 6
+  entry  = event.cliente_60_dias
+  exit   = event.indicacao_feita
+  value  = [&quot;Network expansion&quot;, &quot;Connection&quot;, &quot;Reputational assurance&quot;]
+  metric = metric.pedidos_por_coorte
+  owner  = role.success
+  feeds  = stage.alimentar
+}
+
+# Lanes and signals (internal only)
+
+lane &quot;por_conta_propria&quot; {
+  personas = [&quot;prestador-pj&quot;, &quot;mei-limite&quot;]
+  path     = [&quot;pedido com faixa&quot;, &quot;proposta com plano indicado&quot;, &quot;escolhe o plano&quot;, &quot;envia documentos&quot;]
+  signal   = signal.pronto_autoatendimento
+}
+
+lane &quot;com_o_contador&quot; {
+  personas = [&quot;troca-contador&quot;]
+  path     = [&quot;pedido com CNPJ&quot;, &quot;conferência de pendências&quot;, &quot;conversa de 15 minutos&quot;]
+  signal   = signal.pronto_assistido
+}
+
+signal &quot;pronto_autoatendimento&quot; {
+  when = &quot;[a confirmar] escolheu o plano e enviou os documentos&quot;
+  then = workflow.lead_handoff
+}
+
+signal &quot;pronto_assistido&quot; {
+  when = &quot;[a confirmar] troca com CNPJ, ou sócio/funcionário, ou faixa mais alta&quot;
+  then = workflow.lead_handoff
+}
+
+# Loops
+
+loop &quot;segmentos&quot; {
+  steps  = [&quot;cliente informa o segmento&quot;, &quot;juntamos o que se repete no segmento&quot;, &quot;página e guia do segmento atraem pares&quot;, &quot;pares pedem proposta e informam o segmento&quot;]
+  owner  = role.content
+  metric = metric.pedidos_por_coorte
+  feeds  = stage.alimentar
+}
+
+loop &quot;indicacoes&quot; {
+  steps  = [&quot;cliente com 60 dias recebe link pessoal&quot;, &quot;manda para um colega&quot;, &quot;colega pede proposta pelo link&quot;, &quot;colega vira cliente e recebe o próprio link&quot;]
+  owner  = role.success
+  metric = metric.pedidos_por_coorte
+  feeds  = stage.atrair
+}
+
+loop &quot;conteudo&quot; {
+  steps  = [&quot;dúvidas reais anonimizadas&quot;, &quot;viram artigos e FAQ&quot;, &quot;trazem visitas e pedidos&quot;, &quot;novos clientes trazem novas dúvidas&quot;]
+  owner  = role.content
+  metric = metric.pedidos_por_coorte
+  feeds  = stage.alimentar
+}
+
+# Workflows of the running machine
+
+workflow &quot;lead_handoff&quot; {
+  inputs = [source.pedidos, source.marcos]
+
+  step &quot;resumir&quot; {
+    does = &quot;Para cada sinal novo, escreve um resumo: objetivo, faixa, segmento, pendências vistas, plano indicado&quot;
+    uses = [rule.no_names, rule.regulated]
+  }
+
+  step &quot;entregar&quot; {
+    does = &quot;Entrega o resumo ao contador de vendas; não fala com a pessoa&quot;
+    uses = [rule.no_contact]
+  }
+
+  outputs     = [&quot;sales-machine/leads/&lt;date&gt;.md&quot;]
+  review_gate = gate.lead
+}
+
+workflow &quot;daily_followup&quot; {
+  inputs = [source.marcos]
+
+  step &quot;achar_parados&quot; {
+    does = &quot;Lista pedidos sem proposta há mais de 1 dia útil e propostas sem resposta há mais de 2 dias úteis&quot;
+  }
+
+  step &quot;sugerir_mensagem&quot; {
+    does = &quot;Sugere a mensagem de lembrete por estágio para vendas enviar&quot;
+    uses = [rule.cta, rule.never_say]
+  }
+
+  outputs     = [&quot;sales-machine/followup/&lt;date&gt;.md&quot;]
+  review_gate = gate.lead
+}
+
+workflow &quot;article_batch&quot; {
+  inputs = [source.atendimento, &quot;articles/index.json&quot;, &quot;positioning.md&quot;]
+
+  step &quot;pick_gaps&quot; {
+    does = &quot;Cobertura persona x estágio x loop x valor; escolhe as lacunas e as dúvidas mais frequentes&quot;
+  }
+
+  step &quot;draft&quot; {
+    does = &quot;Escreve artigos prontos em pt-BR com valor, gancho de loop, CTA e FAQ&quot;
+    uses = [rule.cta, rule.never_say, rule.regulated]
+  }
+
+  outputs     = [&quot;articles/&lt;date&gt;/*.md&quot;]
+  review_gate = gate.content
+}
+
+workflow &quot;segment_page&quot; {
+  inputs = [source.pedidos, &quot;landing/&quot;]
+
+  step &quot;rank&quot; {
+    does = &quot;Ordena segmentos por pedidos e clientes do mês&quot;
+  }
+
+  step &quot;draft_page&quot; {
+    does = &quot;Escreve a spec da página do segmento que falta&quot;
+    uses = [rule.no_names, rule.facts_only]
+  }
+
+  outputs     = [&quot;landing/integration-segmento-&lt;slug&gt;.md&quot;]
+  review_gate = gate.content
+}
+
+workflow &quot;metrics_review&quot; {
+  inputs = [source.marcos]
+
+  step &quot;measure&quot; {
+    does = &quot;Calcula conversão e tempo entre estágios e pedidos por coorte por loop&quot;
+  }
+
+  outputs     = [&quot;sales-machine/metrics/&lt;week&gt;.md&quot;]
+  review_gate = gate.report
+}
+
+workflow &quot;report_refresh&quot; {
+  inputs = [source.workspace]
+
+  step &quot;rebuild&quot; {
+    does = &quot;Regenera o relatório HTML autocontido&quot;
+  }
+
+  outputs     = [&quot;report/sales-machine-report.html&quot;]
+  review_gate = gate.report
+}
+
+# Routines
+
+routine &quot;lead_on_signal&quot; {
+  on          = signal.pronto_autoatendimento
+  agent       = agent.operator
+  runs        = workflow.lead_handoff
+  delivers_to = handoff.lead
+}
+
+routine &quot;lead_on_assisted&quot; {
+  on          = signal.pronto_assistido
+  agent       = agent.operator
+  runs        = workflow.lead_handoff
+  delivers_to = handoff.lead
+}
+
+routine &quot;daily_followup&quot; {
+  schedule    = &quot;daily 08:30 America/Sao_Paulo&quot;
+  agent       = agent.operator
+  runs        = workflow.daily_followup
+  delivers_to = handoff.lead
+}
+
+routine &quot;weekly_articles&quot; {
+  schedule    = &quot;weekly tue 09:00 America/Sao_Paulo&quot;
+  agent       = agent.operator
+  runs        = workflow.article_batch
+  delivers_to = handoff.articles
+}
+
+routine &quot;monthly_segment&quot; {
+  schedule    = &quot;monthly day 1 09:00 America/Sao_Paulo&quot;
+  agent       = agent.operator
+  runs        = workflow.segment_page
+  delivers_to = handoff.pages
+}
+
+routine &quot;weekly_metrics&quot; {
+  schedule    = &quot;weekly mon 08:00 America/Sao_Paulo&quot;
+  agent       = agent.operator
+  runs        = workflow.metrics_review
+  delivers_to = handoff.report
+}
+
+routine &quot;report_after_change&quot; {
+  on          = event.conteudo_publicado
+  agent       = agent.auditor
+  runs        = workflow.report_refresh
+  delivers_to = handoff.report
+}
+
+# Gates
+
+gate &quot;content&quot; {
+  checks  = [&quot;só fatos do ledger confirmados&quot;, &quot;2-4 elementos de valor, 1 de nível 3/4&quot;, &quot;gancho de loop&quot;, &quot;FAQ&quot;, &quot;CTA Receber minha proposta&quot;, &quot;nada de nunca-diga&quot;, &quot;temas regulados só pela regra&quot;]
+  on_fail = &quot;corrige, ou registra FAIL e entrega mesmo assim marcado&quot;
+}
+
+gate &quot;lead&quot; {
+  checks  = [&quot;sem dado pessoal além do necessário&quot;, &quot;sem promessa de imposto menor&quot;, &quot;plano indicado pela faixa&quot;]
+  on_fail = &quot;devolve ao operador&quot;
+}
+
+gate &quot;report&quot; {
+  checks  = [&quot;self-check sem recurso externo&quot;, &quot;contagens batem com audit/findings.json&quot;]
+  on_fail = &quot;corrige antes de entregar&quot;
+}
+
+# Metrics
+
+metric &quot;visitas_por_peca&quot; {
+  formula = &quot;visitas_com_utm_da_peca / pecas_publicadas&quot;
+  per     = &quot;peça&quot;
+}
+
+metric &quot;visita_para_pedido&quot; {
+  formula = &quot;pedido_proposta / visita_site&quot;
+  per     = &quot;100 visitas&quot;
+}
+
+metric &quot;pedido_para_proposta_entendida&quot; {
+  formula = &quot;proposta_entendida / pedido_proposta&quot;
+  per     = &quot;100 pedidos&quot;
+}
+
+metric &quot;proposta_para_sinal&quot; {
+  formula = &quot;sinais / proposta_entendida&quot;
+  per     = &quot;100 propostas, por faixa&quot;
+}
+
+metric &quot;sinal_para_cliente&quot; {
+  formula = &quot;primeiro_pagamento / sinais&quot;
+  per     = &quot;100 sinais&quot;
+}
+
+metric &quot;pedidos_por_coorte&quot; {
+  formula = &quot;novos pedidos atribuídos à coorte / clientes da coorte&quot;
+  per     = &quot;loop, mensal&quot;
+}
+
+# Rules
+
+rule &quot;cta&quot; {
+  text = &quot;Todo CTA principal é Receber minha proposta; o secundário é Falar no WhatsApp&quot;
+}
+
+rule &quot;never_say&quot; {
+  text = &quot;Nada de config.neverSay: preços até confirmação, grátis, pague menos imposto, prazos fixos, números sem dado, robô, textos do site de referência&quot;
+}
+
+rule &quot;regulated&quot; {
+  text = &quot;CRC, enquadramento, LGPD e prazo de abertura só como a regra de config.regulatedTopics&quot;
+}
+
+rule &quot;facts_only&quot; {
+  text = &quot;Só fatos F- do ledger; P- só depois do ok do dono&quot;
+}
+
+rule &quot;no_names&quot; {
+  text = &quot;Nenhum nome de cliente; segmentos sim, pessoas não&quot;
+}
+
+rule &quot;no_contact&quot; {
+  text = &quot;O agente nunca escreve para leads ou clientes; só prepara para pessoas enviarem&quot;
+}
+
+rule &quot;no_publish_without_review&quot; {
+  text = &quot;Nada é publicado sem passar por um gate e por uma pessoa&quot;
+}
+
+# Hand-offs
+
+handoff &quot;lead&quot; {
+  from     = agent.operator
+  to       = role.sales
+  artifact = &quot;sales-machine/leads/&lt;date&gt;.md&quot;
+  when     = &quot;after gate.lead passes&quot;
+}
+
+handoff &quot;articles&quot; {
+  from     = agent.operator
+  to       = role.content
+  artifact = &quot;articles/&lt;date&gt;/*.md&quot;
+  when     = &quot;after gate.content passes&quot;
+}
+
+handoff &quot;pages&quot; {
+  from     = agent.operator
+  to       = role.content
+  artifact = &quot;landing/*.md&quot;
+  when     = &quot;after gate.content passes&quot;
+}
+
+handoff &quot;report&quot; {
+  from     = agent.auditor
+  to       = role.owner
+  artifact = &quot;report/sales-machine-report.html&quot;
+  when     = &quot;after gate.report passes&quot;
+}
+
+handoff &quot;instrumentation&quot; {
+  from     = agent.operator
+  to       = role.product
+  artifact = &quot;loops.md (instrumentação necessária)&quot;
+  when     = &quot;on change of loops.md&quot;
+}
+</pre></div></details><details><summary>Instruções do operador</summary><div class="db"><p>Carregue <code>sales-machine.hcl</code> e <code>../config.json</code>. Depois:</p>
+<ol><li>Rode o workflow de cada <code>routine</code> no horário (America/Sao_Paulo) ou no evento indicado.</li><li>Obedeça a todo <code>rule</code>. Em especial: nunca escreva para leads ou clientes (<code>rule.no_contact</code>), nunca publique sem revisão, nunca use nada de <code>config.neverSay</code>.</li><li>Pare em todo <code>gate</code>. Se falhar, corrija ou registre FAIL em <code>audit/findings.json</code>.</li><li>Entregue só pelos <code>handoff</code>: resumo de lead para vendas, rascunhos para conteúdo, relatório para o dono.</li><li>Use só fatos <code>F-</code> do ledger em <code>product-map.md</code>. Propostas <code>P-</code> só depois do ok do dono.</li><li>Escreva em pt-BR, frases curtas, sem juridiquês.</li><li>Nunca aja fora do spec. Para mudar a máquina, mude o spec primeiro (<code>/sales-machine-scaffold system-spec</code>).</li></ol></div></details>
+<h2 id="aud">10. Auditoria</h2><div class="tw"><table><thead><tr><th>Arquivo</th><th>Veredito</th><th>Regra</th><th>Trecho</th><th>Correção</th></tr></thead><tbody><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>fatos (P- não confirmado)</td><td>Seu contador responde com o plano e o enquadramento explicado, em até N horas úteis.</td><td>Preencher o prazo real (P-010) ou trocar por "Seu contador responde com o plano e o enquadramento explicado."</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>fatos (P- não confirmado)</td><td>Notas fiscais de serviço <span class="tbc">[a confirmar: emitimos ou orientamos]</span></td><td>"Emitimos as suas notas fiscais de serviço" ou "Te orientamos a emitir as suas notas", conforme G-05/P-006.</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>neverSay (preços)</td><td>R$ a confirmar /mês</td><td>Manter sem valor até o dono decidir publicar preços (G-01); se não publicar, trocar por "Valor na sua proposta".</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>regulado R-01 (CRC)</td><td>Razão social a confirmar · CNPJ 00.000.000/0000-00 · CRC UF 000000/O-0</td><td>Preencher com os dados reais antes de publicar (G-02). Não publicar sem eles.</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>regulado R-03 (LGPD)</td><td>Você pode pedir a exclusão quando quiser em e-mail a confirmar.</td><td>Preencher o e-mail do encarregado e publicar a Política de privacidade linkada no rodapé.</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>fatos (P-009 não confirmado)</td><td>Tem fidelidade? a confirmar</td><td>Responder com a regra real ou tirar a pergunta do FAQ e o item "sem fidelidade?" de "Em todos os planos".</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>prova social (hard rule 4)</td><td>Espaço para depoimentos reais.</td><td>Publicar só depoimentos reais com autorização (G-07) ou remover a caixa antes de ir ao ar.</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>promessa absoluta (corrigido nesta rodada)</td><td>Saia na hora certa, sem multa por atraso</td><td>Aplicado: "Saia na hora certa, antes de virar multa".</td></tr><tr><td>../site/index.html</td><td><span class="chip fail">FAIL</span></td><td>entrada em aberto (G-09)</td><td>var ENTRADA = { modo: "formulario", whatsapp: "", formEndpoint: "" ...</td><td>Dono escolhe o modo; preencher número de WhatsApp e/ou endpoint do formulário. Sem eles, o envio só registra no console (modo de revisão).</td></tr><tr><td>landing/home.md</td><td><span class="chip fail">FAIL</span></td><td>fatos (P- não confirmado)</td><td>linhas 9, 10, 12, 13 e FAQ apoiadas em P-004 a P-010</td><td>Confirmar P-004 a P-010 com o dono; o resto da spec passa nas regras (CTA, neverSay, regulados, sem nomes).</td></tr><tr><td>landing/persona-troca-contador.md</td><td><span class="chip fail">FAIL</span></td><td>fatos (P-002 não confirmado)</td><td>Nós pedimos os documentos ao contador atual. Conferimos guias em aberto, certidões e enquadramento.</td><td>Confirmar com o dono que a Nortecontábil faz essa conferência na entrada (P-002).</td></tr><tr><td>landing/integration-segmento-tecnologia.md</td><td><span class="chip fail">FAIL</span></td><td>fatos (G-08)</td><td>Serviço para cliente no exterior <span class="tbc">[a confirmar: atende exportação de serviço?]</span></td><td>Manter só se a Nortecontábil atende exportação de serviço; senão remover o caso.</td></tr><tr><td>landing/persona-prestador-pj.md</td><td><span class="chip pass">PASS</span></td><td>—</td><td>—</td><td>—</td></tr><tr><td>landing/persona-mei-limite.md</td><td><span class="chip pass">PASS</span></td><td>—</td><td>—</td><td>—</td></tr><tr><td>system/sales-machine.hcl</td><td><span class="chip pass">PASS</span></td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div>
+<h2 id="ho">11. Hand-off</h2><div class="tw"><table><thead><tr><th>Papel</th><th>Leva</th></tr></thead><tbody>
+<tr><td>Dono</td><td>Responder G-01 a G-09; aprovar P-001 a P-010; decidir se publica preços.</td></tr>
+<tr><td>Produto</td><td>Publicar <code>site/index.html</code> num domínio; configurar <code>ENTRADA</code>; criar a planilha de marcos e os campos de instrumentação de <code>loops.md</code>.</td></tr>
+<tr><td>Conteúdo</td><td>Fotos, depoimentos reais com autorização, política de privacidade; páginas de persona e segmento a partir das specs.</td></tr>
+<tr><td>Vendas</td><td>Modelo de proposta (plano pela faixa + enquadramento explicado + checklist) e prazo de resposta.</td></tr>
+<tr><td>Sucesso do cliente</td><td>Etiquetar dúvidas do WhatsApp por tema (alimenta o loop de conteúdo); regra do link de indicação.</td></tr>
+</tbody></table></div>
+<h3>Lacunas</h3><div class="tw"><table><thead><tr><th>Id</th><th>Lacuna</th><th>Quem resolve</th></tr></thead><tbody><tr><td>G-01</td><td>Preços, faixas de faturamento e o que cada plano inclui</td><td>dono</td></tr><tr><td>G-02</td><td>Razão social, CNPJ, CRC e contador responsável (obrigatórios no rodapé)</td><td>dono</td></tr><tr><td>G-03</td><td>WhatsApp, e-mail, endereço; para onde o formulário envia (planilha, CRM, e-mail)</td><td>dono + produto</td></tr><tr><td>G-09</td><td>Como o cliente entra: formulário + WhatsApp com pessoa, cadastro direto num sistema, ou os dois (F-007)</td><td>dono</td></tr><tr><td>G-04</td><td>Logo oficial (paleta azul-marinho + verde confirmada, F-008)</td><td>dono</td></tr><tr><td>G-05</td><td>Sistema/área do cliente: existe? Emite nota? Lê extrato?</td><td>dono + produto</td></tr><tr><td>G-06</td><td>Alíquotas para o simulador: só publicar números validados por contador</td><td>contador responsável</td></tr><tr><td>G-07</td><td>Prova social: avaliações, depoimentos reais, fotos da equipe</td><td>dono + conteúdo</td></tr><tr><td>G-08</td><td>Segmentos que a Nortecontábil atende bem (CNAEs aceitos)</td><td>dono</td></tr></tbody></table></div>
+<h3>Tudo que está <span class="tbc">a confirmar</span> (89)</h3><details><summary>Ver lista</summary><div class="db"><div class="tw"><table><thead><tr><th>Onde</th><th>Linha</th></tr></thead><tbody><tr><td><code>sales-machine/audit/findings.json:16</code></td><td>&quot;quote&quot;: &quot;Notas fiscais de serviço [a confirmar: emitimos ou orientamos]&quot;,</td></tr><tr><td><code>sales-machine/audit/findings.json:21</code></td><td>&quot;quote&quot;: &quot;R$ a confirmar /mês&quot;,</td></tr><tr><td><code>sales-machine/audit/findings.json:26</code></td><td>&quot;quote&quot;: &quot;Razão social a confirmar · CNPJ 00.000.000/0000-00 · CRC UF 000000/O-0&quot;,</td></tr><tr><td><code>sales-machine/audit/findings.json:31</code></td><td>&quot;quote&quot;: &quot;Você pode pedir a exclusão quando quiser em e-mail a confirmar.&quot;,</td></tr><tr><td><code>sales-machine/audit/findings.json:36</code></td><td>&quot;quote&quot;: &quot;Tem fidelidade? a confirmar&quot;,</td></tr><tr><td><code>sales-machine/audit/findings.json:99</code></td><td>&quot;quote&quot;: &quot;Serviço para cliente no exterior [a confirmar: atende exportação de serviço?]&quot;,</td></tr><tr><td><code>sales-machine/config.json:4</code></td><td>&quot;tagline&quot;: &quot;[a confirmar] Proposta: Contabilidade online para quem presta serviço como PJ, com contador de verdade do seu lado.&quot;,</td></tr><tr><td><code>sales-machine/config.json:25</code></td><td>&quot;primaryCtaDetail&quot;: &quot;[a confirmar: entrada em aberto (G-09). Opções: A) formulário curto + contador responde no WhatsApp; B) cadastro direto num sistema; C) os dois. A landing troca em ENTRADA no site</td></tr><tr><td><code>sales-machine/config.json:44</code></td><td>&quot;buyingSignal&quot;: &quot;[a confirmar] Proposto: simulou o imposto na calculadora E enviou o formulário com a faixa de faturamento&quot;</td></tr><tr><td><code>sales-machine/config.json:49</code></td><td>&quot;buyingSignal&quot;: &quot;[a confirmar] Proposto: pediu troca de contador informando o CNPJ, OU tem sócio/funcionário, OU faturamento na faixa mais alta&quot;</td></tr><tr><td><code>sales-machine/config.json:77</code></td><td>&quot;live&quot;: &quot;[a confirmar]&quot;</td></tr><tr><td><code>sales-machine/config.json:83</code></td><td>&quot;live&quot;: &quot;[a confirmar: a Nortecontábil emite pelo cliente ou o cliente emite?]&quot;</td></tr><tr><td><code>sales-machine/config.json:89</code></td><td>&quot;live&quot;: &quot;[a confirmar: quais bancos e por qual meio: OFX, Open Finance, envio manual]&quot;</td></tr><tr><td><code>sales-machine/config.json:103</code></td><td>&quot;preços, valores de plano, descontos e cupons até o dono confirmar (hoje só a estrutura por faixa aparece, com valor [a confirmar])&quot;,</td></tr><tr><td><code>sales-machine/config.json:122</code></td><td>&quot;a lista [a confirmar] deste workspace&quot;</td></tr><tr><td><code>sales-machine/config.json:127</code></td><td>&quot;rule&quot;: &quot;A contabilidade é feita sob responsabilidade de contador registrado no CRC [a confirmar: nome e número do CRC]; razão social e CNPJ aparecem no rodapé.&quot;</td></tr><tr><td><code>sales-machine/config.json:135</code></td><td>&quot;rule&quot;: &quot;Usamos seus dados só para preparar e enviar a proposta e falar com você sobre ela; você pode pedir a exclusão a qualquer momento [a confirmar: e-mail do encarregado].&quot;</td></tr><tr><td><code>sales-machine/landing/home.md:1</code></td><td># Spec de landing: Home de vendas (nortecontabil `[a confirmar: domínio]`)</td></tr><tr><td><code>sales-machine/landing/home.md:7</code></td><td>nesta rodada a pedido do dono). Tudo que é `[a confirmar]` aparece na página como marcação visível.</td></tr><tr><td><code>sales-machine/landing/home.md:27</code></td><td>| 10 | Todo mês, sem você correr atrás | Imposto calculado e guia no WhatsApp · Pró-labore e obrigações em dia · Notas fiscais `[a confirmar P-006]` · Relatório simples do mês · Revisão do enquadramen</td></tr><tr><td><code>sales-machine/landing/home.md:29</code></td><td>| 12 | Planos | Seletor &quot;Quanto sua empresa fatura por mês?&quot; com 3 faixas `[a confirmar G-01]`; destaca o plano recomendado. Cards **Essencial / Crescer / Completo** `[a confirmar nomes]` com &quot;R$ — /m</td></tr><tr><td><code>sales-machine/landing/home.md:30</code></td><td>| 13 | Quem cuida de você | Espaço para foto, nome e CRC do contador responsável `[a confirmar R-01, G-07]`. Copy: &quot;Sua empresa tem um contador de referência. Ele conhece o seu caso e é ele quem respo</td></tr><tr><td><code>sales-machine/landing/home.md:35</code></td><td>| 18 | Rodapé | Nortecontábil · razão social `[a confirmar]` · CNPJ `[a confirmar]` · CRC `[a confirmar]` · endereço `[a confirmar]` · contato `[a confirmar]` · Política de privacidade | R-01, G-02 | </td></tr><tr><td><code>sales-machine/landing/home.md:47</code></td><td>| Tem fidelidade? | `[a confirmar P-009]` | P-009 |</td></tr><tr><td><code>sales-machine/landing/home.md:48</code></td><td>| Como falo com o meu contador? | Pelo WhatsApp, em horário comercial `[a confirmar horário e prazo de resposta]`. | P-004 |</td></tr><tr><td><code>sales-machine/landing/home.md:53</code></td><td>- **B.** Cadastro direto num sistema (`[a confirmar: qual]`), plano escolhido na tela seguinte.</td></tr><tr><td><code>sales-machine/landing/integration-segmento-tecnologia.md:9</code></td><td>| Casos comuns | Contrato PJ com empresa brasileira · Serviço para cliente no exterior `[a confirmar: atende exportação de serviço?]` · Freela com vários clientes | G-08 | Configurability (3) |</td></tr><tr><td><code>sales-machine/loops.md:19</code></td><td>profissionais de tecnologia, consultores, designers `[a confirmar: segmentos que a Nortecontábil</td></tr><tr><td><code>sales-machine/loops.md:31</code></td><td>- **Benefício para quem indica:** `[a confirmar: existe? qual? não publicar valor até o dono decidir]`.</td></tr><tr><td><code>sales-machine/machine.md:29</code></td><td>contador responde `[a confirmar: N horas úteis, P-010]`.</td></tr><tr><td><code>sales-machine/machine.md:53</code></td><td>- **Sinal `pronto_autoatendimento`:** `[a confirmar]` proposto: escolheu o plano **e** enviou os</td></tr><tr><td><code>sales-machine/machine.md:58</code></td><td>2. Conferência rápida de pendências pelo CNPJ (certidões, situação do Simples) `[a confirmar: o que</td></tr><tr><td><code>sales-machine/product-map.md:10</code></td><td>- Quase tudo abaixo é **proposto** (status `a confirmar`): é a oferta que o setor usa, desenhada</td></tr><tr><td><code>sales-machine/product-map.md:24</code></td><td>| WhatsApp | mensagem pré-preenchida por contexto (abrir, trocar, MEI, dúvida) | proposto `[a confirmar: número]` | `reference-notes.md` |</td></tr><tr><td><code>sales-machine/product-map.md:26</code></td><td>| Área do cliente / sistema | `[a confirmar: existe? qual?]` | desconhecido | — |</td></tr><tr><td><code>sales-machine/product-map.md:36</code></td><td>| 5 | Notas fiscais | Emissão ou orientação de emissão de NFS-e | prestador-pj | `[a confirmar: quem emite]` | — |</td></tr><tr><td><code>sales-machine/product-map.md:37</code></td><td>| 6 | Extrato organizado e relatórios | Conciliação da conta PJ e relatório mensal (DRE simples) | troca-contador | `[a confirmar]` | — |</td></tr><tr><td><code>sales-machine/product-map.md:38</code></td><td>| 7 | Serviços avulsos | Alterações contratuais, certidões, alvarás | todas | `[a confirmar: lista e valores]` | — |</td></tr><tr><td><code>sales-machine/product-map.md:39</code></td><td>| 8 | Planos por faixa de faturamento | Mensalidade que acompanha o tamanho da empresa | todas | estrutura confirmada (F-006), **valores `[a confirmar]`** | `reference-notes.md` |</td></tr><tr><td><code>sales-machine/product-map.md:45</code></td><td>| WhatsApp | tira dúvida, recebe guia e lembrete de vencimento | `[a confirmar]` |</td></tr><tr><td><code>sales-machine/product-map.md:46</code></td><td>| Emissor de NFS-e da prefeitura | nota emitida pela Nortecontábil ou pelo cliente | `[a confirmar]` |</td></tr><tr><td><code>sales-machine/product-map.md:47</code></td><td>| Contas PJ (bancos digitais) | extrato para conciliação (OFX, Open Finance ou envio manual) | `[a confirmar]` |</td></tr><tr><td><code>sales-machine/product-map.md:58</code></td><td>| Responsiveness (3) | Resposta no WhatsApp em horário comercial `[a confirmar: prazo]` | P-004 |</td></tr><tr><td><code>sales-machine/product-map.md:61</code></td><td>| Flexibility (3) | Sem fidelidade `[a confirmar]` | P-009 |</td></tr><tr><td><code>sales-machine/product-map.md:68</code></td><td>Proposta, a confirmar com o dono:</td></tr><tr><td><code>sales-machine/product-map.md:72</code></td><td>3. Em até `[a confirmar]` horas úteis, um contador responde no WhatsApp com a proposta: plano</td></tr><tr><td><code>sales-machine/product-map.md:90</code></td><td>| F-007 | Entrada do cliente: **em aberto** (formulário + WhatsApp não confirmado; cadastro direto é a alternativa) | `owner-answers.md` resposta 2 | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:92</code></td><td>| P-001 | Abrimos empresa com enquadramento escolhido junto com o contador | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:93</code></td><td>| P-002 | Na troca, pedimos os documentos ao contador anterior e conferimos pendências antes de assumir | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:94</code></td><td>| P-003 | Ajudamos o MEI que passou do limite a sair do MEI no momento certo | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:95</code></td><td>| P-004 | Cada empresa tem um contador de referência, com atendimento pelo WhatsApp | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:96</code></td><td>| P-005 | Guias de imposto chegam prontas pelo WhatsApp antes do vencimento | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:97</code></td><td>| P-006 | Notas fiscais de serviço: emissão ou orientação | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:98</code></td><td>| P-007 | Relatório mensal simples (quanto entrou, quanto saiu, quanto foi de imposto) | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:99</code></td><td>| P-008 | Planos mensais por faixa de faturamento; o que inclui fica escrito na proposta | proposta | a confirmar (valores e faixas) |</td></tr><tr><td><code>sales-machine/product-map.md:100</code></td><td>| P-009 | Sem fidelidade, com aviso prévio para cancelar | proposta | a confirmar |</td></tr><tr><td><code>sales-machine/product-map.md:101</code></td><td>| P-010 | Proposta enviada em até N horas úteis | proposta | a confirmar (N) |</td></tr><tr><td><code>sales-machine/product-map.md:102</code></td><td>| R-01 | Contador responsável registrado no CRC | `config.regulatedTopics` | a confirmar (nome, nº) |</td></tr><tr><td><code>sales-machine/product-map.md:104</code></td><td>| R-03 | Uso dos dados do formulário (LGPD) | `config.regulatedTopics` | a confirmar (e-mail) |</td></tr><tr><td><code>sales-machine/system/sales-machine.hcl:35</code></td><td>owns     = [&quot;config.json&quot;, &quot;preços e planos&quot;, &quot;diga / nunca diga&quot;, &quot;lista a confirmar&quot;]</td></tr><tr><td><code>sales-machine/system/sales-machine.hcl:61</code></td><td>path_or_channel = &quot;&quot;</td></tr><tr><td><code>sales-machine/system/sales-machine.hcl:194</code></td><td>when = &quot;[a confirmar] escolheu o plano e enviou os documentos&quot;</td></tr><tr><td><code>sales-machine/system/sales-machine.hcl:199</code></td><td>when = &quot;[a confirmar] troca com CNPJ, ou sócio/funcionário, ou faixa mais alta&quot;</td></tr><tr><td><code>site/index.html:10</code></td><td>Spec: ../sales-machine/landing/home.md. Tudo marcado [a confirmar] espera dado do dono.</td></tr><tr><td><code>site/index.html:349</code></td><td>Notas fiscais de serviço a confirmar: emitimos ou orientamos</td></tr><tr><td><code>site/index.html:370</code></td><td>Se você vende o seu trabalho como PJ, a Nortecontábil é para você. a confirmar: lista de atividades atendidas</td></tr><tr><td><code>site/index.html:399</code></td><td>R$ a confirmar /mês</td></tr><tr><td><code>site/index.html:403</code></td><td>a confirmar: notas por mês</td></tr><tr><td><code>site/index.html:411</code></td><td>R$ a confirmar /mês</td></tr><tr><td><code>site/index.html:415</code></td><td>a confirmar: diferenciais</td></tr><tr><td><code>site/index.html:423</code></td><td>R$ a confirmar /mês</td></tr><tr><td><code>site/index.html:427</code></td><td>a confirmar: diferenciais</td></tr><tr><td><code>site/index.html:433</code></td><td>Contador de referênciaAtendimento pelo WhatsAppGuias antes do vencimentoRevisão do enquadramentoa confirmar: sem fidelidade?</td></tr><tr><td><code>site/index.html:445</code></td><td>foto do contadora confirmar</td></tr><tr><td><code>site/index.html:447</code></td><td>Nome do contador responsável a confirmar</td></tr><tr><td><code>site/index.html:449</code></td><td>&quot;Minha regra é simples: se você tem dúvida, me pergunta antes de pagar ou emitir. É para isso que eu estou aqui.&quot; a confirmar: frase do contador</td></tr><tr><td><code>site/index.html:452</code></td><td>Espaço para depoimentos reais.Publicar só depoimentos de clientes de verdade, com autorização por escrito. a confirmar</td></tr><tr><td><code>site/index.html:465</code></td><td>Tem fidelidade?a confirmar: regra de fidelidade e aviso prévio de cancelamento</td></tr><tr><td><code>site/index.html:466</code></td><td>Como falo com o meu contador?Pelo WhatsApp, em horário comercial a confirmar: horário e prazo de resposta. É sempre a mesma pessoa que conhece o seu caso.</td></tr><tr><td><code>site/index.html:504</code></td><td>Até R$ X mil [a confirmar]</td></tr><tr><td><code>site/index.html:505</code></td><td>Até R$ Y mil [a confirmar]</td></tr><tr><td><code>site/index.html:506</code></td><td>Acima de R$ Y mil [a confirmar]</td></tr><tr><td><code>site/index.html:521</code></td><td>Usamos seus dados só para preparar e enviar a sua proposta e falar com você sobre ela. Você pode pedir a exclusão quando quiser em e-mail a confirmar.</td></tr><tr><td><code>site/index.html:556</code></td><td>ContatoWhatsApp a confirmarE-mail a confirmarEndereço a confirmarPolítica de privacidade a escrever</td></tr><tr><td><code>site/index.html:559</code></td><td>Nortecontábil · Razão social a confirmar · CNPJ 00.000.000/0000-00</td></tr><tr><td><code>site/index.html:581</code></td><td>whatsapp: &quot;&quot;,          // [a confirmar] só dígitos com DDI, ex.: &quot;5511999999999&quot;</td></tr><tr><td><code>site/index.html:582</code></td><td>formEndpoint: &quot;&quot;,      // [a confirmar] URL que recebe o pedido (CRM, planilha, e-mail)</td></tr><tr><td><code>site/index.html:583</code></td><td>cadastroUrl: &quot;&quot;,       // [a confirmar] URL do cadastro, se houver sistema</td></tr><tr><td><code>site/index.html:584</code></td><td>respostaEm: &quot;N horas úteis&quot; // [a confirmar] prazo da proposta (P-010)</td></tr></tbody></table></div></div></details>
+</main></body></html>

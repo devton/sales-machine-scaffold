@@ -7,6 +7,7 @@ see the full output of every command and re-run it.
 | Example | Product | Access mode | Open the report |
 |---|---|---|---|
 | [`workflow-blueprint.com`](workflow-blueprint.com/) | workflow-blueprint, a meta-skill for coding agents | `open` (install command, no account) | [`sales-machine-report.html`](workflow-blueprint.com/sales-machine/report/sales-machine-report.html) |
+| [`nortecontabil`](nortecontabil/) | Nortecontábil, online accounting for service providers (pt-BR); a **service**, not software, plus a built sales landing page | `open` (proposal request; entry mode still open) | [`sales-machine-report.html`](nortecontabil/sales-machine/report/sales-machine-report.html) |
 
 To add an example: create `examples/<product>/sources/` with a snapshot of the files the skill
 may read, run `/sales-machine-scaffold setup` with `sources` pointing there, then the default

@@ -1,0 +1,146 @@
+{
+  "product": {
+    "name": "Nortecontábil",
+    "tagline": "[a confirmar] Proposta: Contabilidade online para quem presta serviço como PJ, com contador de verdade do seu lado.",
+    "category": "contabilidade online para PJ"
+  },
+  "language": {
+    "content": "pt-BR",
+    "team": "pt-BR",
+    "secondaryContent": []
+  },
+  "sources": {
+    "code": [],
+    "docs": [],
+    "releaseNotes": [],
+    "featureFlags": [],
+    "notes": [
+      "../sources/owner-answers.md",
+      "../sources/reference-notes.md"
+    ]
+  },
+  "access": {
+    "mode": "open",
+    "primaryCta": "Receber minha proposta",
+    "primaryCtaDetail": "[a confirmar: entrada em aberto (G-09). Opções: A) formulário curto + contador responde no WhatsApp; B) cadastro direto num sistema; C) os dois. A landing troca em ENTRADA no site/index.html]",
+    "secondaryCta": "Falar no WhatsApp",
+    "forbiddenCtas": [
+      "Teste grátis",
+      "Cadastre-se grátis",
+      "Crie sua conta",
+      "Compre agora",
+      "Entre na lista de espera",
+      "Agende uma demo"
+    ]
+  },
+  "flagship": {
+    "who": "Prestador de serviço que vai abrir ou já tem CNPJ (dev, designer, consultor, profissional liberal) e fatura sozinho ou com um sócio",
+    "pain": "Não sabe se está no enquadramento certo, paga imposto sem entender a conta, perde prazo de guia e não tem a quem perguntar rápido"
+  },
+  "lanes": [
+    {
+      "id": "self-serve",
+      "label": "Por conta própria",
+      "buyingSignal": "[a confirmar] Proposto: simulou o imposto na calculadora E enviou o formulário com a faixa de faturamento"
+    },
+    {
+      "id": "assisted",
+      "label": "Com o contador",
+      "buyingSignal": "[a confirmar] Proposto: pediu troca de contador informando o CNPJ, OU tem sócio/funcionário, OU faturamento na faixa mais alta"
+    }
+  ],
+  "personas": [
+    {
+      "id": "prestador-pj",
+      "name": "Prestador de serviço PJ",
+      "wants": "Abrir o CNPJ, emitir nota e pagar o imposto certo todo mês sem virar especialista em contabilidade",
+      "lane": "self-serve"
+    },
+    {
+      "id": "mei-limite",
+      "name": "MEI que passou do limite",
+      "wants": "Sair do MEI no momento certo, sem multa, e cair no enquadramento que faz sentido para a atividade",
+      "lane": "self-serve"
+    },
+    {
+      "id": "troca-contador",
+      "name": "Dono de pequena empresa trocando de contador",
+      "wants": "Trocar de contador sem perder prazo, guia ou documento, e passar a ter resposta rápida",
+      "lane": "assisted"
+    }
+  ],
+  "integrations": [
+    {
+      "slug": "whatsapp",
+      "name": "WhatsApp",
+      "kind": "canal de atendimento e envio de guias",
+      "live": "[a confirmar]"
+    },
+    {
+      "slug": "emissor-nfse",
+      "name": "Emissor de NFS-e da prefeitura",
+      "kind": "nota fiscal de serviço",
+      "live": "[a confirmar: a Nortecontábil emite pelo cliente ou o cliente emite?]"
+    },
+    {
+      "slug": "bancos-pj",
+      "name": "Contas PJ (bancos digitais)",
+      "kind": "extrato para conciliação",
+      "live": "[a confirmar: quais bancos e por qual meio: OFX, Open Finance, envio manual]"
+    }
+  ],
+  "loops": [
+    "segmentos",
+    "indicacoes",
+    "conteudo"
+  ],
+  "loopMapping": {
+    "segmentos": "integrations (o template fala em provedores; para contabilidade o equivalente são segmentos/atividades atendidos)",
+    "indicacoes": "invites",
+    "conteudo": "content"
+  },
+  "neverSay": [
+    "preços, valores de plano, descontos e cupons até o dono confirmar (hoje só a estrutura por faixa aparece, com valor [a confirmar])",
+    "\"grátis\", \"de graça\", \"sem custo\" para abertura ou troca até o dono confirmar o que é cobrado",
+    "\"pague menos imposto\" ou \"economize X%\" como promessa (o imposto depende da atividade e do faturamento)",
+    "prazos fixos de abertura (\"CNPJ em 24h/48h\") sem ressalva de prefeitura e Junta Comercial",
+    "número de clientes, avaliações, notas ou anos de mercado até existirem e serem confirmados",
+    "nomes de clientes e depoimentos inventados",
+    "\"100% automático\", \"sem contador\", \"robô\" (o diferencial é ter contador de verdade)",
+    "qualquer texto, marca, número ou imagem do site de referência"
+  ],
+  "sayInstead": {
+    "economizar imposto": "pagar o imposto certo, no enquadramento certo",
+    "burocracia zero": "a gente cuida da parte chata",
+    "suporte": "seu contador",
+    "cliente": "você / sua empresa",
+    "tributação": "imposto"
+  },
+  "internalOnly": [
+    "as faixas (lanes) de atendimento e o sinal de compra",
+    "metas e números de conversão",
+    "a lista [a confirmar] deste workspace"
+  ],
+  "regulatedTopics": [
+    {
+      "topic": "responsabilidade técnica contábil",
+      "rule": "A contabilidade é feita sob responsabilidade de contador registrado no CRC [a confirmar: nome e número do CRC]; razão social e CNPJ aparecem no rodapé."
+    },
+    {
+      "topic": "enquadramento e planejamento tributário",
+      "rule": "Ajudamos a escolher o enquadramento correto dentro da lei para a sua atividade e faturamento; o valor do imposto depende desses dados e da legislação vigente."
+    },
+    {
+      "topic": "dados pessoais no formulário (LGPD)",
+      "rule": "Usamos seus dados só para preparar e enviar a proposta e falar com você sobre ela; você pode pedir a exclusão a qualquer momento [a confirmar: e-mail do encarregado]."
+    },
+    {
+      "topic": "prazos de abertura",
+      "rule": "O prazo depende da prefeitura e da Junta Comercial da sua cidade; informamos a estimativa na proposta."
+    }
+  ],
+  "batch": {
+    "articlesPerRun": 3,
+    "minSalesLane": 2
+  }
+}
